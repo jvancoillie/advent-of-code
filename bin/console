@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__DIR__).'/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use App\Command\PuzzleResolverCommand;
+use App\Command\PuzzleMakerCommand;
+
+$command = new PuzzleResolverCommand();
+$application = new Application();
+
+// ... register commands
+$application->add($command);
+$application->add(new PuzzleMakerCommand());
+
+// set as default command
+//$application->setDefaultCommand($command->getName());
+
+$application->run();

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  advent:
+    build:
+      context: ./
+    volumes:
+      - "./:/var/www/advent:cached"
+    environment:
+      # Keep attention to that env variable
+      PHP_IDE_CONFIG: serverName=advent
