@@ -62,12 +62,23 @@ class PuzzleMakerCommand extends Command
 
         $inputFilePath = sprintf("%s/input/input.txt", $folderPath);
         $testFilePath = sprintf("%s/input/test.txt", $folderPath);
-        $ResolverFilePath = sprintf("%s/PuzzleResolver.php", $folderPath);
+        $resolverFilePath = sprintf("%s/PuzzleResolver.php", $folderPath);
 
         $noData = $input->getOption('no-data');
+        if($this->filesystem->exists($resolverFilePath)){
+            $output->writeln('<comment> Enable to create Puzzle Resolver Class, already exist ! </comment>');
+
+            return Command::FAILURE;
+        }
 
         $output->writeln('<info>Create Puzzle Resolver Class</info>');
-        $this->filesystem->dumpFile($ResolverFilePath, $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', ['namespace' => $namespace]));
+        $this->filesystem->dumpFile(
+            $resolverFilePath,
+            $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', [
+                'namespace' => $namespace,
+                'puzzleLink' => $link
+            ])
+        );
 
         $output->writeln('<info>Create Puzzle data input files</info>');
 
