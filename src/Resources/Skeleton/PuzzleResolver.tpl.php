@@ -6,6 +6,10 @@ use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+* Class PuzzleResolver
+* @see <?= $puzzleLink; ?><?= "\n" ?>
+*/
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     public function main(PuzzleInput $input, OutputInterface $output)
