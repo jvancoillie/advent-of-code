@@ -1,3 +1,4 @@
 /vendor/
 /.env.local
 /.idea/
+/src/Utils/Knapsack/
