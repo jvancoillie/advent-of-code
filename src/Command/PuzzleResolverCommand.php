@@ -41,9 +41,11 @@ class PuzzleResolverCommand extends Command
         $year = $input->getOption('year');
         $day = $input->getOption('day');
 
+
         $link = sprintf("https://adventofcode.com/%d/day/%d", $year, $day);
 
         $isTest = $input->getOption('test');
+        $options = ['env' => $isTest?'test':'prod'];
         $inputFileName = $isTest?'test.txt':'input.txt';
         $inputFilePath = sprintf("src/Puzzle/Year%d/Day%s/input/%s", $year, $day, $inputFileName);
 
@@ -63,7 +65,7 @@ class PuzzleResolverCommand extends Command
         $data = file_get_contents($inputFilePath);
 
         $startTime = microtime(true);
-        $callable(new PuzzleInput($data), $output);
+        $callable(new PuzzleInput($data), $output, $options);
         $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
 
         return Command::SUCCESS;
