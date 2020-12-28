@@ -168,7 +168,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function main(PuzzleInput $input, OutputInterface $output)
+    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $floor = $this->part1($input, $output);
 

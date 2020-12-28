@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     private $tsp;
 
-    public function main(PuzzleInput $input, OutputInterface $output)
+    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createTSP($input);
         $this->part1($output);

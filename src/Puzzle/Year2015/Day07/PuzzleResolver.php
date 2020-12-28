@@ -18,7 +18,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $circuit = [];
     private $part1Answer = null;
 
-    public function main(PuzzleInput $input, OutputInterface $output)
+    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
