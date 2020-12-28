@@ -13,10 +13,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $reindeers = [];
+    private $time = 1000;
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
-        dump($options);
+        if($options['env'] === "prod"){
+            $this->time = 2503;
+        }
+
         $this->createReindeers($input);
         $this->part1($output);
         $this->part2($output);
@@ -25,10 +29,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(OutputInterface $output)
     {
         $ans = 0;
-        $time = 2503;
-
         foreach($this->reindeers as $reindeer){
-             $dist = $reindeer['speed'] * (floor($time / ($reindeer['fly'] + $reindeer['rest'])) * $reindeer['fly'] + min($time % ($reindeer['fly'] + $reindeer['rest']), $reindeer['fly']));
+             $dist = $reindeer['speed'] * (floor($this->time / ($reindeer['fly'] + $reindeer['rest'])) * $reindeer['fly'] + min($this->time % ($reindeer['fly'] + $reindeer['rest']), $reindeer['fly']));
              if($dist > $ans){
                 $ans = $dist;
              }
@@ -40,7 +42,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(OutputInterface $output)
     {
         $points = [];
-        for ($i = 1; $i <= 2503; $i++) {
+        for ($i = 1; $i <= $this->time; $i++) {
             $winners = null;
             $best = 0;
             foreach($this->reindeers as $key => $reindeer) {
