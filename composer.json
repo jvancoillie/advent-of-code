@@ -4,6 +4,7 @@
     "name": "jvancoillie/advent-of-code",
     "description": "advent of code ",
     "require": {
+        "php": "^8.0",
         "symfony/console": "^5.2",
         "symfony/http-client": "^5.2",
         "symfony/filesystem": "^5.2",
