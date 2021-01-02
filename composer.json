@@ -8,7 +8,8 @@
         "symfony/http-client": "^5.2",
         "symfony/filesystem": "^5.2",
         "symfony/dotenv": "^5.2",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-gmp": "*"
     },
     "autoload": {
         "psr-4": {

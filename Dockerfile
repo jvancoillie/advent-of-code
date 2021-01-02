@@ -6,6 +6,8 @@ FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 # persistent / runtime deps
 RUN apk add --no-cache \
         acl \
+        gmp \
+        gmp-dev \
         fcgi \
         file \
         gettext \
@@ -25,6 +27,7 @@ RUN set -eux; \
 	\
 	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
+	    gmp \
 	    intl \
 	    zip \
 	; \
@@ -46,6 +49,7 @@ RUN set -eux; \
 	apk add --no-cache --virtual .phpexts-rundeps $runDeps; \
 	\
 	apk del .build-deps
+
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
