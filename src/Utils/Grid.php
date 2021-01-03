@@ -24,4 +24,18 @@ class Grid
         }
         echo "\n";
     }
+
+    public static function count($grid, $needle)
+    {
+        $count = 0;
+        for ($y = 0; $y < count($grid); $y++) {
+            for ($x = 0; $x < count($grid[$y]); $x++) {
+                if ($grid[$y][$x] === $needle) {
+                    $count++;
+                }
+            }
+        }
+
+        return $count;
+    }
 }
