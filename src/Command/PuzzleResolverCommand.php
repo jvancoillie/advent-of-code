@@ -14,8 +14,8 @@ class PuzzleResolverCommand extends Command
 
     protected function configure()
     {
-        $currentYear = (new \DateTime())->format("Y");
-        $currentDay = (new \DateTime())->format("d");
+        $currentYear = (new \DateTime())->format('Y');
+        $currentDay = (new \DateTime())->format('d');
         $this
             ->setDescription('Outputs the solutions of a Puzzles for a given event')
             ->addOption(
@@ -41,25 +41,25 @@ class PuzzleResolverCommand extends Command
         $year = $input->getOption('year');
         $day = $input->getOption('day');
 
-
-        $link = sprintf("https://adventofcode.com/%d/day/%d", $year, $day);
+        $link = sprintf('https://adventofcode.com/%d/day/%d', $year, $day);
 
         $isTest = $input->getOption('test');
-        $options = ['env' => $isTest?'test':'prod'];
-        $inputFileName = $isTest?'test.txt':'input.txt';
-        $inputFilePath = sprintf("src/Puzzle/Year%d/Day%s/input/%s", $year, $day, $inputFileName);
+        $options = ['env' => $isTest ? 'test' : 'prod'];
+        $inputFileName = $isTest ? 'test.txt' : 'input.txt';
+        $inputFilePath = sprintf('src/Puzzle/Year%d/Day%s/input/%s', $year, $day, $inputFileName);
 
-        try{
-            $callable = [$this->instantiateClass(sprintf('\\App\\Puzzle\\Year%d\\Day%s\\PuzzleResolver',$year, $day)), 'main'];
-        }catch (\Error $e){
+        try {
+            $callable = [$this->instantiateClass(sprintf('\\App\\Puzzle\\Year%d\\Day%s\\PuzzleResolver', $year, $day)), 'main'];
+        } catch (\Error $e) {
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
+
             return Command::FAILURE;
         }
 
-        $output->writeln(sprintf('<info><href=%1$s>%1$s</><info>',$link));
-        $output->writeln(sprintf('<info>=========  DAY:  %1$s-%2$s, MODE: %3$s ========= <info>', $year, $day, $isTest?"Test":"Prod"));
+        $output->writeln(sprintf('<info><href=%1$s>%1$s</><info>', $link));
+        $output->writeln(sprintf('<info>=========  DAY:  %1$s-%2$s, MODE: %3$s ========= <info>', $year, $day, $isTest ? 'Test' : 'Prod'));
         if (!\is_callable($callable)) {
-            throw new \InvalidArgumentException(sprintf('the main methode of class \\App\\Puzzle\\Year%d\\Day%s is not callable',$year, $day ));
+            throw new \InvalidArgumentException(sprintf('the main methode of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
         }
 
         $data = file_get_contents($inputFilePath);

@@ -8,12 +8,12 @@ use App\Utils\PathFinding\TSP;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/13
  *
  * execute with increase memory limit :
  *  php -d  memory_limit=2048M bin/console puzzle:resolve --year=2015 --day=13
- *
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
@@ -69,7 +69,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         preg_match($pattern, $line, $matches);
 
         if (!$matches) {
-            throw new \Exception("parsing action error");
+            throw new \Exception('parsing action error');
         }
 
         return [$matches['from'], $matches['type'], $matches['bonus'], $matches['next']];
@@ -81,7 +81,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         foreach (explode("\n", $input->getData()) as $line) {
             [$from, $type, $bonus, $to] = $this->parseLine($line);
-            $bonus = ($type === 'gain') ? (int)$bonus : (int)-$bonus;
+            $bonus = ('gain' === $type) ? (int) $bonus : (int) -$bonus;
 
             if (isset($graph[$from][$to])) {
                 $graph[$from][$to] += $bonus;

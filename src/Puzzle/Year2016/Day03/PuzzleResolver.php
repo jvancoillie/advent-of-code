@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2016/day/3
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -39,7 +40,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $cols[0][] = $col1;
             $cols[1][] = $col2;
             $cols[2][] = $col3;
-            if (count($cols[0]) === 3) {
+            if (3 === count($cols[0])) {
                 foreach ($cols as $col) {
                     $triangles[] = $col;
                 }
@@ -58,7 +59,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         foreach ($triangles as $triangle) {
             sort($triangle);
             if ($triangle[0] + $triangle[1] > $triangle[2]) {
-                $valid++;
+                ++$valid;
             }
         }
 

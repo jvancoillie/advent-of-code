@@ -21,20 +21,20 @@ class PuzzleResolver extends AbstractPuzzleResolver
         foreach (str_split($input->getData()) as $d) {
             switch ($d) {
                 case '<':
-                    $x -= 1;
+                    --$x;
                     break;
                 case '>':
-                    $x += 1;
+                    ++$x;
                     break;
                 case '^':
-                    $y -= 1;
+                    --$y;
                     break;
                 case 'v':
-                    $y += 1;
+                    ++$y;
                     break;
             }
             if (isset($houses[$x][$y])) {
-                $houses[$x][$y]++;
+                ++$houses[$x][$y];
             } else {
                 $houses[$x][$y] = 0;
             }
@@ -52,23 +52,23 @@ class PuzzleResolver extends AbstractPuzzleResolver
         ];
         $houses = [[0]];
         foreach (str_split($input->getData()) as $key => $d) {
-            $turn = ($key % 2 === 0) ? 'santa' : 'robo';
+            $turn = (0 === $key % 2) ? 'santa' : 'robo';
             switch ($d) {
                 case '<':
-                    $coords[$turn]['x'] -= 1;
+                    --$coords[$turn]['x'];
                     break;
                 case '>':
-                    $coords[$turn]['x'] += 1;
+                    ++$coords[$turn]['x'];
                     break;
                 case '^':
-                    $coords[$turn]['y'] -= 1;
+                    --$coords[$turn]['y'];
                     break;
                 case 'v':
-                    $coords[$turn]['y'] += 1;
+                    ++$coords[$turn]['y'];
                     break;
             }
             if (isset($houses[$coords[$turn]['x']][$coords[$turn]['y']])) {
-                $houses[$coords[$turn]['x']][$coords[$turn]['y']]++;
+                ++$houses[$coords[$turn]['x']][$coords[$turn]['y']];
             } else {
                 $houses[$coords[$turn]['x']][$coords[$turn]['y']] = 0;
             }

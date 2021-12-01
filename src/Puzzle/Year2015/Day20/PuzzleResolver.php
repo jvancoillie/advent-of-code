@@ -7,11 +7,12 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/20
  *
  * Not found by my self
- * @link https://medium.com/@ghaiklor/advent-of-code-2015-explanation-aa9932db6d6f#9795
+ * @see https://medium.com/@ghaiklor/advent-of-code-2015-explanation-aa9932db6d6f#9795
  *
  * need to run with php -d  memory_limit=2048M bin/console puzzle:resolve --year=2015 --day=20
  */
@@ -29,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $houses = [];
         $houseNumber = $input;
 
-        for ($i = 1; $i < $input; $i++) {
+        for ($i = 1; $i < $input; ++$i) {
             for ($j = $i; $j < $input; $j += $i) {
                 if (!isset($houses[$j])) {
                     $houses[$j] = 0;
@@ -49,16 +50,20 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $houses = [];
         $houseNumber = $input;
 
-        for ($i = 1; $i < $input; $i++) {
+        for ($i = 1; $i < $input; ++$i) {
             $visits = 0;
             for ($j = $i; $j < $input; $j += $i) {
                 if (!isset($houses[$j])) {
                     $houses[$j] = 11;
                 }
-                if (($houses[$j] = $houses[$j] + $i * 11) >= $input * 10 && $j < $houseNumber) $houseNumber = $j;
+                if (($houses[$j] = $houses[$j] + $i * 11) >= $input * 10 && $j < $houseNumber) {
+                    $houseNumber = $j;
+                }
 
-                $visits++;
-                if ($visits === 50) break;
+                ++$visits;
+                if (50 === $visits) {
+                    break;
+                }
             }
         }
 

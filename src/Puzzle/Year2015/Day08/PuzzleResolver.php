@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $ans += 2;
             preg_match_all('/(\\\.)/', $line, $m);
             foreach ($m[0] as $r) {
-                $ans += ($r == '\x') ? 3 : 1;
+                $ans += ('\x' == $r) ? 3 : 1;
             }
         }
 
@@ -32,7 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = 0;
         foreach (explode("\n", $input->getData()) as $line) {
-            $ans += strlen(addslashes($line))+2-strlen($line);
+            $ans += strlen(addslashes($line)) + 2 - strlen($line);
         }
 
         $output->writeln("<info>Part 2 : $ans</info>");

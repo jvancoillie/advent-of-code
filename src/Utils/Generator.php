@@ -1,14 +1,12 @@
 <?php
 
-
 namespace App\Utils;
-
 
 class Generator
 {
     public static function combinations(array $dataset)
     {
-        if (count($dataset) === 0) {
+        if (0 === count($dataset)) {
             yield [];
         } else {
             $key = array_key_first($dataset);
@@ -59,20 +57,17 @@ class Generator
 //            }
 //        }
 
-        if (count($items) === 0) {
+        if (0 === count($items)) {
             yield [];
-        }else{
+        } else {
             $firstItem = array_shift($items);
             $permsWithoutFirst = self::permutations($items);
 
-            foreach ($permsWithoutFirst as $perms){
-                for($i=0; $i<=count($perms); $i++){
+            foreach ($permsWithoutFirst as $perms) {
+                for ($i = 0; $i <= count($perms); ++$i) {
                     yield array_merge(array_slice($perms, 0, $i), [$firstItem], array_slice($perms, $i));
                 }
             }
         }
-
-
-
     }
 }

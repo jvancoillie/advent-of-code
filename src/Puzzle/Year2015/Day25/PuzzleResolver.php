@@ -7,9 +7,10 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
-* Class PuzzleResolver
-* @see https://adventofcode.com/2015/day/25
-*/
+ * Class PuzzleResolver.
+ *
+ * @see https://adventofcode.com/2015/day/25
+ */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
@@ -20,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
-        preg_match('/^To continue, please consult the code grid in the manual.  Enter the code at row (?<row>\d+), column (?<column>\d+).$/',$input->getData(), $matches);
+        preg_match('/^To continue, please consult the code grid in the manual.  Enter the code at row (?<row>\d+), column (?<column>\d+).$/', $input->getData(), $matches);
         $targetRow = (int) $matches['row'];
         $targetColumn = (int) $matches['column'];
 
@@ -30,13 +31,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $ans = 20151125;
 
         while ($column !== $targetColumn || $row !== $targetRow) {
-            $ans = ($ans*$multiply)%$divide;
-            if ($row === 1) {
+            $ans = ($ans * $multiply) % $divide;
+            if (1 === $row) {
                 $column = 1;
                 $row = ++$nextRow;
             } else {
-                $column++;
-                $row--;
+                ++$column;
+                --$row;
             }
         }
 
@@ -45,6 +46,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
-        $output->writeln("<comment>This event is done :)</comment>");
+        $output->writeln('<comment>This event is done :)</comment>');
     }
 }

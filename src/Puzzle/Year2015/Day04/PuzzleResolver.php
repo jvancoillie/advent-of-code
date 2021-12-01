@@ -16,11 +16,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
-        $i=0;
+        $i = 0;
         $md5 = '';
         $string = $input->getData();
-        while(strpos($md5, '00000') !== 0){
-            $i++;
+        while (0 !== strpos($md5, '00000')) {
+            ++$i;
             $md5 = md5($string.$i);
         }
         $output->writeln("<info>Part 1 : $i</info>");
@@ -28,11 +28,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
-        $i=0;
+        $i = 0;
         $md5 = '';
         $string = $input->getData();
-        while(strpos($md5, '000000') !== 0){
-            $i++;
+        while (0 !== strpos($md5, '000000')) {
+            ++$i;
             $md5 = md5($string.$i);
         }
         $output->writeln("<info>Part 2 : $i</info>");

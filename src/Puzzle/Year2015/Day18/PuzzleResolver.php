@@ -8,7 +8,8 @@ use App\Utils\Grid;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/18
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -31,7 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
-        if ($options['env'] === 'test') {
+        if ('test' === $options['env']) {
             $this->steps = 5;
         }
 
@@ -45,7 +46,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
-        for ($i = 0; $i < $this->steps; $i++) {
+        for ($i = 0; $i < $this->steps; ++$i) {
             $this->toggleLights();
         }
 
@@ -59,7 +60,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         //turn on corners;
         $this->turnOnCorners();
 
-        for ($i = 0; $i < $this->steps; $i++) {
+        for ($i = 0; $i < $this->steps; ++$i) {
             $this->toggleLights();
         }
 
@@ -83,15 +84,15 @@ class PuzzleResolver extends AbstractPuzzleResolver
         //Grid::dump($this->grid);
         $grid = [];
 
-        for ($y = 0; $y <= $this->height; $y++) {
-            for ($x = 0; $x <= $this->width; $x++) {
+        for ($y = 0; $y <= $this->height; ++$y) {
+            for ($x = 0; $x <= $this->width; ++$x) {
                 $grid[$y][$x] = $this->grid[$y][$x];
 
                 // use for part 2 locked corners
                 if ($this->cornersLocked &&
                     (
-                        ($x === 0 && $y === 0) || ($x === 0 && $y === $this->width) ||
-                        ($x === $this->height && $y === 0) || ($x === $this->height && $y === $this->width)
+                        (0 === $x && 0 === $y) || (0 === $x && $y === $this->width) ||
+                        ($x === $this->height && 0 === $y) || ($x === $this->height && $y === $this->width)
                     )
                 ) {
                     continue;
@@ -108,20 +109,20 @@ class PuzzleResolver extends AbstractPuzzleResolver
                     $nx = $x + $dx;
                     $ny = $y + $dy;
                     if (isset($this->grid[$ny][$nx])) {
-                        if ($this->grid[$ny][$nx] === "#") {
-                            $on++;
+                        if ('#' === $this->grid[$ny][$nx]) {
+                            ++$on;
                         } else {
-                            $off++;
+                            ++$off;
                         }
                     }
                 }
-                if ($this->grid[$y][$x] === '#') {
+                if ('#' === $this->grid[$y][$x]) {
                     if ($on < 2 || $on > 3) {
                         $grid[$y][$x] = '.';
                     }
                 }
-                if ($this->grid[$y][$x] === '.') {
-                    if ($on === 3) {
+                if ('.' === $this->grid[$y][$x]) {
+                    if (3 === $on) {
                         $grid[$y][$x] = '#';
                     }
                 }
@@ -144,10 +145,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function countLightOn()
     {
         $on = 0;
-        for ($y = 0; $y <= $this->height; $y++) {
-            for ($x = 0; $x <= $this->width; $x++) {
-                if ($this->grid[$y][$x] === '#') {
-                    $on++;
+        for ($y = 0; $y <= $this->height; ++$y) {
+            for ($x = 0; $x <= $this->width; ++$x) {
+                if ('#' === $this->grid[$y][$x]) {
+                    ++$on;
                 }
             }
         }

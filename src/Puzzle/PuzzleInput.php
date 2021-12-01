@@ -8,6 +8,7 @@ class PuzzleInput
 
     /**
      * PuzzleInput constructor.
+     *
      * @param $data
      */
     public function __construct($data)

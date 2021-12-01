@@ -1,6 +1,6 @@
-<?= "<?php\n" ?>
+<?php echo "<?php\n"; ?>
 
-namespace <?= $namespace; ?>;
+namespace <?php echo $namespace; ?>;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
 * Class PuzzleResolver
-* @see <?= $puzzleLink; ?><?= "\n" ?>
+* @see <?php echo $puzzleLink; ?><?php echo "\n"; ?>
 */
 class PuzzleResolver extends AbstractPuzzleResolver
 {

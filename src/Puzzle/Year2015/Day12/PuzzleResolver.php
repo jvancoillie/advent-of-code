@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/12
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -39,8 +40,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $sum = 0;
         foreach ($array as $key => $item) {
             if (is_object($item)) {
-                $array = (array)$item;
-                if ($excluded === null) {
+                $array = (array) $item;
+                if (null === $excluded) {
                     $sum += $this->sumNumbers($array, $excluded);
                 } elseif (!in_array($excluded, $array)) {
                     $sum += $this->sumNumbers($array, $excluded);

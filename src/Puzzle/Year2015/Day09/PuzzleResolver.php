@@ -35,8 +35,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $maxDistance = 0;
 
-        foreach($this->tsp->getRoutes() as $route){
-            if($route['distance'] > $maxDistance){
+        foreach ($this->tsp->getRoutes() as $route) {
+            if ($route['distance'] > $maxDistance) {
                 $maxDistance = $route['distance'];
             }
         }
@@ -50,9 +50,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         preg_match($pattern, $line, $matches);
 
         if (!$matches) {
-            throw new \Exception("parsing action error");
+            throw new \Exception('parsing action error');
         }
 
-        return [$matches['from'], $matches['to'], (int)$matches['dist']];
+        return [$matches['from'], $matches['to'], (int) $matches['dist']];
     }
 }

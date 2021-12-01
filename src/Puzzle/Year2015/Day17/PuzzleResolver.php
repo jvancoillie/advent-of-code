@@ -8,7 +8,8 @@ use App\Utils\Generator;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/17
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -18,7 +19,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
-        if ($options['env'] === "test") {
+        if ('test' === $options['env']) {
             $this->liters = 25;
         }
         $this->createContainers($input);
@@ -29,9 +30,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
         $ans = 0;
-        foreach(Generator::combinations($this->containers) as $comb){
-            if(array_sum($comb) === $this->liters){
-                $ans++;
+        foreach (Generator::combinations($this->containers) as $comb) {
+            if (array_sum($comb) === $this->liters) {
+                ++$ans;
             }
         }
         $output->writeln("<info>Part 1 : $ans</info>");
@@ -40,9 +41,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $ans = INF;
-        foreach(Generator::combinations($this->containers) as $comb){
-            if(array_sum($comb) === $this->liters && count($comb) < $ans){
-                $ans=count($comb);
+        foreach (Generator::combinations($this->containers) as $comb) {
+            if (array_sum($comb) === $this->liters && count($comb) < $ans) {
+                $ans = count($comb);
             }
         }
         $output->writeln("<info>Part 2 : $ans</info>");

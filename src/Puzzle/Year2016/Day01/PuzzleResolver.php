@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2016/day/1
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -40,8 +41,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function createInstructions(PuzzleInput $input)
     {
-        foreach (explode(", ", $input->getData()) as $line) {
-            $this->instructions[] = ['turn' => substr($line, 0, 1), 'dist' => (int)substr($line, 1)];
+        foreach (explode(', ', $input->getData()) as $line) {
+            $this->instructions[] = ['turn' => substr($line, 0, 1), 'dist' => (int) substr($line, 1)];
         }
     }
 
@@ -55,26 +56,26 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $targets = [];
             switch ($this->currentDirection) {
                 case 'N':
-                    for ($i = 0; $i < $instruction['dist']; $i++) {
-                        $y--;
+                    for ($i = 0; $i < $instruction['dist']; ++$i) {
+                        --$y;
                         $targets[] = ['x' => $x, 'y' => $y];
                     }
                     break;
                 case 'S':
-                    for ($i = 0; $i < $instruction['dist']; $i++) {
-                        $y++;
+                    for ($i = 0; $i < $instruction['dist']; ++$i) {
+                        ++$y;
                         $targets[] = ['x' => $x, 'y' => $y];
                     }
                     break;
                 case 'E':
-                    for ($i = 0; $i < $instruction['dist']; $i++) {
-                        $x++;
+                    for ($i = 0; $i < $instruction['dist']; ++$i) {
+                        ++$x;
                         $targets[] = ['x' => $x, 'y' => $y];
                     }
                     break;
                 case 'W':
-                    for ($i = 0; $i < $instruction['dist']; $i++) {
-                        $x--;
+                    for ($i = 0; $i < $instruction['dist']; ++$i) {
+                        --$x;
                         $targets[] = ['x' => $x, 'y' => $y];
                     }
                     break;
@@ -102,10 +103,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $key = array_search($this->currentDirection, $this->directions);
 
-        if ($direction === 'R') {
-            $key++;
+        if ('R' === $direction) {
+            ++$key;
         } else {
-            $key--;
+            --$key;
         }
 
         if ($key < 0) {

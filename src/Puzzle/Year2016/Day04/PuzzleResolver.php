@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2016/day/4
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -39,7 +40,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         foreach (explode("\n", $input->getData()) as $line) {
             $room = $this->parseLine($line);
             $realName = $this->decrypt($room);
-            if (str_contains($realName, "northpole object storage")) {
+            if (str_contains($realName, 'northpole object storage')) {
                 $ans = $room['id'];
             }
         }
@@ -73,7 +74,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         foreach ($room['encrypt'] as $encrypt) {
             foreach (str_split($encrypt) as $l) {
-                $realName[] = $this->shift($l, (int)$room['id']);
+                $realName[] = $this->shift($l, (int) $room['id']);
             }
             $realName[] = ' ';
         }
@@ -103,11 +104,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
         preg_match('/^(?<encrypt>[\w-]{0,100})-(?<id>\d+)\[(?<checksum>\w{5})\]$/', $line, $matches);
 
         if (!$matches) {
-            throw new \Exception("parsing action error");
+            throw new \Exception('parsing action error');
         }
 
         $parsed['encrypt'] = explode('-', $matches['encrypt']);
-        $parsed['id'] = (int)$matches['id'];
+        $parsed['id'] = (int) $matches['id'];
         $parsed['checksum'] = $matches['checksum'];
 
         return $parsed;

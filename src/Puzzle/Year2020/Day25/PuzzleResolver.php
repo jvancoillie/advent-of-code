@@ -24,7 +24,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $cardKey = $this->transformNumber($cardSubjectNumber, $doorLoopSize);
 
         $output->writeln("<info>Part 1 : $cardKey</info>");
-
     }
 
     public function findLoopSize($key)
@@ -34,25 +33,23 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $value = 1;
 
         while ($key !== $value) {
-            $i++;
+            ++$i;
             $value *= $subjectNumber;
             $value %= 20201227;
-
         }
 
         return $i;
     }
 
-    public function transformNumber($subjectNumber,$loopSize)
+    public function transformNumber($subjectNumber, $loopSize)
     {
         $n = $subjectNumber;
         $value = 1;
-        for ($i=0;$i<$loopSize;$i++) {
+        for ($i = 0; $i < $loopSize; ++$i) {
             $value = $value * $n;
             $value = $value % 20201227;
         }
 
         return $value;
     }
-
 }

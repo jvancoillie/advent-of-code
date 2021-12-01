@@ -8,8 +8,8 @@ class Grid
     {
         $grid = [];
 
-        for ($gy = 0; $gy < $y; $gy++) {
-            for ($gx = 0; $gx < $x; $gx++) {
+        for ($gy = 0; $gy < $y; ++$gy) {
+            for ($gx = 0; $gx < $x; ++$gx) {
                 $grid[$gy][$gx] = $fill;
             }
         }
@@ -28,10 +28,10 @@ class Grid
     public static function count($grid, $needle)
     {
         $count = 0;
-        for ($y = 0; $y < count($grid); $y++) {
-            for ($x = 0; $x < count($grid[$y]); $x++) {
+        for ($y = 0; $y < count($grid); ++$y) {
+            for ($x = 0; $x < count($grid[$y]); ++$x) {
                 if ($grid[$y][$x] === $needle) {
-                    $count++;
+                    ++$count;
                 }
             }
         }

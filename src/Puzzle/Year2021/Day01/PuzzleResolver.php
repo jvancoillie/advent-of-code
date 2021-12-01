@@ -7,9 +7,10 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
-* Class PuzzleResolver
-* @see https://adventofcode.com/2021/day/1
-*/
+ * Class PuzzleResolver.
+ *
+ * @see https://adventofcode.com/2021/day/1
+ */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
@@ -36,9 +37,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $increase = 0;
 
-        for($i=0; $i< count($data)-$size;$i++){
-            if($data[$i]<$data[$i+$size]){
-                $increase++;
+        for ($i = 0; $i < count($data) - $size; ++$i) {
+            if ($data[$i] < $data[$i + $size]) {
+                ++$increase;
             }
         }
 

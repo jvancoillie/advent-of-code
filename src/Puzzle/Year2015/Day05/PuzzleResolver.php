@@ -21,9 +21,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $patternTReserved = '/(ab|cd|pq|xy)/';
         $nice = 0;
 
-        foreach (explode("\n", $input->getData()) as $line){
-            if(preg_match($patternVowels, $line) && preg_match($patternTwice, $line) && !preg_match($patternTReserved, $line) ){
-                $nice++;
+        foreach (explode("\n", $input->getData()) as $line) {
+            if (preg_match($patternVowels, $line) && preg_match($patternTwice, $line) && !preg_match($patternTReserved, $line)) {
+                ++$nice;
             }
         }
 
@@ -36,9 +36,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $patternRepeat = '/(.).\1/';
         $nice = 0;
 
-        foreach (explode("\n", $input->getData()) as $line){
-            if(preg_match($patternPair, $line) && preg_match($patternRepeat, $line)){
-                $nice++;
+        foreach (explode("\n", $input->getData()) as $line) {
+            if (preg_match($patternPair, $line) && preg_match($patternRepeat, $line)) {
+                ++$nice;
             }
         }
 

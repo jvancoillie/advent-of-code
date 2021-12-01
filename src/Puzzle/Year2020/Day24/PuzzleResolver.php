@@ -8,11 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    const BLACK = '#';
-    const WHITE = 'O';
+    public const BLACK = '#';
+    public const WHITE = 'O';
     private $directions = [
-        'w'  => [-1, 0],
-        'e'  => [1,  0],
+        'w' => [-1, 0],
+        'e' => [1,  0],
         'ne' => [0,  1],
         'nw' => [-1, 1],
         'se' => [1, -1],
@@ -29,7 +29,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         foreach (explode("\n", $input->getData()) as $data) {
             $moves = $this->parseLine($data);
             $this->doMoves($moves);
-
         }
 
         $blackTiles = $this->countBlackTiles();
@@ -39,7 +38,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(PuzzleInput $input, OutputInterface $output, $floor)
     {
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; ++$i) {
             $this->dayFlipping();
         }
 
@@ -49,18 +48,18 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * e, se, sw, w, nw, and ne
+     * e, se, sw, w, nw, and ne.
      */
     public function parseLine($string)
     {
         $split = str_split($string);
         $moves = [];
-        for ($i = 0; $i < count($split); $i++) {
+        for ($i = 0; $i < count($split); ++$i) {
             $move = $split[$i];
-            if ($split[$i] === "s" || $split[$i] === "n") {
-                if (isset($split[$i + 1]) && ($split[$i + 1] === "e" || $split[$i + 1] === "w")) {
+            if ('s' === $split[$i] || 'n' === $split[$i]) {
+                if (isset($split[$i + 1]) && ('e' === $split[$i + 1] || 'w' === $split[$i + 1])) {
                     $move .= $split[$i + 1];
-                    $i++;
+                    ++$i;
                 }
             }
             $moves[] = $move;
@@ -81,7 +80,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->updateFloorSize($x, $y);
 
         if (isset($this->floor[$x][$y])) {
-            $this->floor[$x][$y] = ($this->floor[$x][$y] === self::BLACK) ? self::WHITE : self::BLACK;
+            $this->floor[$x][$y] = (self::BLACK === $this->floor[$x][$y]) ? self::WHITE : self::BLACK;
         } else {
             $this->floor[$x][$y] = self::BLACK;
         }
@@ -92,8 +91,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $sum = 0;
         foreach ($this->floor as $line) {
             foreach ($line as $tile) {
-                if ($tile === self::BLACK) {
-                    $sum++;
+                if (self::BLACK === $tile) {
+                    ++$sum;
                 }
             }
         }
@@ -107,13 +106,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $this->extendFloor();
 
-        for ($x = $this->minX; $x <= $this->maxX; $x++) {
-            for ($y = $this->minY; $y <= $this->maxY; $y++) {
+        for ($x = $this->minX; $x <= $this->maxX; ++$x) {
+            for ($y = $this->minY; $y <= $this->maxY; ++$y) {
                 $colors = $this->countNeighborsColors($x, $y);
                 $tile = $this->floor[$x][$y] ?? self::WHITE;
-                if ($tile === self::WHITE && $colors[self::BLACK] === 2) {
+                if (self::WHITE === $tile && 2 === $colors[self::BLACK]) {
                     $newFloor[$x][$y] = self::BLACK;
-                } elseif ($tile === self::BLACK && ($colors[self::BLACK] === 0 || $colors[self::BLACK] > 2)) {
+                } elseif (self::BLACK === $tile && (0 === $colors[self::BLACK] || $colors[self::BLACK] > 2)) {
                     $newFloor[$x][$y] = self::WHITE;
                 } else {
                     $newFloor[$x][$y] = $tile;
@@ -121,7 +120,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $this->floor =  $newFloor;
+        $this->floor = $newFloor;
     }
 
     public function countNeighborsColors($x, $y)
@@ -131,9 +130,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $nx = $x + $ax;
             $ny = $y + $ay;
             if (isset($this->floor[$nx][$ny])) {
-                $colors[$this->floor[$nx][$ny]]++;
+                ++$colors[$this->floor[$nx][$ny]];
             } else {
-                $colors[self::WHITE]++;
+                ++$colors[self::WHITE];
             }
         }
 
@@ -142,16 +141,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function extendFloor()
     {
-        $this->minX--;
-        $this->maxX++;
-        $this->minY--;
-        $this->maxY++;
+        --$this->minX;
+        ++$this->maxX;
+        --$this->minY;
+        ++$this->maxY;
     }
 
-    /**
-     * @param int $x
-     * @param int $y
-     */
     private function updateFloorSize(int $x, int $y): void
     {
         if ($x > $this->maxX) {
@@ -174,5 +169,4 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $this->part2($input, $output, $floor);
     }
-
 }

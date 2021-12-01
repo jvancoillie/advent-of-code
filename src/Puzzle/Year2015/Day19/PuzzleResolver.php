@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/19
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -19,7 +20,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->init($input);
-        
+
         $this->part1($output);
         $this->part2($output);
     }
@@ -86,13 +87,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = 0;
         $input = $this->input;
-        while ($input !== 'e') {
+        while ('e' !== $input) {
             $found = false;
             foreach ($this->part2Replacements as [$search, $replacement]) {
                 if ((false !== $pos = strrpos($input, $search))) {
                     $length = strlen($search);
                     $input = substr_replace($input, $replacement, $pos, $length);
-                    $ans++;
+                    ++$ans;
                     $found = true;
                     break;
                 }

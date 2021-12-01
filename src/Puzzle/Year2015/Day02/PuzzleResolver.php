@@ -15,7 +15,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * @param PuzzleInput $input
      * @param OutputInterface $output
      *
      * 2*l*w + 2*w*h + 2*h*l.
@@ -51,7 +50,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $min2 = $entry[1];
             $squareFeet += $min1 + $min1 + $min2 + $min2;
             $squareFeet += $entry[0] * $entry[1] * $entry[2];
-
         }
 
         $output->writeln("<info>Part 1 : $squareFeet</info>");

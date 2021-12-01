@@ -36,11 +36,10 @@ class PuzzleMakerCommand extends Command
         $this->filesystem = new Filesystem();
     }
 
-
     protected function configure()
     {
-        $currentYear = (new \DateTime())->format("Y");
-        $currentDay = (new \DateTime())->format("d");
+        $currentYear = (new \DateTime())->format('Y');
+        $currentDay = (new \DateTime())->format('d');
 
         $this
             ->setDescription('Create the input data and structure for a given puzzle event')
@@ -55,17 +54,17 @@ class PuzzleMakerCommand extends Command
         $year = $input->getOption('year');
         $day = $input->getOption('day');
 
-        $link = sprintf("https://adventofcode.com/%d/day/%d", $year, $day);
+        $link = sprintf('https://adventofcode.com/%d/day/%d', $year, $day);
 
-        $folderPath = sprintf("src/Puzzle/Year%d/Day%s", $year, $day);
+        $folderPath = sprintf('src/Puzzle/Year%d/Day%s', $year, $day);
         $namespace = sprintf("App\Puzzle\Year%d\Day%s", $year, $day);
 
-        $inputFilePath = sprintf("%s/input/input.txt", $folderPath);
-        $testFilePath = sprintf("%s/input/test.txt", $folderPath);
-        $resolverFilePath = sprintf("%s/PuzzleResolver.php", $folderPath);
+        $inputFilePath = sprintf('%s/input/input.txt', $folderPath);
+        $testFilePath = sprintf('%s/input/test.txt', $folderPath);
+        $resolverFilePath = sprintf('%s/PuzzleResolver.php', $folderPath);
 
         $noData = $input->getOption('no-data');
-        if($this->filesystem->exists($resolverFilePath)){
+        if ($this->filesystem->exists($resolverFilePath)) {
             $output->writeln('<comment> Enable to create Puzzle Resolver Class, already exist ! </comment>');
 
             return Command::FAILURE;
@@ -76,16 +75,16 @@ class PuzzleMakerCommand extends Command
             $resolverFilePath,
             $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', [
                 'namespace' => $namespace,
-                'puzzleLink' => $link
+                'puzzleLink' => $link,
             ])
         );
 
         $output->writeln('<info>Create Puzzle data input files</info>');
 
         $this->filesystem->dumpFile($inputFilePath, '');
-        $this->filesystem->dumpFile($testFilePath,'');
+        $this->filesystem->dumpFile($testFilePath, '');
 
-        if(!$noData) {
+        if (!$noData) {
             $output->writeln(sprintf('<info>--- Retrieve data for DAY:  %1$s-%2$s --- <info>', $year, $day));
 
             $dotenv = new Dotenv();
@@ -94,21 +93,20 @@ class PuzzleMakerCommand extends Command
 
             $sessionId = $_ENV['AOC_SESSSION_ID'];
 
-            if($sessionId === ''){
+            if ('' === $sessionId) {
                 $output->writeln("<info> --- can't retrieve input data, the AOC_SESSSION_ID must be set in the .env.local file --- <info>");
-            }else{
+            } else {
                 try {
                     $inputDataLink = $link.'/input';
                     $output->writeln(sprintf('<info>--- %s --- <info>', $inputDataLink));
                     $response = $this->client->request('GET', $inputDataLink, [
-                            'headers' => ['Cookie' => 'session='.$sessionId]
+                            'headers' => ['Cookie' => 'session='.$sessionId],
                         ]
                     );
 
                     $response->getContent();
 
                     $this->filesystem->dumpFile($inputFilePath, trim($response->getContent()));
-
                 } catch (\Error $e) {
                     $output->writeln(
                         sprintf('<error>Error when retrieve input data for day %d of year %d</error>', $day, $year)
@@ -117,9 +115,7 @@ class PuzzleMakerCommand extends Command
                     return Command::FAILURE;
                 }
             }
-
         }
-
 
         return Command::SUCCESS;
     }

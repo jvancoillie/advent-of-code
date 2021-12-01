@@ -4,12 +4,11 @@ namespace App\Puzzle\Year2015\Day15;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use App\Utils\Knapsack\Item;
-use App\Utils\Knapsack\Knapsack;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/15
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -52,8 +51,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $value = 0;
         foreach ($propertiesData as $propertyData) {
             [$property, $teaspoon] = explode(' ', $propertyData);
-            $properties[$property] = (int)$teaspoon;
-            if ($property !== 'calories') {
+            $properties[$property] = (int) $teaspoon;
+            if ('calories' !== $property) {
                 $value += $properties[$property];
             }
         }
@@ -74,7 +73,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $flavor += $ingredient['flavor'] * $multiplier[$key];
                 $texture += $ingredient['texture'] * $multiplier[$key];
                 $calories += $ingredient['calories'] * $multiplier[$key];
-
             }
 
             if ($withCalories && 500 != $calories) {
@@ -94,13 +92,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function permutations($sum, $length): array
     {
-        if ($length === 0) {
+        if (0 === $length) {
             return [[$sum]];
         }
 
         $list = [];
 
-        for ($i = $sum; $i > 0; $i--) {
+        for ($i = $sum; $i > 0; --$i) {
             $subList = $this->permutations($sum - $i, $length - 1);
             foreach ($subList as $perms) {
                 $perms[] = $i;
@@ -111,4 +109,3 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $list;
     }
 }
-

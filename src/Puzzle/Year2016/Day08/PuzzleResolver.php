@@ -9,7 +9,8 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2016/day/8
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -21,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $this->createInstructions($input);
 
-        if ($options['env'] === 'test') {
+        if ('test' === $options['env']) {
             $this->grid = Grid::create(7, 3, '.');
         } else {
             $this->grid = Grid::create(50, 6, ' ');
@@ -41,7 +42,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
-        $output->writeln("<info>Part 2 : Display screen below </info>");
+        $output->writeln('<info>Part 2 : Display screen below </info>');
 
         $table = new Table($output);
         $table->setStyle('compact');
@@ -56,7 +57,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $instruction = [];
             $instruction['action'] = $exploded[0];
 
-            if ($exploded[0] === 'rect') {
+            if ('rect' === $exploded[0]) {
                 [$x, $y] = explode('x', $exploded[1]);
                 $instruction['coord']['x'] = $x;
                 $instruction['coord']['y'] = $y;
@@ -74,11 +75,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private function applyInstructions()
     {
         foreach ($this->instructions as $instruction) {
-
-            if ($instruction['action'] === 'rect') {
+            if ('rect' === $instruction['action']) {
                 $this->turnOn($instruction['coord']['x'], $instruction['coord']['y']);
             } else {
-                if ($instruction['type'] === 'column') {
+                if ('column' === $instruction['type']) {
                     $this->rotateColumn($instruction['coord'], $instruction['by']);
                 } else {
                     $this->rotateRow($instruction['coord'], $instruction['by']);
@@ -89,8 +89,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function turnOn($xSize, $ySize)
     {
-        for ($y = 0; $y < $ySize; $y++) {
-            for ($x = 0; $x < $xSize; $x++) {
+        for ($y = 0; $y < $ySize; ++$y) {
+            for ($x = 0; $x < $xSize; ++$x) {
                 $this->grid[$y][$x] = '#';
             }
         }
@@ -99,12 +99,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private function rotateRow($y, $by)
     {
         $row = $this->grid[$y];
-        for ($i = 0; $i < $by; $i++) {
+        for ($i = 0; $i < $by; ++$i) {
             array_unshift($row, array_pop($row));
         }
         $this->grid[$y] = $row;
     }
-
 
     private function rotateColumn($x, $by)
     {
@@ -113,13 +112,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $col[$y] = $line[$x];
         }
 //        dump($col);
-        for ($i = 0; $i < $by; $i++) {
+        for ($i = 0; $i < $by; ++$i) {
             array_unshift($col, array_pop($col));
         }
 //        dump($col);
         foreach ($this->grid as $y => $line) {
             $this->grid[$y][$x] = $col[$y];
         }
-
     }
 }

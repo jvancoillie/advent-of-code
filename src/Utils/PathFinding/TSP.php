@@ -2,10 +2,9 @@
 
 namespace App\Utils\PathFinding;
 
-
 /**
- * Class TSP
- * @package App\Utils\PathFinding
+ * Class TSP.
+ *
  * @see https://en.wikipedia.org/wiki/Travelling_salesman_problem
  */
 class TSP
@@ -52,7 +51,6 @@ class TSP
 
     /**
      * TSP constructor.
-     * @param array $graph
      */
     public function __construct(array $graph = [])
     {
@@ -72,7 +70,7 @@ class TSP
     }
 
     /**
-     * Compute all routes
+     * Compute all routes.
      */
     public function compute()
     {
@@ -83,19 +81,19 @@ class TSP
         $this->routes = $this->permutations($keys);
         foreach ($this->routes as $key => $perms) {
             $total = 0;
-            for ($i = 0; $i < count($perms) - 1; $i++) {
+            for ($i = 0; $i < count($perms) - 1; ++$i) {
                 $total += $this->graph[$perms[$i]][$perms[$i + 1]];
             }
 
             $this->routes[$key]['distance'] = $total;
 
-            if ($total < $this->shortestDistance || $this->shortestDistance === null) {
+            if ($total < $this->shortestDistance || null === $this->shortestDistance) {
                 $this->shortestDistance = $total;
                 $this->shortestPath = $perms;
                 $this->shortestPaths = [];
             }
 
-            if ($total > $this->longestDistance || $this->longestDistance === null) {
+            if ($total > $this->longestDistance || null === $this->longestDistance) {
                 $this->longestDistance = $total;
                 $this->longestPath = $perms;
                 $this->longestPaths = [];
@@ -115,11 +113,12 @@ class TSP
     /**
      * @param $items
      * @param array $perms
+     *
      * @return mixed
      */
     private function permutations($items): array
     {
-        if (count($items) === 0) {
+        if (0 === count($items)) {
             return [[]];
         }
 
@@ -127,8 +126,8 @@ class TSP
         $permsWithoutFirst = $this->permutations($items);
         $allPermutations = [];
 
-        foreach ($permsWithoutFirst as $perms){
-            for($i=0; $i<=count($perms); $i++){
+        foreach ($permsWithoutFirst as $perms) {
+            for ($i = 0; $i <= count($perms); ++$i) {
                 $permsWithFirst = array_merge(array_slice($perms, 0, $i), [$firstItem], array_slice($perms, $i));
                 $allPermutations[] = $permsWithFirst;
             }
@@ -137,9 +136,6 @@ class TSP
         return $allPermutations;
     }
 
-    /**
-     * @return array
-     */
     public function getShortestPath(): array
     {
         $this->compute();
@@ -147,9 +143,6 @@ class TSP
         return $this->shortestPath;
     }
 
-    /**
-     * @return array
-     */
     public function getShortestPaths(): array
     {
         $this->compute();
@@ -157,9 +150,6 @@ class TSP
         return $this->shortestPaths;
     }
 
-    /**
-     * @return int|null
-     */
     public function getShortestDistance(): ?int
     {
         $this->compute();
@@ -167,9 +157,6 @@ class TSP
         return $this->shortestDistance;
     }
 
-    /**
-     * @return array
-     */
     public function getLongestPath(): array
     {
         $this->compute();
@@ -177,9 +164,6 @@ class TSP
         return $this->longestPath;
     }
 
-    /**
-     * @return array
-     */
     public function getLongestPaths(): array
     {
         $this->compute();
@@ -197,18 +181,11 @@ class TSP
         return $this->longestDistance;
     }
 
-    /**
-     * @return array
-     */
     public function getGraph(): array
     {
         return $this->graph;
     }
 
-
-    /**
-     * @return array
-     */
     public function getRoutes(): array
     {
         $this->compute();
@@ -226,7 +203,6 @@ class TSP
 
     /**
      * @param false $computed
-     * @return TSP
      */
     public function setComputed(bool $computed): TSP
     {

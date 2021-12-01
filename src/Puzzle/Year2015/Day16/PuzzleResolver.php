@@ -7,22 +7,23 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/16
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $tickerTape = [
-        "children" => 3,
-        "cats" => 7,
-        "samoyeds" => 2,
-        "pomeranians" => 3,
-        "akitas" => 0,
-        "vizslas" => 0,
-        "goldfish" => 5,
-        "trees" => 3,
-        "cars" => 2,
-        "perfumes" => 1,
+        'children' => 3,
+        'cats' => 7,
+        'samoyeds' => 2,
+        'pomeranians' => 3,
+        'akitas' => 0,
+        'vizslas' => 0,
+        'goldfish' => 5,
+        'trees' => 3,
+        'cars' => 2,
+        'perfumes' => 1,
     ];
 
     private $aunts = [];
@@ -37,8 +38,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
         $ans = 0;
-        foreach ($this->aunts as $key => $aunt){
-            if($this->match($aunt)){
+        foreach ($this->aunts as $key => $aunt) {
+            if ($this->match($aunt)) {
                 $ans = $key;
             }
         }
@@ -48,8 +49,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $ans = 0;
-        foreach ($this->aunts as $key => $aunt){
-            if($this->match2($aunt)){
+        foreach ($this->aunts as $key => $aunt) {
+            if ($this->match2($aunt)) {
                 $ans = $key;
             }
         }
@@ -65,17 +66,17 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function parseLine($line)
     {
-        $pattern ='/^Sue\s(?<id>\d+):\s(?<properties>.*)$/';
+        $pattern = '/^Sue\s(?<id>\d+):\s(?<properties>.*)$/';
 
         preg_match($pattern, $line, $matches);
 
-        if(!$matches) {
-            throw new \Exception("parsing action error");
+        if (!$matches) {
+            throw new \Exception('parsing action error');
         }
         $propertiesData = explode(', ', $matches['properties']);
         foreach ($propertiesData as $propertyData) {
             [$property, $number] = explode(': ', $propertyData);
-            $properties[$property] = (int)$number;
+            $properties[$property] = (int) $number;
         }
 
         $this->aunts[$matches['id']] = $properties;
@@ -83,34 +84,31 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function match($aunt)
     {
-        foreach($aunt as $property => $number){
-            if($this->tickerTape[$property] !== $number){
+        foreach ($aunt as $property => $number) {
+            if ($this->tickerTape[$property] !== $number) {
                 return false;
             }
         }
 
         return true;
-
     }
-
 
     private function match2($aunt)
     {
-        foreach($aunt as $property => $number){
-            if($property === 'cats' || $property === 'trees'){
-                if($this->tickerTape[$property] >= $number){
+        foreach ($aunt as $property => $number) {
+            if ('cats' === $property || 'trees' === $property) {
+                if ($this->tickerTape[$property] >= $number) {
                     return false;
                 }
-            }elseif($property === 'pomeranians' || $property === 'goldfish'){
-                if($this->tickerTape[$property] <= $number){
+            } elseif ('pomeranians' === $property || 'goldfish' === $property) {
+                if ($this->tickerTape[$property] <= $number) {
                     return false;
                 }
-            }elseif($this->tickerTape[$property] !== $number){
+            } elseif ($this->tickerTape[$property] !== $number) {
                 return false;
             }
         }
 
         return true;
-
     }
 }

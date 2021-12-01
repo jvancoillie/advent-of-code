@@ -7,8 +7,7 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
- * @package App\Puzzle\Year2015\Day10
+ * Class PuzzleResolver.
  *
  * @see https://en.wikipedia.org/wiki/Look-and-say_sequence
  */
@@ -24,7 +23,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = $input->getData();
 
-        for ($i = 1; $i <= 40; $i++) {
+        for ($i = 1; $i <= 40; ++$i) {
             $ans = $this->lookAndSay($ans);
         }
         $ans = strlen($ans);
@@ -36,7 +35,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = $input->getData();
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; ++$i) {
             $ans = $this->lookAndSay($ans);
         }
         $ans = strlen($ans);

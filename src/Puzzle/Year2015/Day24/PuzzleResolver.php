@@ -4,11 +4,11 @@ namespace App\Puzzle\Year2015\Day24;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use App\Utils\Generator;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/24
  *
  * Not found @see https://www.reddit.com/r/adventofcode/comments/3y1s7f/day_24_solutions/
@@ -26,7 +26,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
         $packages = explode("\n", $input->getData());
-        $list = $this->createGroups(array_sum($packages)/3, $packages);
+        $list = $this->createGroups(array_sum($packages) / 3, $packages);
         $min = INF;
         foreach ($list as $item) {
             $product = array_product($item);
@@ -41,7 +41,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $packages = explode("\n", $input->getData());
-        $list = $this->createGroups(array_sum($packages)/4, $packages);
+        $list = $this->createGroups(array_sum($packages) / 4, $packages);
         $min = INF;
         foreach ($list as $item) {
             $product = array_product($item);
@@ -57,36 +57,38 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $list = [];
 
-        while($packages){
+        while ($packages) {
             $package = array_pop($packages);
             $weightCheck = array_sum($group) + $package;
-            if($weight < $weightCheck){
+            if ($weight < $weightCheck) {
                 $checked[] = $package;
                 continue;
             }
             $newGroup = $group;
             $newGroup[] = $package;
-            if($weightCheck === $weight && $this->isValid(array_merge($checked, $packages), $weight)){
+            if ($weightCheck === $weight && $this->isValid(array_merge($checked, $packages), $weight)) {
                 $list[] = $newGroup;
             }
 
             $list = array_merge($list, $this->createGroups($weight, $packages, $newGroup, $checked));
         }
-        return array_unique($list,SORT_REGULAR);
+
+        return array_unique($list, SORT_REGULAR);
     }
 
     private function isValid(array $group, $targetWeight, $weight = 0)
     {
-        while($group) {
+        while ($group) {
             $item = array_pop($group);
             $newWeight = $weight + $item;
-            if($newWeight === $targetWeight) {
+            if ($newWeight === $targetWeight) {
                 return true;
             }
-            if($newWeight < $targetWeight && $this->isValid($group, $targetWeight, $newWeight)) {
+            if ($newWeight < $targetWeight && $this->isValid($group, $targetWeight, $newWeight)) {
                 return true;
             }
         }
+
         return false;
     }
 }

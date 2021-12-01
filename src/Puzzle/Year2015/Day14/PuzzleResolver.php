@@ -7,7 +7,8 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
+ * Class PuzzleResolver.
+ *
  * @see https://adventofcode.com/2015/day/14
  */
 class PuzzleResolver extends AbstractPuzzleResolver
@@ -17,7 +18,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
-        if($options['env'] === "prod"){
+        if ('prod' === $options['env']) {
             $this->time = 2503;
         }
 
@@ -29,11 +30,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(OutputInterface $output)
     {
         $ans = 0;
-        foreach($this->reindeers as $reindeer){
-             $dist = $reindeer['speed'] * (floor($this->time / ($reindeer['fly'] + $reindeer['rest'])) * $reindeer['fly'] + min($this->time % ($reindeer['fly'] + $reindeer['rest']), $reindeer['fly']));
-             if($dist > $ans){
+        foreach ($this->reindeers as $reindeer) {
+            $dist = $reindeer['speed'] * (floor($this->time / ($reindeer['fly'] + $reindeer['rest'])) * $reindeer['fly'] + min($this->time % ($reindeer['fly'] + $reindeer['rest']), $reindeer['fly']));
+            if ($dist > $ans) {
                 $ans = $dist;
-             }
+            }
         }
 
         $output->writeln("<info>Part 1 : $ans</info>");
@@ -42,27 +43,26 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(OutputInterface $output)
     {
         $points = [];
-        for ($i = 1; $i <= $this->time; $i++) {
+        for ($i = 1; $i <= $this->time; ++$i) {
             $winners = null;
             $best = 0;
-            foreach($this->reindeers as $key => $reindeer) {
+            foreach ($this->reindeers as $key => $reindeer) {
                 $dist = $reindeer['speed'] * (floor($i / ($reindeer['fly'] + $reindeer['rest'])) * $reindeer['fly'] + min($i % ($reindeer['fly'] + $reindeer['rest']), $reindeer['fly']));
-                if($dist > $best){
+                if ($dist > $best) {
                     $best = $dist;
                     $winners = [$key];
-                }elseif($dist === $best && $best > 0){
+                } elseif ($dist === $best && $best > 0) {
                     $winners[] = $key;
                 }
             }
 
             foreach ($winners as $winner) {
-                if(isset($points[$winner])){
-                    $points[$winner]++;
-                }else{
+                if (isset($points[$winner])) {
+                    ++$points[$winner];
+                } else {
                     $points[$winner] = 1;
                 }
             }
-
         }
 
         $ans = max($points);
@@ -82,7 +82,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         preg_match($pattern, $line, $matches);
 
         if (!$matches) {
-            throw new \Exception("parsing action error");
+            throw new \Exception('parsing action error');
         }
 
         $this->reindeers[] = [

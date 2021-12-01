@@ -7,11 +7,7 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PuzzleResolver
- * @package App\Puzzle\Year2015\Day07
- *
- * https://www.php.net/manual/fr/language.operators.bitwise.php
- * https://www.php.net/manual/fr/function.str-contains.php
+ * Class PuzzleResolver.
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
@@ -51,7 +47,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function resolveCircuitEntry($letter)
     {
         if (is_numeric($this->circuit[$letter])) {
-            return (int)$this->circuit[$letter];
+            return (int) $this->circuit[$letter];
         }
 
         if (!is_array($this->circuit[$letter])) {
@@ -61,9 +57,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return $result;
         }
 
-        if (count($this->circuit[$letter]) === 3) {
+        if (3 === count($this->circuit[$letter])) {
             if (is_numeric($this->circuit[$letter][0])) {
-                $a = (int)$this->circuit[$letter][0];
+                $a = (int) $this->circuit[$letter][0];
             } else {
                 $a = $this->resolveCircuitEntry($this->circuit[$letter][0]);
             }
@@ -71,7 +67,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $operation = $this->circuit[$letter][1];
 
             if (is_numeric($this->circuit[$letter][2])) {
-                $b = (int)$this->circuit[$letter][2];
+                $b = (int) $this->circuit[$letter][2];
             } else {
                 $b = $this->resolveCircuitEntry($this->circuit[$letter][2]);
             }
@@ -85,21 +81,20 @@ class PuzzleResolver extends AbstractPuzzleResolver
                     $result = $a | $b;
                     break;
                 case 'LSHIFT':
-                    $result = $a << (int)$b;
+                    $result = $a << (int) $b;
                     break;
                 case 'RSHIFT':
-                    $result = $a >> (int)$b;
+                    $result = $a >> (int) $b;
                     break;
             }
             $this->circuit[$letter] = $result;
 
             return $result;
-
         }
 
-        if (count($this->circuit[$letter]) === 2) {
+        if (2 === count($this->circuit[$letter])) {
             if (is_numeric($this->circuit[$letter][1])) {
-                $a = (int)$this->circuit[$letter][1];
+                $a = (int) $this->circuit[$letter][1];
             } else {
                 $a = $this->resolveCircuitEntry($this->circuit[$letter][1]);
             }
@@ -114,14 +109,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
         throw new \Exception('should never reach');
     }
 
-    /**
-     * @param PuzzleInput $input
-     */
     private function createCircuit(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             [$in, $out] = $this->parseLine($line);
-            if (count($in) === 1) {
+            if (1 === count($in)) {
                 $this->circuit[$out] = $in[0];
             } else {
                 $this->circuit[$out] = $in;

@@ -7,9 +7,10 @@ use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
-* Class PuzzleResolver
-* @see https://adventofcode.com/2015/day/23
-*/
+ * Class PuzzleResolver.
+ *
+ * @see https://adventofcode.com/2015/day/23
+ */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $instructions = [];
@@ -25,26 +26,26 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = $this->execute(['a' => 0, 'b' => 0]);
 
-        $output->writeln("<info>Part 1 : ".$ans['b']."</info>");
+        $output->writeln('<info>Part 1 : '.$ans['b'].'</info>');
     }
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $ans = $this->execute(['a' => 1, 'b' => 0]);
 
-        $output->writeln("<info>Part 2 : ".$ans['b']."</info>");
+        $output->writeln('<info>Part 2 : '.$ans['b'].'</info>');
     }
 
     private function createInstructions(PuzzleInput $input)
     {
-        foreach (explode("\n", $input->getData()) as $line){
+        foreach (explode("\n", $input->getData()) as $line) {
             $exploded = explode(', ', $line);
             [$action, $register] = explode(' ', $exploded[0]);
-            if($action === "jmp"){
+            if ('jmp' === $action) {
                 $jmp = (int) $register;
                 $register = null;
-            }else{
-                $jmp =  isset($exploded[1])?$exploded[1]:0;
+            } else {
+                $jmp = isset($exploded[1]) ? $exploded[1] : 0;
             }
             $this->instructions[] = ['action' => $action, 'register' => $register, 'jmp' => (int) $jmp];
         }
@@ -53,36 +54,36 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function execute($registers)
     {
         $i = 0;
-        while($i<count($this->instructions)){
+        while ($i < count($this->instructions)) {
             $instruction = $this->instructions[$i];
-            switch ($instruction['action']){
+            switch ($instruction['action']) {
                 case 'hlf':
                     $registers[$instruction['register']] /= 2;
-                    $i++;
+                    ++$i;
                     break;
                 case 'tpl':
                     $registers[$instruction['register']] *= 3;
-                    $i++;
+                    ++$i;
                     break;
                 case 'inc':
                     $registers[$instruction['register']]++;
-                    $i++;
+                    ++$i;
                     break;
                 case 'jmp':
                     $i += $instruction['jmp'];
                     break;
                 case 'jie':
-                    if(0 === $registers[$instruction['register']] % 2){
+                    if (0 === $registers[$instruction['register']] % 2) {
                         $i += $instruction['jmp'];
-                    }else{
-                        $i++;
+                    } else {
+                        ++$i;
                     }
                     break;
                 case 'jio':
-                    if($registers[$instruction['register']] === 1){
+                    if (1 === $registers[$instruction['register']]) {
                         $i += $instruction['jmp'];
-                    }else{
-                       $i++;
+                    } else {
+                        ++$i;
                     }
                     break;
             }
@@ -93,7 +94,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function isEven($number)
     {
-        return ;
+        return;
     }
-
 }

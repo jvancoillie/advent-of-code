@@ -17,11 +17,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
         $floor = 0;
-        foreach(str_split($input->getData()) as $data){
-            if($data === '('){
-                $floor++;
-            }elseif ($data === ')'){
-                $floor--;
+        foreach (str_split($input->getData()) as $data) {
+            if ('(' === $data) {
+                ++$floor;
+            } elseif (')' === $data) {
+                --$floor;
             }
         }
 
@@ -31,17 +31,16 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $floor = 0;
-        foreach(str_split($input->getData()) as $key => $data){
-            if($data === '('){
-                $floor++;
-            }elseif ($data === ')'){
-                $floor--;
+        foreach (str_split($input->getData()) as $key => $data) {
+            if ('(' === $data) {
+                ++$floor;
+            } elseif (')' === $data) {
+                --$floor;
             }
 
-            if($floor<0){
-                $response = $key +1;
+            if ($floor < 0) {
+                $response = $key + 1;
                 break;
-
             }
         }
 
