@@ -14,6 +14,7 @@ RUN apk add --no-cache \
         git \
         jq \
         bash \
+        make \
     ;
 
 ARG APCU_VERSION=5.1.19
@@ -63,7 +64,6 @@ RUN mkdir -p /var/www/advent
 WORKDIR /var/www/advent
 COPY . /var/www/advent
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 CMD ["php-fpm"]
 
