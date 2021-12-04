@@ -18,6 +18,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $instructions = [];
     private $grid = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createInstructions($input);
@@ -32,7 +35,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $this->applyInstructions();
         $ans = Grid::count($this->grid, '#');
@@ -40,7 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $output->writeln('<info>Part 2 : Display screen below </info>');
 
@@ -50,7 +53,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $table->render();
     }
 
-    private function createInstructions(PuzzleInput $input)
+    private function createInstructions(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $exploded = explode(' ', $line);
@@ -72,7 +75,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    private function applyInstructions()
+    private function applyInstructions(): void
     {
         foreach ($this->instructions as $instruction) {
             if ('rect' === $instruction['action']) {
@@ -87,7 +90,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    private function turnOn($xSize, $ySize)
+    private function turnOn($xSize, $ySize): void
     {
         for ($y = 0; $y < $ySize; ++$y) {
             for ($x = 0; $x < $xSize; ++$x) {
@@ -96,7 +99,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    private function rotateRow($y, $by)
+    private function rotateRow($y, $by): void
     {
         $row = $this->grid[$y];
         for ($i = 0; $i < $by; ++$i) {
@@ -105,7 +108,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->grid[$y] = $row;
     }
 
-    private function rotateColumn($x, $by)
+    private function rotateColumn($x, $by): void
     {
         $col = [];
         foreach ($this->grid as $y => $line) {

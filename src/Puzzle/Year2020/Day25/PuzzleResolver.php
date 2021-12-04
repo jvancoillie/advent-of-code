@@ -8,12 +8,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $data = explode("\n", $input->getData());
 
@@ -26,7 +29,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $cardKey</info>");
     }
 
-    public function findLoopSize($key)
+    /**
+     * @psalm-return 0|positive-int
+     */
+    public function findLoopSize(int $key): int
     {
         $i = 0;
         $subjectNumber = 7;
@@ -41,7 +47,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $i;
     }
 
-    public function transformNumber($subjectNumber, $loopSize)
+    public function transformNumber(int $subjectNumber, $loopSize)
     {
         $n = $subjectNumber;
         $value = 1;

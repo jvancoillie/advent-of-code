@@ -17,6 +17,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $currentDirection = 'N';
     private $directions = ['N', 'E', 'S', 'W'];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createInstructions($input);
@@ -25,28 +28,33 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         [$x, $y] = $this->walk();
         $ans = $this->manhattan(0, 0, $x, $y);
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         [$x, $y] = $this->walk(true);
         $ans = $this->manhattan(0, 0, $x, $y);
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function createInstructions(PuzzleInput $input)
+    private function createInstructions(PuzzleInput $input): void
     {
         foreach (explode(', ', $input->getData()) as $line) {
             $this->instructions[] = ['turn' => substr($line, 0, 1), 'dist' => (int) substr($line, 1)];
         }
     }
 
-    private function walk($firstVisited = false)
+    /**
+     * @return int[]
+     *
+     * @psalm-return array{0: int, 1: int}
+     */
+    private function walk(bool $firstVisited = false): array
     {
         $x = $y = 0;
         $this->currentDirection = 'N';
@@ -94,12 +102,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return [$x, $y];
     }
 
-    private function manhattan($xa, $ya, $xb, $yb)
+    private function manhattan(int $xa, int $ya, $xb, $yb): float|int
     {
         return abs($ya - $yb) + abs($xa - $xb);
     }
 
-    private function turn($direction)
+    private function turn($direction): void
     {
         $key = array_search($this->currentDirection, $this->directions);
 

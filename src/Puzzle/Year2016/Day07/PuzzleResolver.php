@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
 
@@ -33,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
 
@@ -47,7 +50,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function parseLine($line)
+    /**
+     * @return (mixed|string)[][]
+     *
+     * @psalm-return array{out: non-empty-list<mixed|string>, in: list<string>}
+     */
+    public function parseLine(string $line): array
     {
         $out = $in = [];
         while (false !== $pos = strpos($line, '[')) {
@@ -63,7 +71,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return ['out' => $out, 'in' => $in];
     }
 
-    public function hasABBA($strings)
+    public function hasABBA($strings): bool
     {
         foreach ($strings as $string) {
             $split = str_split($string);
@@ -81,7 +89,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return false;
     }
 
-    public function isSSl($ip)
+    public function isSSl($ip): bool
     {
         //extract all ABA from outside brackets and check if in brackets
         foreach ($ip['out'] as $string) {

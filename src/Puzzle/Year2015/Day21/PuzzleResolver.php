@@ -53,6 +53,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Equipped' => [],
     ];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         dump($options);
@@ -63,7 +66,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->bothParts($output);
     }
 
-    public function bothParts(OutputInterface $output)
+    public function bothParts(OutputInterface $output): void
     {
         $part1 = INF;
         $part2 = 0;
@@ -82,7 +85,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $part2</info>");
     }
 
-    private function setBossStats(PuzzleInput $input)
+    private function setBossStats(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             if (preg_match('/^Hit Points:\s(\d+)$/', $line, $matches)) {
@@ -97,6 +100,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
+    /**
+     * @return bool
+     */
     private function fight($player)
     {
         $boss = $this->boss;
@@ -121,8 +127,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
      * 0-2 Rings.
      *
      * Create all combinations
+     *
+     * @psalm-return \Generator<int, mixed, mixed, void>
      */
-    private function nextBuy()
+    private function nextBuy(): \Generator
     {
         foreach ($this->shop['Weapons'] as $weaponName => $weaponStats) {
             foreach ($this->shop['Armor'] as $armorName => $armorStats) {

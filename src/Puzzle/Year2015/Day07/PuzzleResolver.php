@@ -14,20 +14,23 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $circuit = [];
     private $part1Answer;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $this->createCircuit($input);
         $this->part1Answer = $this->resolveCircuitEntry('a');
         $output->writeln("<info>Part 1 : $this->part1Answer</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $this->createCircuit($input);
         $this->circuit['b'] = $this->part1Answer;
@@ -36,7 +39,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function parseLine($line)
+    /**
+     * @return (string|string[])[]
+     *
+     * @psalm-return array{0: non-empty-list<string>, 1: string}
+     */
+    public function parseLine(string $line): array
     {
         [$in, $out] = explode(' -> ', $line);
         $in = explode(' ', $in);
@@ -44,7 +52,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return [$in, $out];
     }
 
-    public function resolveCircuitEntry($letter)
+    /**
+     * @psalm-param 'a' $letter
+     */
+    public function resolveCircuitEntry(string $letter)
     {
         if (is_numeric($this->circuit[$letter])) {
             return (int) $this->circuit[$letter];

@@ -4,7 +4,18 @@ namespace App\Utils;
 
 class Grid
 {
-    public static function create($x, $y, $fill)
+    /**
+     * @param int|string $fill
+     *
+     * @psalm-param 7|50|1000 $x
+     * @psalm-param 3|6|1000 $y
+     * @psalm-param ' '|'.'|0 $fill
+     *
+     * @return array[]
+     *
+     * @psalm-return array<0|positive-int, array<0|positive-int, mixed>>
+     */
+    public static function create(int $x, int $y, string|int $fill): array
     {
         $grid = [];
 
@@ -17,7 +28,7 @@ class Grid
         return $grid;
     }
 
-    public static function dump($array)
+    public static function dump($array): void
     {
         foreach ($array as $lines) {
             echo implode('', $lines)."\n";
@@ -25,7 +36,12 @@ class Grid
         echo "\n";
     }
 
-    public static function count($grid, $needle)
+    /**
+     * @psalm-param '#' $needle
+     *
+     * @psalm-return 0|positive-int
+     */
+    public static function count($grid, string $needle): int
     {
         $count = 0;
         for ($y = 0; $y < count($grid); ++$y) {

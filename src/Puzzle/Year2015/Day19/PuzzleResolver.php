@@ -17,6 +17,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $part2Replacements = [];
     private $input;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->init($input);
@@ -25,21 +28,21 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->replace(str_split($this->input));
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $ans = $this->randomSearch();
 
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function init(PuzzleInput $input)
+    public function init(PuzzleInput $input): void
     {
         [$replacementsData, $inputData] = explode("\n\n", $input->getData());
         $this->input = $inputData;
@@ -52,7 +55,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function replace($input)
+    /**
+     * @param string[] $input
+     *
+     * @psalm-param list<string> $input
+     *
+     * @psalm-return 0|positive-int
+     */
+    public function replace(array $input): int
     {
         $molecules = [];
         foreach ($input as $i => $l) {
@@ -83,7 +93,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return count($molecules);
     }
 
-    public function randomSearch()
+    /**
+     * @psalm-return 0|positive-int
+     */
+    public function randomSearch(): int
     {
         $ans = 0;
         $input = $this->input;

@@ -39,6 +39,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Recharge' => ['Cost' => 229, 'Active' => 5, 'Damage' => 0, 'Heal' => 0, 'Armor' => 7, 'Mana' => 101],
     ];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         dump($options);
@@ -53,20 +56,20 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->play();
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->play(true);
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function setBossStats(PuzzleInput $input)
+    private function setBossStats(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             if (preg_match('/^Hit Points:\s(\d+)$/', $line, $matches)) {
@@ -78,7 +81,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    private function play($hard = false)
+    private function play(bool $hard = false)
     {
         $min = INF;
 

@@ -30,6 +30,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $width;
     private $cornersLocked = false;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         if ('test' === $options['env']) {
@@ -44,7 +47,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         for ($i = 0; $i < $this->steps; ++$i) {
             $this->toggleLights();
@@ -55,7 +58,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         //turn on corners;
         $this->turnOnCorners();
@@ -69,7 +72,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function createGrid(PuzzleInput $input)
+    public function createGrid(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $this->grid[] = str_split($line);
@@ -79,7 +82,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->width = count($this->grid[0]) - 1;
     }
 
-    public function togglelights()
+    public function togglelights(): void
     {
         //Grid::dump($this->grid);
         $grid = [];
@@ -132,7 +135,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->grid = $grid;
     }
 
-    public function turnOnCorners()
+    public function turnOnCorners(): void
     {
         $this->grid[0][0] = '#';
         $this->grid[0][$this->width] = '#';
@@ -142,7 +145,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->cornersLocked = true;
     }
 
-    public function countLightOn()
+    /**
+     * @psalm-return 0|positive-int
+     */
+    public function countLightOn(): int
     {
         $on = 0;
         for ($y = 0; $y <= $this->height; ++$y) {

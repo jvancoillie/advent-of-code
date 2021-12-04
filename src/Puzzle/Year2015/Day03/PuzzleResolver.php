@@ -8,13 +8,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $x = $y = 0;
         $houses = [[0]];
@@ -44,7 +47,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $count</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $coords = [
             'santa' => ['x' => 0, 'y' => 0],
@@ -78,7 +81,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $count</info>");
     }
 
-    public function countHouses($houses)
+    public function countHouses(array $houses): int
     {
         $count = 0;
         foreach ($houses as $house) {

@@ -24,7 +24,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $maxY = 0;
     private $floor = [];
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         foreach (explode("\n", $input->getData()) as $data) {
             $moves = $this->parseLine($data);
@@ -36,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $blackTiles black tiles</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output, $floor)
+    public function part2(PuzzleInput $input, OutputInterface $output, $floor): void
     {
         for ($i = 0; $i < 100; ++$i) {
             $this->dayFlipping();
@@ -49,8 +49,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     /**
      * e, se, sw, w, nw, and ne.
+     *
+     * @return string[]
+     *
+     * @psalm-return list<string>
      */
-    public function parseLine($string)
+    public function parseLine(string $string): array
     {
         $split = str_split($string);
         $moves = [];
@@ -68,7 +72,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $moves;
     }
 
-    public function doMoves($moves)
+    public function doMoves($moves): void
     {
         $x = $y = 0;
 
@@ -86,7 +90,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function countBlackTiles()
+    /**
+     * @psalm-return 0|positive-int
+     */
+    public function countBlackTiles(): int
     {
         $sum = 0;
         foreach ($this->floor as $line) {
@@ -100,7 +107,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $sum;
     }
 
-    public function dayFlipping()
+    public function dayFlipping(): void
     {
         $newFloor = [];
 
@@ -123,7 +130,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->floor = $newFloor;
     }
 
-    public function countNeighborsColors($x, $y)
+    /**
+     * @return int[]
+     *
+     * @psalm-return array<0|1|2>
+     */
+    public function countNeighborsColors($x, $y): array
     {
         $colors = [self::BLACK => 0, self::WHITE => 0];
         foreach ($this->directions as [$ax, $ay]) {
@@ -139,7 +151,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $colors;
     }
 
-    public function extendFloor()
+    public function extendFloor(): void
     {
         --$this->minX;
         ++$this->maxX;
@@ -163,6 +175,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $floor = $this->part1($input, $output);

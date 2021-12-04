@@ -32,7 +32,7 @@ class TSP
         $this->graph = $graph;
     }
 
-    public function add($from, $to, $distance)
+    public function add($from, string $to, int $distance): void
     {
         $this->graph[$from][$to] = $distance;
         $this->graph[$to][$from] = $distance;
@@ -42,7 +42,7 @@ class TSP
     /**
      * Compute all routes.
      */
-    public function compute()
+    public function compute(): void
     {
 //        if ($this->isComputed()) {
 //            return;
@@ -81,7 +81,12 @@ class TSP
     }
 
 
-    private function permutations($items): array
+    /**
+     * @param (int|string)[] $items
+     *
+     * @psalm-param list<array-key> $items
+     */
+    private function permutations(array $items): array
     {
         if (0 === count($items)) {
             return [[]];
@@ -171,7 +176,7 @@ class TSP
         return $this;
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->computed = false;
         $this->longestDistance = null;

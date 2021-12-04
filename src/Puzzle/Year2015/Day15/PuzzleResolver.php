@@ -15,6 +15,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $ingredients = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createIngredients($input);
@@ -22,28 +25,28 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->highestScoringCookie();
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $ans = $this->highestScoringCookie(true);
 
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function createIngredients(PuzzleInput $input)
+    private function createIngredients(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $this->parseLine($line);
         }
     }
 
-    private function parseLine($line)
+    private function parseLine(string $line): void
     {
         [$ingredient, $properties] = explode(': ', $line);
         $propertiesData = explode(', ', $properties);
@@ -60,7 +63,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->ingredients[] = $properties;
     }
 
-    private function highestScoringCookie($withCalories = false)
+    private function highestScoringCookie(bool $withCalories = false)
     {
         $highestScore = 0;
 
@@ -90,7 +93,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $highestScore;
     }
 
-    private function permutations($sum, $length): array
+    /**
+     * @psalm-param 100 $sum
+     */
+    private function permutations(int $sum, int $length): array
     {
         if (0 === $length) {
             return [[$sum]];

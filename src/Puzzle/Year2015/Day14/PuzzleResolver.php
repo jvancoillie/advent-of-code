@@ -16,6 +16,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $reindeers = [];
     private $time = 1000;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         if ('prod' === $options['env']) {
@@ -27,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = 0;
         foreach ($this->reindeers as $reindeer) {
@@ -40,7 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $points = [];
         for ($i = 1; $i <= $this->time; ++$i) {
@@ -69,14 +72,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function createReindeers(PuzzleInput $input)
+    public function createReindeers(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $this->parseLine($line);
         }
     }
 
-    public function parseLine($line)
+    public function parseLine(string $line): void
     {
         $pattern = '/^(?<reindeer>.*) can fly (?<speed>\d+) km\/s for (?<fly>\d+) seconds, but then must rest for (?<rest>\d+) seconds.$/';
         preg_match($pattern, $line, $matches);

@@ -15,6 +15,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $instructions = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createInstructions($input);
@@ -22,21 +25,21 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->execute(['a' => 0, 'b' => 0]);
 
         $output->writeln('<info>Part 1 : '.$ans['b'].'</info>');
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->execute(['a' => 1, 'b' => 0]);
 
         $output->writeln('<info>Part 2 : '.$ans['b'].'</info>');
     }
 
-    private function createInstructions(PuzzleInput $input)
+    private function createInstructions(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $exploded = explode(', ', $line);
@@ -51,7 +54,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function execute($registers)
+    /**
+     * @param int[] $registers
+     *
+     * @psalm-param array{a: 0|1, b: 0} $registers
+     */
+    public function execute(array $registers)
     {
         $i = 0;
         while ($i < count($this->instructions)) {

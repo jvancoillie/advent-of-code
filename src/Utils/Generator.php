@@ -4,7 +4,10 @@ namespace App\Utils;
 
 class Generator
 {
-    public static function combinations(array $dataset)
+    /**
+     * @psalm-return \Generator<int, array|mixed, mixed, void>
+     */
+    public static function combinations(array $dataset): \Generator
     {
         if (0 === count($dataset)) {
             yield [];
@@ -22,7 +25,12 @@ class Generator
         }
     }
 
-    public static function combinationsFixedSize(array $dataset, $size = 1)
+    /**
+     * @psalm-param 1|2 $size
+     *
+     * @psalm-return \Generator<int, array<mixed|null>, mixed, void>
+     */
+    public static function combinationsFixedSize(array $dataset, int $size = 1): \Generator
     {
         $originalLength = count($dataset);
         $remainingLength = $originalLength - $size + 1;
@@ -44,7 +52,10 @@ class Generator
         }
     }
 
-    public static function permutations($items)
+    /**
+     * @psalm-return \Generator<int, array, mixed, void>
+     */
+    public static function permutations($items): \Generator
     {
 //        if (count($items) === 0) {
 //            yield [];

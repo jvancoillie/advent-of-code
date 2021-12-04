@@ -12,6 +12,9 @@ class PuzzleResolverCommand extends Command
 {
     protected static $defaultName = 'puzzle:resolve';
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $currentYear = (new \DateTime())->format('Y');

@@ -13,6 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $password = $input->getData();
@@ -31,14 +34,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $password;
     }
 
-    public function part2(string $password, OutputInterface $output)
+    public function part2(string $password, OutputInterface $output): void
     {
         $password = $this->nextPassword($password);
 
         $output->writeln("<info>Part 2 : $password</info>");
     }
 
-    public function nextPassword($password)
+    public function nextPassword(string $password)
     {
         do {
             ++$password;
@@ -47,7 +50,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $password;
     }
 
-    public function isValidPassword($password)
+    public function isValidPassword($password): bool
     {
         $arr = str_split($password);
 

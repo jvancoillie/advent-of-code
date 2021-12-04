@@ -11,6 +11,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $tsp;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $tsp = new TSP();
@@ -24,14 +27,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->tsp->getShortestDistance();
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $maxDistance = 0;
 
@@ -44,7 +47,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $maxDistance</info>");
     }
 
-    public function parseLine($line)
+    /**
+     * @return (int|string)[]
+     *
+     * @psalm-return array{0: string, 1: string, 2: int}
+     */
+    public function parseLine(string $line): array
     {
         $pattern = '/(?<from>.*)\sto\s(?<to>.*)\s=\s(?<dist>\d+)/';
         preg_match($pattern, $line, $matches);

@@ -15,6 +15,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private Bingo $bingo;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createBingo($input);
@@ -25,14 +28,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->getScore($this->bingo->getFirstWinner());
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $ans = $this->getScore($this->bingo->getLastWinner());
 

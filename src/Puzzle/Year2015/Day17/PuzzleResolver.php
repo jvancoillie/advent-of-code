@@ -17,6 +17,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $liters = 150;
     private $containers = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         if ('test' === $options['env']) {
@@ -27,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
         foreach (Generator::combinations($this->containers) as $comb) {
@@ -38,7 +41,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = INF;
         foreach (Generator::combinations($this->containers) as $comb) {
@@ -49,7 +52,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function createContainers(PuzzleInput $input)
+    private function createContainers(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $this->containers[] = (int) $line;

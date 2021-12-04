@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
 
@@ -33,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 'Not found';
 
@@ -48,7 +51,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function check($room)
+    public function check($room): bool
     {
         $encrypt = count_chars(implode('', $room['encrypt']));
 
@@ -68,7 +71,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $room['checksum'] === implode('', array_slice(array_map('chr', array_keys($encrypt)), 0, 5));
     }
 
-    private function decrypt($room)
+    private function decrypt($room): string
     {
         $realName = [];
 
@@ -82,7 +85,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return trim(implode('', $realName));
     }
 
-    private function shift($char, $shift)
+    private function shift(string $char, int $shift): string
     {
         $shift = $shift % 26;
         $ascii = ord($char);
@@ -99,7 +102,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return chr($shifted);
     }
 
-    private function parseLine($line)
+    private function parseLine(string $line): array
     {
         preg_match('/^(?<encrypt>[\w-]{0,100})-(?<id>\d+)\[(?<checksum>\w{5})\]$/', $line, $matches);
 

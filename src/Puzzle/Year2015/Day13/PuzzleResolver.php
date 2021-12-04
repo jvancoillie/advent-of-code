@@ -22,6 +22,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     private $tsp;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createTSP($input);
@@ -29,7 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->tsp->getLongestDistance();
         $path = $this->tsp->getLongestPath();
@@ -43,7 +46,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $graph = $this->tsp->getGraph();
 
@@ -63,7 +66,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function parseLine($line)
+    /**
+     * @return string[]
+     *
+     * @psalm-return array{0: string, 1: string, 2: string, 3: string}
+     */
+    public function parseLine(string $line): array
     {
         $pattern = '/^(?<from>.*)\swould\s(?<type>.*)\s(?<bonus>\d+)\shappiness units by sitting next to\s(?<next>.*).$/';
         preg_match($pattern, $line, $matches);
@@ -75,7 +83,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return [$matches['from'], $matches['type'], $matches['bonus'], $matches['next']];
     }
 
-    public function createTSP(PuzzleInput $input)
+    public function createTSP(PuzzleInput $input): void
     {
         $graph = [];
 

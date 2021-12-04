@@ -16,13 +16,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PuzzleResolver extends AbstractPuzzleResolver
 {
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $packages = explode("\n", $input->getData());
         $list = $this->createGroups(array_sum($packages) / 3, $packages);
@@ -37,7 +40,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $min</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $packages = explode("\n", $input->getData());
         $list = $this->createGroups(array_sum($packages) / 4, $packages);
@@ -52,7 +55,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $min</info>");
     }
 
-    private function createGroups($weight, $packages = [], $group = [], $checked = [])
+    private function createGroups(int|float $weight, array $packages = [], $group = [], $checked = []): array
     {
         $list = [];
 
@@ -75,7 +78,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return array_unique($list, SORT_REGULAR);
     }
 
-    private function isValid(array $group, $targetWeight, $weight = 0)
+    private function isValid(array $group, $targetWeight, $weight = 0): bool
     {
         while ($group) {
             $item = array_pop($group);

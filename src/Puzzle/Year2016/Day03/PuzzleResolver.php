@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $triangles = [];
         foreach (explode("\n", $input->getData()) as $line) {
@@ -31,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $cols = [[], [], []];
         $triangles = [];
@@ -52,7 +55,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function countValidTriangles($triangles)
+    /**
+     * @param int[][] $triangles
+     *
+     * @psalm-param list<list<int>> $triangles
+     *
+     * @psalm-return 0|positive-int
+     */
+    private function countValidTriangles(array $triangles): int
     {
         $valid = 0;
 

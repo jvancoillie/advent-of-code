@@ -13,27 +13,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->navigate(explode("\n", $input->getData()));
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->navigateWithAim(explode("\n", $input->getData()));
 
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function navigate($data)
+    private function navigate(array $data): int
     {
         $depth = $horizontal = 0;
         foreach ($data as $moves) {
@@ -54,7 +57,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $depth * $horizontal;
     }
 
-    private function navigateWithAim($data)
+    private function navigateWithAim(array $data): int
     {
         $depth = $horizontal = $aim = 0;
         foreach ($data as $moves) {

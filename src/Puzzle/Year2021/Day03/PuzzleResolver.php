@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $data = $this->explodeData(explode("\n", $input->getData()));
 
@@ -31,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $data = $this->explodeData(explode("\n", $input->getData()));
 
@@ -58,7 +61,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return strtr($binaryString, [1, 0]);
     }
 
-    private function lifeRating(array $data, $reversed = false): string
+    private function lifeRating(array $data, bool $reversed = false): string
     {
         $search = 0;
         while (count($data) > 1) {

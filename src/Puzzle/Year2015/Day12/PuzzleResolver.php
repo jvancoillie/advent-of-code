@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $decoded = json_decode($input->getData());
         $ans = $this->sumNumbers($decoded);
@@ -27,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $decoded = json_decode($input->getData());
         $ans = $this->sumNumbers($decoded, 'red');
@@ -35,7 +38,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function sumNumbers($array, $excluded = null)
+    /**
+     * @param null|string $excluded
+     *
+     * @psalm-param 'red'|null $excluded
+     */
+    public function sumNumbers(array $array, string|null $excluded = null)
     {
         $sum = 0;
         foreach ($array as $item) {

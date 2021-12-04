@@ -9,13 +9,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $lights = Grid::create(1000, 1000, 0);
 
@@ -29,7 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $lights = Grid::create(1000, 1000, 0);
 
@@ -46,8 +49,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
     /**
      * Extract action lines
      * turn on 0,0 through 999,999
+     *
+     * @return string[]
+     *
+     * @psalm-return array<string>
      */
-    public function parseLine($line)
+    public function parseLine(string $line): array
     {
         $pattern = '/(?<action>.*)\s(?<fromX>\d+),(?<fromY>\d+)\sthrough\s(?<toX>\d+),(?<toY>\d+)/';
         preg_match($pattern, $line, $matches);
@@ -59,7 +66,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $matches;
     }
 
-    public function applyLightInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY)
+    public function applyLightInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY): void
     {
         for ($y = $fromY; $y <= $toY; ++$y) {
             for ($x = $fromX; $x <= $toX; ++$x) {
@@ -78,7 +85,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function applyLightBrightnessInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY)
+    public function applyLightBrightnessInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY): void
     {
         for ($y = $fromY; $y <= $toY; ++$y) {
             for ($x = $fromX; $x <= $toX; ++$x) {

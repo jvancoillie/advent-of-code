@@ -21,12 +21,12 @@ class Bingo
         $this->numbers = $numbers;
     }
 
-    public function addBoard(Board $board)
+    public function addBoard(Board $board): void
     {
         $this->boards[] = $board;
     }
 
-    public function play()
+    public function play(): void
     {
         $boards = $this->boards;
 

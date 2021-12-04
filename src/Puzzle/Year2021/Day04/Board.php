@@ -15,7 +15,7 @@ class Board
         $this->grid = $grid;
     }
 
-    public function play($number)
+    public function play($number): void
     {
         $this->lastNumber = $number;
         for ($y = 0; $y < count($this->grid); ++$y) {
@@ -32,7 +32,7 @@ class Board
         return $this->hasFullLine($this->grid) || $this->hasFullLine(array_map(null, ...$this->grid));
     }
 
-    private function hasFullLine($array): bool
+    private function hasFullLine(array $array): bool
     {
         for ($y = 0; $y < count($array); ++$y) {
             $values = array_count_values($array[$y]);

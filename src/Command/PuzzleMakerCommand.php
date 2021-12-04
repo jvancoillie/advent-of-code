@@ -32,6 +32,9 @@ class PuzzleMakerCommand extends Command
         $this->filesystem = new Filesystem();
     }
 
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $currentYear = (new \DateTime())->format('Y');

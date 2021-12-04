@@ -28,6 +28,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private $aunts = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->createAunts($input);
@@ -35,7 +38,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
         foreach ($this->aunts as $key => $aunt) {
@@ -46,7 +49,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = 0;
         foreach ($this->aunts as $key => $aunt) {
@@ -57,14 +60,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function createAunts(PuzzleInput $input)
+    private function createAunts(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $line) {
             $this->parseLine($line);
         }
     }
 
-    private function parseLine($line)
+    private function parseLine(string $line): void
     {
         $pattern = '/^Sue\s(?<id>\d+):\s(?<properties>.*)$/';
 
@@ -82,7 +85,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->aunts[$matches['id']] = $properties;
     }
 
-    private function match($aunt)
+    private function match($aunt): bool
     {
         foreach ($aunt as $property => $number) {
             if ($this->tickerTape[$property] !== $number) {
@@ -93,7 +96,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return true;
     }
 
-    private function match2($aunt)
+    private function match2($aunt): bool
     {
         foreach ($aunt as $property => $number) {
             if ('cats' === $property || 'trees' === $property) {
