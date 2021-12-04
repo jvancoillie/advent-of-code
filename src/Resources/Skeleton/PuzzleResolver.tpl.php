@@ -21,18 +21,18 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
         $ans = 0;
-        foreach (explode("\n", $input->getData()) as $line){
 
-        }
+        $data = explode("\n", $input->getData());
+
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
         $ans = 0;
-        foreach (explode("\n", $input->getData()) as $line){
 
-        }
+        $data = explode("\n", $input->getData());
+
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 }
