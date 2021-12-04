@@ -100,8 +100,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private function fight($player)
     {
         $boss = $this->boss;
-        $winner = false;
-        while (!$winner) {
+        while (true) {
             $deals = max($player['Damage'] - $boss['Armor'], 1);
             $boss['Hit'] -= $deals;
             if ($boss['Hit'] <= 0) {

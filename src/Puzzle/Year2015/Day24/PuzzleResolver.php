@@ -15,7 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    private $packages = [];
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {

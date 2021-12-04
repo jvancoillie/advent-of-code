@@ -44,8 +44,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * @param $line
-     *
      * Extract action lines
      * turn on 0,0 through 999,999
      */

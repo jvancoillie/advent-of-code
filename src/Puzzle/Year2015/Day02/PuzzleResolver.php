@@ -26,7 +26,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $squareFeet = 0;
         foreach (explode("\n", $input->getData()) as $line) {
-            $entry = explode('x', $line);
+            $entry = array_map('intval', explode('x', $line));
             $surfaces['lw'] = $entry[0] * $entry[1];
             $surfaces['wh'] = $entry[1] * $entry[2];
             $surfaces['hl'] = $entry[0] * $entry[2];
@@ -44,7 +44,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $squareFeet = 0;
         foreach (explode("\n", $input->getData()) as $line) {
-            $entry = explode('x', $line);
+            $entry = array_map('intval', explode('x', $line));
             sort($entry);
             $min1 = $entry[0];
             $min2 = $entry[1];

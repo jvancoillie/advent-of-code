@@ -9,59 +9,29 @@ namespace App\Utils\PathFinding;
  */
 class TSP
 {
-    /**
-     * @var array
-     */
     private $shortestPath = [];
-    /**
-     * @var array
-     */
+
     private $shortestPaths = [];
-    /**
-     * @var null
-     */
+
     private $shortestDistance = null;
 
-    /**
-     * @var array
-     */
     private $longestPath = [];
-    /**
-     * @var array
-     */
+
     private $longestPaths = [];
-    /**
-     * @var null
-     */
+
     private $longestDistance = null;
 
-    /**
-     * @var array
-     */
     private $routes = [];
-    /**
-     * @var array
-     */
+
     private $graph;
 
-    /**
-     * @var false
-     */
     private $computed = false;
 
-    /**
-     * TSP constructor.
-     */
     public function __construct(array $graph = [])
     {
         $this->graph = $graph;
     }
 
-    /**
-     * @param $from
-     * @param $to
-     * @param $distance
-     */
     public function add($from, $to, $distance)
     {
         $this->graph[$from][$to] = $distance;
@@ -74,9 +44,9 @@ class TSP
      */
     public function compute()
     {
-        if ($this->isComputed()) {
-            return;
-        }
+//        if ($this->isComputed()) {
+//            return;
+//        }
         $keys = array_keys($this->graph);
         $this->routes = $this->permutations($keys);
         foreach ($this->routes as $key => $perms) {
@@ -110,12 +80,7 @@ class TSP
         $this->setComputed(true);
     }
 
-    /**
-     * @param $items
-     * @param array $perms
-     *
-     * @return mixed
-     */
+
     private function permutations($items): array
     {
         if (0 === count($items)) {
@@ -201,9 +166,7 @@ class TSP
         return $this->computed;
     }
 
-    /**
-     * @param false $computed
-     */
+
     public function setComputed(bool $computed): TSP
     {
         $this->computed = $computed;

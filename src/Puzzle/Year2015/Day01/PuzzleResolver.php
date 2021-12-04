@@ -30,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(PuzzleInput $input, OutputInterface $output)
     {
-        $floor = 0;
+        $floor = $response = 0;
         foreach (str_split($input->getData()) as $key => $data) {
             if ('(' === $data) {
                 ++$floor;

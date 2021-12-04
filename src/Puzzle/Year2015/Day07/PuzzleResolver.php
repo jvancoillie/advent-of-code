@@ -99,7 +99,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $a = $this->resolveCircuitEntry($this->circuit[$letter][1]);
             }
 
-            $result = ~$a;
+            $result = ~(int)$a;
             $result += 65536;
             $this->circuit[$letter] = $result;
 

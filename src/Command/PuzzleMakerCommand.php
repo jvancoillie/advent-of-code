@@ -9,11 +9,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PuzzleMakerCommand extends Command
 {
     /**
-     * @var HttpClient
+     * @var HttpClientInterface
      */
     private $client;
 
@@ -24,11 +25,6 @@ class PuzzleMakerCommand extends Command
 
     protected static $defaultName = 'puzzle:make';
 
-    /**
-     * PuzzleMakerCommand constructor.
-     *
-     * @param $client
-     */
     public function __construct()
     {
         parent::__construct();

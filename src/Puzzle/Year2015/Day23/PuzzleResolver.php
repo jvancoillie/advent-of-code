@@ -92,8 +92,4 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $registers;
     }
 
-    private function isEven($number)
-    {
-        return;
-    }
 }
