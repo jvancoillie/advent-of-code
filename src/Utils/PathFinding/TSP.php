@@ -13,13 +13,13 @@ class TSP
 
     private $shortestPaths = [];
 
-    private $shortestDistance = null;
+    private $shortestDistance;
 
     private $longestPath = [];
 
     private $longestPaths = [];
 
-    private $longestDistance = null;
+    private $longestDistance;
 
     private $routes = [];
 
@@ -158,9 +158,6 @@ class TSP
         return $this->routes;
     }
 
-    /**
-     * @return false
-     */
     public function isComputed(): bool
     {
         return $this->computed;

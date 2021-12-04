@@ -15,7 +15,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $replacements = [];
     private $part2Replacements = [];
-    private $input = null;
+    private $input;
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {

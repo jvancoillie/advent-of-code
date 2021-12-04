@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PuzzleResolver extends AbstractPuzzleResolver
 {
     private $circuit = [];
-    private $part1Answer = null;
+    private $part1Answer;
 
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {

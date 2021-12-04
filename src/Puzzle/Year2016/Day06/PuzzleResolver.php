@@ -37,7 +37,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         $ans = '';
-        foreach ($score as $key => $values) {
+        foreach ($score as $values) {
             arsort($values);
             $ans .= array_key_first($values);
         }
@@ -63,7 +63,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         $ans = '';
-        foreach ($score as $key => $values) {
+        foreach ($score as $values) {
             asort($values);
             $ans .= array_key_first($values);
         }

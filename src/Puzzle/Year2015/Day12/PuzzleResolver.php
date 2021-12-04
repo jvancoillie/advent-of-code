@@ -38,7 +38,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function sumNumbers($array, $excluded = null)
     {
         $sum = 0;
-        foreach ($array as $key => $item) {
+        foreach ($array as $item) {
             if (is_object($item)) {
                 $array = (array) $item;
                 if (null === $excluded) {

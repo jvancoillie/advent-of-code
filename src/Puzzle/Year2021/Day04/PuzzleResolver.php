@@ -42,9 +42,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private function getScore(array $list)
     {
         return array_reduce($list, function ($carry, Board $item) {
-            $carry += $item->score();
-
-            return $carry;
+            return $carry + $item->score();
         });
     }
 

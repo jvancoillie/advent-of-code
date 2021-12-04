@@ -21,7 +21,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1(PuzzleInput $input, OutputInterface $output)
     {
-        $ans = 0;
         foreach (explode("\n", $input->getData()) as $line) {
             $instruction[] = str_split($line);
         }

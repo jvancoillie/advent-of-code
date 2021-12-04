@@ -79,6 +79,11 @@ phpstan: phpstan.neon.dist ## Run PHPStan (the configuration must be defined in 
 psalm: psalm.xml ## Run Psalm
 	$(PHP) vendor/bin/psalm
 
+rector: ## Run rector
+	$(PHP)  vendor/bin/rector process src
+
+rector-dry: ## Run rector in dry mode
+	$(PHP)  vendor/bin/rector process src --dry-run
 .PHONY: psalm phpstan format
 
 

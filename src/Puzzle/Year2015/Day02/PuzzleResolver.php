@@ -15,8 +15,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * @param OutputInterface $output
-     *
      * 2*l*w + 2*w*h + 2*h*l.
      * l = 0
      * w = 1
