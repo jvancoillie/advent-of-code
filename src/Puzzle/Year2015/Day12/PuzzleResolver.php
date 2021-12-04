@@ -39,8 +39,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * @param string|null $excluded
-     *
      * @psalm-param 'red'|null $excluded
      */
     public function sumNumbers(array $array, string|null $excluded = null)
