@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
      * 2*l*w + 2*w*h + 2*h*l.
      * l = 0
      * w = 1
-     * h = 2
+     * h = 2.
      */
     public function part1(PuzzleInput $input, OutputInterface $output): void
     {

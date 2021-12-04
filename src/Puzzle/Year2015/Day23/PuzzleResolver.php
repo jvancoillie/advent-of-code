@@ -99,5 +99,4 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         return $registers;
     }
-
 }

@@ -56,6 +56,5 @@ class Bingo
     public function getLastWinner(): array
     {
         return $this->leaderBoard[array_key_last($this->leaderBoard)] ?? [];
-
     }
 }

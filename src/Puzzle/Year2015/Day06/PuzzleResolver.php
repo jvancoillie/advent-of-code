@@ -48,7 +48,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     /**
      * Extract action lines
-     * turn on 0,0 through 999,999
+     * turn on 0,0 through 999,999.
      *
      * @return string[]
      *

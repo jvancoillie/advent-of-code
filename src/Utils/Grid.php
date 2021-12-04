@@ -5,8 +5,6 @@ namespace App\Utils;
 class Grid
 {
     /**
-     * @param int|string $fill
-     *
      * @psalm-param 7|50|1000 $x
      * @psalm-param 3|6|1000 $y
      * @psalm-param ' '|'.'|0 $fill

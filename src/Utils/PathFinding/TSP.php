@@ -80,7 +80,6 @@ class TSP
         $this->setComputed(true);
     }
 
-
     /**
      * @param (int|string)[] $items
      *
@@ -167,7 +166,6 @@ class TSP
     {
         return $this->computed;
     }
-
 
     public function setComputed(bool $computed): TSP
     {

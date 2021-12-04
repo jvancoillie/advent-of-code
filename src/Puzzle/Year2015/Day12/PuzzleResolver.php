@@ -39,7 +39,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     }
 
     /**
-     * @param null|string $excluded
+     * @param string|null $excluded
      *
      * @psalm-param 'red'|null $excluded
      */
