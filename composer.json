@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2",
-        "friendsofphp/php-cs-fixer": "^3.3"
+        "friendsofphp/php-cs-fixer": "^3.3",
+        "phpstan/phpstan": "^1.2"
     }
 }
