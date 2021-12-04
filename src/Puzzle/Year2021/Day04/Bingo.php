@@ -50,11 +50,12 @@ class Bingo
 
     public function getFirstWinner(): array
     {
-        return $this->leaderBoard[array_key_first($this->leaderBoard)];
+        return $this->leaderBoard[array_key_first($this->leaderBoard)] ?? [];
     }
 
     public function getLastWinner(): array
     {
-        return $this->leaderBoard[array_key_last($this->leaderBoard)];
+        return $this->leaderBoard[array_key_last($this->leaderBoard)] ?? [];
+
     }
 }

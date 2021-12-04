@@ -44,7 +44,7 @@ class Board
         return false;
     }
 
-    public function score(): int
+    public function score(): int|float
     {
         $sum = 0;
 

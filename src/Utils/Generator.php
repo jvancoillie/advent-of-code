@@ -28,6 +28,7 @@ class Generator
         $remainingLength = $originalLength - $size + 1;
 
         for ($i = 0; $i < $remainingLength; ++$i) {
+            /** @var int $key */
             $key = array_key_first($dataset);
             $current = array_shift($dataset);
 
@@ -37,8 +38,7 @@ class Generator
                 $remaining = $dataset;
 
                 foreach (self::combinationsFixedSize($remaining, $size - 1) as $comb) {
-                    $comb = array_merge($comb, [$key => $current]);
-                    yield $comb;
+                    yield array_merge($comb, [$key => $current]);
                 }
             }
         }
