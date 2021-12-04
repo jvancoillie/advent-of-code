@@ -58,8 +58,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
      * @param int[] $registers
      *
      * @psalm-param array{a: 0|1, b: 0} $registers
+     *
+     * @return (float|int)[]
+     *
+     * @psalm-return array<float|int>
      */
-    public function execute(array $registers)
+    public function execute(array $registers): array
     {
         $i = 0;
         while ($i < count($this->instructions)) {

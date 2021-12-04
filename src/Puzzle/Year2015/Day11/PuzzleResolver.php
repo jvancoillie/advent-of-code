@@ -41,7 +41,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $password</info>");
     }
 
-    public function nextPassword(string $password)
+    public function nextPassword(string $password): string
     {
         do {
             ++$password;

@@ -36,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $blackTiles black tiles</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output, $floor): void
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         for ($i = 0; $i < 100; ++$i) {
             $this->dayFlipping();
@@ -132,8 +132,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     /**
      * @return int[]
-     *
-     * @psalm-return array<0|1|2>
      */
     public function countNeighborsColors($x, $y): array
     {
@@ -180,8 +178,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
-        $floor = $this->part1($input, $output);
+        $this->part1($input, $output);
 
-        $this->part2($input, $output, $floor);
+        $this->part2($input, $output);
     }
 }

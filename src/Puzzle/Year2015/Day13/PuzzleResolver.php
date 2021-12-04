@@ -69,7 +69,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     /**
      * @return string[]
      *
-     * @psalm-return array{0: string, 1: string, 2: string, 3: string}
+     * @psalm-return array{0: string, 1: string, 2: int, 3: string}
      */
     public function parseLine(string $line): array
     {
@@ -80,7 +80,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             throw new \Exception('parsing action error');
         }
 
-        return [$matches['from'], $matches['type'], $matches['bonus'], $matches['next']];
+        return [$matches['from'], $matches['type'], (int) $matches['bonus'], $matches['next']];
     }
 
     public function createTSP(PuzzleInput $input): void
@@ -89,7 +89,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         foreach (explode("\n", $input->getData()) as $line) {
             [$from, $type, $bonus, $to] = $this->parseLine($line);
-            $bonus = ('gain' === $type) ? (int) $bonus : (int) -$bonus;
+            $bonus = ('gain' === $type) ? $bonus : -$bonus;
 
             if (isset($graph[$from][$to])) {
                 $graph[$from][$to] += $bonus;

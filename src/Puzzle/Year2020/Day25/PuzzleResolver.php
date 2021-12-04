@@ -47,7 +47,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $i;
     }
 
-    public function transformNumber(int $subjectNumber, $loopSize)
+    /**
+     * @psalm-return int<-20201226, 20201226>
+     */
+    public function transformNumber(int $subjectNumber, $loopSize): int
     {
         $n = $subjectNumber;
         $value = 1;

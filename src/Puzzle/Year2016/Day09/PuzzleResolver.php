@@ -13,20 +13,23 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->part1($input, $output);
         $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->decompress($input->getData(), false);
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(PuzzleInput $input, OutputInterface $output): void
     {
         $ans = $this->decompress($input->getData());
 
@@ -42,10 +45,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
             if (preg_match("/\((\d+)x(\d+)\)(.+)/", $sequence, $matches)) {
                 [ ,$subsequentLength, $repeated, $remaining] = $matches;
 
-                $stringLength = ($recurse) ? $this->decompress(substr($remaining, 0, $subsequentLength)) : strlen(substr($remaining, 0, $subsequentLength));
-                $decompressedLength += $repeated * $stringLength;
+                $stringLength = ($recurse) ? $this->decompress(substr($remaining, 0, (int) $subsequentLength)) : strlen(substr($remaining, 0, (int) $subsequentLength));
+                $decompressedLength += (int) $repeated * $stringLength;
 
-                $sequence = substr($remaining, $subsequentLength);
+                $sequence = substr($remaining, (int) $subsequentLength);
             }
         }
 

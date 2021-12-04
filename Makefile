@@ -86,6 +86,11 @@ rector-dry: ## Run rector in dry mode
 	$(PHP)  vendor/bin/rector process src --dry-run
 .PHONY: psalm phpstan format
 
+qa-all:
+	make format
+	make psalm
+	make phpstan
+	make rector-dry
 
 ##—— Docker  ——————————————————————————————————————————————————————————————————————————————————————————————————————————
 
