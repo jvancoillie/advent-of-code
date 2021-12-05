@@ -53,7 +53,7 @@ class PuzzleResolverCommand extends Command
 
         try {
             $callable = [$this->instantiateClass(sprintf('\\App\\Puzzle\\Year%d\\Day%s\\PuzzleResolver', $year, $day)), 'main'];
-        } catch (\Error $e) {
+        } catch (\Error) {
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
 
             return Command::FAILURE;

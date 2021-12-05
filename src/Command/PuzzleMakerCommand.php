@@ -106,7 +106,7 @@ class PuzzleMakerCommand extends Command
                     $response->getContent();
 
                     $this->filesystem->dumpFile($inputFilePath, trim($response->getContent()));
-                } catch (\Error $e) {
+                } catch (\Error) {
                     $output->writeln(
                         sprintf('<error>Error when retrieve input data for day %d of year %d</error>', $day, $year)
                     );

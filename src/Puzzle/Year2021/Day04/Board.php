@@ -6,13 +6,10 @@ class Board
 {
     private const MARK = 'X';
 
-    private array $grid = [];
-
     private int $lastNumber = -1;
 
-    public function __construct(array $grid)
+    public function __construct(private array $grid)
     {
-        $this->grid = $grid;
     }
 
     public function play($number): void

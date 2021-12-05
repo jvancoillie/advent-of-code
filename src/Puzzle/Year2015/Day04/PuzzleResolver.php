@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $i = 0;
         $md5 = '';
         $string = $input->getData();
-        while (0 !== strpos($md5, '00000')) {
+        while (!str_starts_with($md5, '00000')) {
             ++$i;
             $md5 = md5($string.$i);
         }
@@ -34,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $i = 0;
         $md5 = '';
         $string = $input->getData();
-        while (0 !== strpos($md5, '000000')) {
+        while (!str_starts_with($md5, '000000')) {
             ++$i;
             $md5 = md5($string.$i);
         }

@@ -4,17 +4,8 @@ namespace App\Puzzle\Year2021\Day05;
 
 class Segment
 {
-    private int $x1;
-    private int $y1;
-    private int $x2;
-    private int $y2;
-
-    public function __construct(int $x1, int $y1, int $x2, int $y2)
+    public function __construct(private int $x1, private int $y1, private int $x2, private int $y2)
     {
-        $this->x1 = $x1;
-        $this->y1 = $y1;
-        $this->x2 = $x2;
-        $this->y2 = $y2;
     }
 
     public function getPoints($withDiagonals = false): array

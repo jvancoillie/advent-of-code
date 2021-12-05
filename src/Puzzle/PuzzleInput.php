@@ -4,11 +4,8 @@ namespace App\Puzzle;
 
 class PuzzleInput
 {
-    private $data;
-
-    public function __construct($data)
+    public function __construct(private $data)
     {
-        $this->data = $data;
     }
 
     public function getData()

@@ -14,11 +14,8 @@ class Bingo
      */
     private array $leaderBoard = [];
 
-    private array $numbers;
-
-    public function __construct(array $numbers)
+    public function __construct(private array $numbers)
     {
-        $this->numbers = $numbers;
     }
 
     public function addBoard(Board $board): void
