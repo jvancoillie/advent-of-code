@@ -77,7 +77,7 @@ phpstan: phpstan.neon.dist ## Run PHPStan (the configuration must be defined in 
 	$(PHP) vendor/bin/phpstan analyse  --xdebug
 
 psalm: psalm.xml ## Run Psalm
-	$(PHP) vendor/bin/psalm
+	$(PHP) vendor/bin/psalm  --no-cache
 
 rector: ## Run rector
 	$(PHP)  vendor/bin/rector process src
