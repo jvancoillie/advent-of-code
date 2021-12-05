@@ -66,7 +66,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $matches;
     }
 
-    public function applyLightInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY): void
+    /**
+     * @param array[] $lights
+     *
+     * @psalm-param array<0|positive-int, array<0|positive-int, mixed>> $lights
+     */
+    public function applyLightInstruction(array &$lights, string $action, string $fromX, string $fromY, string $toX, string $toY): void
     {
         for ($y = $fromY; $y <= $toY; ++$y) {
             for ($x = $fromX; $x <= $toX; ++$x) {
@@ -85,7 +90,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function applyLightBrightnessInstruction(&$lights, $action, $fromX, $fromY, $toX, $toY): void
+    /**
+     * @param array[] $lights
+     *
+     * @psalm-param array<0|positive-int, array<0|positive-int, mixed>> $lights
+     */
+    public function applyLightBrightnessInstruction(array &$lights, string $action, string $fromX, string $fromY, string $toX, string $toY): void
     {
         for ($y = $fromY; $y <= $toY; ++$y) {
             for ($x = $fromX; $x <= $toX; ++$x) {

@@ -8,7 +8,7 @@ class Segment
     {
     }
 
-    public function getPoints($withDiagonals = false): array
+    public function getPoints(bool $withDiagonals = false): array
     {
         $points = [];
         if ($this->x1 == $this->x2) {

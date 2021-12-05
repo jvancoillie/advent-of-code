@@ -51,7 +51,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function check($room): bool
+    public function check(array $room): bool
     {
         $encrypt = count_chars(implode('', $room['encrypt']));
 
@@ -71,7 +71,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $room['checksum'] === implode('', array_slice(array_map('chr', array_keys($encrypt)), 0, 5));
     }
 
-    private function decrypt($room): string
+    private function decrypt(array $room): string
     {
         $realName = [];
 

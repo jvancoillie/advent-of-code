@@ -18,6 +18,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     private array $segments;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->parseInput($input);
@@ -26,21 +29,21 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $ans = $this->countOverlapping(false);
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $ans = $this->countOverlapping(true);
 
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function parseInput(PuzzleInput $input)
+    private function parseInput(PuzzleInput $input): void
     {
         foreach (explode("\n", $input->getData()) as $entry) {
             if (preg_match('/(?<x1>\d+),(?<y1>\d+) -> (?<x2>\d+),(?<y2>\d+)/', $entry, $matches)) {

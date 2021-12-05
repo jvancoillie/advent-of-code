@@ -71,7 +71,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return ['out' => $out, 'in' => $in];
     }
 
-    public function hasABBA($strings): bool
+    /**
+     * @param (mixed|string)[] $strings
+     *
+     * @psalm-param list<mixed|string> $strings
+     */
+    public function hasABBA(array $strings): bool
     {
         foreach ($strings as $string) {
             $split = str_split($string);
@@ -89,7 +94,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return false;
     }
 
-    public function isSSl($ip): bool
+    /**
+     * @param (mixed|string)[][] $ip
+     *
+     * @psalm-param array{out: non-empty-list<mixed|string>, in: list<string>} $ip
+     */
+    public function isSSl(array $ip): bool
     {
         //extract all ABA from outside brackets and check if in brackets
         foreach ($ip['out'] as $string) {

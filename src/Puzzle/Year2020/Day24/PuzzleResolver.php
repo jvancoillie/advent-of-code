@@ -72,7 +72,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $moves;
     }
 
-    public function doMoves($moves): void
+    /**
+     * @param string[] $moves
+     *
+     * @psalm-param list<string> $moves
+     */
+    public function doMoves(array $moves): void
     {
         $x = $y = 0;
 

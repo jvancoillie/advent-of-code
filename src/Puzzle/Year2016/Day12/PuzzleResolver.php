@@ -15,6 +15,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 {
     private array $instructions = [];
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->parseInput($input);
@@ -22,7 +25,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $register = $this->playInstructions([]);
 
@@ -31,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $register = $this->playInstructions(['c' => 1]);
 
@@ -40,7 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    private function parseInput(PuzzleInput $input)
+    private function parseInput(PuzzleInput $input): void
     {
         $data = explode("\n", $input->getData());
 

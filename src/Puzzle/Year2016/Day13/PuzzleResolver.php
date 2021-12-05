@@ -17,6 +17,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $reach;
     private int $favoriteNumber;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->reach = ('test' === $options['env']) ? [7, 4] : [31, 39];
@@ -27,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1(OutputInterface $output): void
     {
         $maze = new Maze($this->favoriteNumber);
 
@@ -42,7 +45,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(OutputInterface $output)
+    public function part2(OutputInterface $output): void
     {
         $ans = 0;
 

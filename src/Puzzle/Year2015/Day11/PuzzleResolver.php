@@ -25,7 +25,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->part2($password, $output);
     }
 
-    public function part1(string $password, OutputInterface $output)
+    public function part1(string $password, OutputInterface $output): string
     {
         $password = $this->nextPassword($password);
 
@@ -50,7 +50,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $password;
     }
 
-    public function isValidPassword($password): bool
+    public function isValidPassword(string $password): bool
     {
         $arr = str_split($password);
 

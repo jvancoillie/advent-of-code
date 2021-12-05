@@ -18,6 +18,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $outputs = [];
     private int $botComparingId;
 
+    /**
+     * @return void
+     */
     public function main(PuzzleInput $input, OutputInterface $output, $options = [])
     {
         $this->parseInput($input);

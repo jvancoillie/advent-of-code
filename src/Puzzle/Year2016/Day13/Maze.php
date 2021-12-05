@@ -36,7 +36,7 @@ class Maze implements GraphInterface
         return implode($rowDelimiter, array_map('implode', $result));
     }
 
-    public function createPoint($x, $y)
+    public function createPoint(int $x, int $y)
     {
         if (isset($this->tiles[$y][$x])) {
             return $this->tiles[$y][$x];

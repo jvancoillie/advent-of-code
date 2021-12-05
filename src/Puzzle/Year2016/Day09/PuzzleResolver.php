@@ -36,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $output->writeln("<info>Part 2 : $ans</info>");
     }
 
-    public function decompress($sequence, $recurse = true): float|int
+    public function decompress(string $sequence, bool $recurse = true): float|int
     {
         $decompressedLength = 0;
         while (false !== $pos = strpos($sequence, '(')) {
