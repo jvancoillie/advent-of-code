@@ -36,25 +36,19 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function cheapestFuelToAlign($data, $expensive = false): float|int
     {
         $max = max($data);
-        $best = INF;
+        $fuels = [];
 
         for ($i = 0; $i < $max; ++$i) {
-            $sum = 0;
-            foreach ($data as $p) {
-                $diff = abs($p - $i);
-                $sum += $expensive ? $this->spend($diff) : $diff;
-            }
-
-            if ($sum < $best) {
-                $best = $sum;
-            }
+            $fuels[] = array_reduce($data, function ($carry, $pos) use ($i, $expensive) {
+                return $carry + $this->spend(abs($pos - $i), $expensive);
+            });
         }
 
-        return $best;
+        return min($fuels);
     }
 
-    public function spend($n): int
+    public function spend($n, $expensive): int
     {
-        return $n * (1 + $n) / 2;
+        return ($expensive) ? $n * (1 + $n) / 2 : $n;
     }
 }
