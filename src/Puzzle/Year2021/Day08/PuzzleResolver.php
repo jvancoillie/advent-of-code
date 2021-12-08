@@ -21,18 +21,18 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $data = explode("\n", $input->getData());
         $this->guess($data);
 
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $this->part1($output);
+        $this->part2($output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part1(OutputInterface $output)
     {
         $ans = $this->count;
 
         $output->writeln("<info>Part 1 : $ans</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output)
+    public function part2(OutputInterface $output)
     {
         $ans = $this->sum;
 
@@ -50,14 +50,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
             $numbers = [1 => [], 4 => [], 7 => [], 8 => []];
 
-            usort($list, function ($a, $b) {
-                return strlen($a) <=> strlen($b);
-            });
             // extract 1 4 7 8
             foreach ($list as $l) {
                 $len = strlen($l);
                 $value = str_split($l);
-                sort($value);
 
                 switch ($len) {
                     case 2:
