@@ -10,7 +10,8 @@
         "symfony/filesystem": "^5.2",
         "symfony/dotenv": "^5.2",
         "ext-json": "*",
-        "ext-gmp": "*"
+        "ext-gmp": "*",
+        "symfony/cache": "^6.0"
     },
     "autoload": {
         "psr-4": {

@@ -6,13 +6,15 @@ require dirname(__DIR__).'/vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use App\Command\PuzzleResolverCommand;
 use App\Command\PuzzleMakerCommand;
+use App\Command\PrivateLeaderboardCommand;
 
-$command = new PuzzleResolverCommand();
+
 $application = new Application();
 
 // ... register commands
-$application->add($command);
+$application->add(new PuzzleResolverCommand());
 $application->add(new PuzzleMakerCommand());
+$application->add(new PrivateLeaderboardCommand());
 
 // set as default command
 //$application->setDefaultCommand($command->getName());

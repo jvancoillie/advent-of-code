@@ -61,6 +61,10 @@ resolve-test: ## Resolve current day with test input
 puzzle: ## Create structure and data for current day
 	$(CONSOLE) puzzle:make
 
+leaderboard: ## Create structure and data for current day
+	$(CONSOLE)  puzzle:leaderboard
+
+
 ##—— Install ——————————————————————————————————————————————————————————————————————————————————————————————————————————
 install: app-build ## Install apps based on APP_ENV
 

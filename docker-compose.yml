@@ -4,7 +4,8 @@ services:
     build:
       context: ./
     volumes:
-      - "./:/var/www/advent:cached"
+      - ./:/var/www/advent:cached
+      - ./docker/conf.d/aoc.ini:/usr/local/etc/php/conf.d/aoc.ini
     environment:
       # Keep attention to that env variable
       PHP_IDE_CONFIG: serverName=advent
