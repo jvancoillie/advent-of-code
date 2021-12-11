@@ -51,7 +51,7 @@ class PuzzleMakerCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $year = $input->getOption('year');
-        $day = $input->getOption('day');
+        $day = sprintf("%02d",$input->getOption('day'));
 
         $link = sprintf('https://adventofcode.com/%d/day/%d', $year, $day);
 
