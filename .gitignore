@@ -3,3 +3,4 @@
 /.idea/
 /src/Utils/Knapsack/
 /.php-cs-fixer.cache
+/.phpunit.result.cache

@@ -18,11 +18,17 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
     "require-dev": {
         "symfony/var-dumper": "^5.2",
         "friendsofphp/php-cs-fixer": "^3.3",
         "phpstan/phpstan": "^1.2",
         "vimeo/psalm": "^4.13",
-        "rector/rector": "^0.12.5"
+        "rector/rector": "^0.12.5",
+        "phpunit/phpunit": "^9.5"
     }
 }
