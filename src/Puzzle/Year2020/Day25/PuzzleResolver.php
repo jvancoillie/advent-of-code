@@ -3,22 +3,18 @@
 namespace App\Puzzle\Year2020\Day25;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-    }
+    protected static int $testPart1Expected = 14897079;
+    protected static int $testPart2Expected = 0;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int $part1Expected = 12929;
+    protected static int $part2Expected = 0;
+
+    public function part1()
     {
-        $data = explode("\n", $input->getData());
+        $data = explode("\n", $this->getInput()->getData());
 
         $cardSubjectNumber = (int) $data[0];
         $doorSubjectNumber = (int) $data[1];
@@ -26,7 +22,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $doorLoopSize = $this->findLoopSize($doorSubjectNumber);
         $cardKey = $this->transformNumber($cardSubjectNumber, $doorLoopSize);
 
-        $output->writeln("<info>Part 1 : $cardKey</info>");
+        return $cardKey;
+    }
+
+    public function part2()
+    {
+        return 0;
     }
 
     /**

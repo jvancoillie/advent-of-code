@@ -3,11 +3,15 @@
 namespace App\Puzzle\Year2020\Day24;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int $testPart1Expected = 10;
+    protected static int $testPart2Expected = 2208;
+
+    protected static int $part1Expected = 317;
+    protected static int $part2Expected = 3804;
+
     public const BLACK = '#';
     public const WHITE = 'O';
     private $directions = [
@@ -24,27 +28,26 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $maxY = 0;
     private $floor = [];
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function main()
     {
-        foreach (explode("\n", $input->getData()) as $data) {
+        foreach (explode("\n", $this->getInput()->getData()) as $data) {
             $moves = $this->parseLine($data);
             $this->doMoves($moves);
         }
-
-        $blackTiles = $this->countBlackTiles();
-
-        $output->writeln("<info>Part 1 : $blackTiles black tiles</info>");
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
+    {
+        return $this->countBlackTiles();
+    }
+
+    public function part2()
     {
         for ($i = 0; $i < 100; ++$i) {
             $this->dayFlipping();
         }
 
-        $blackTiles = $this->countBlackTiles();
-
-        $output->writeln("<info>Part 2 : $blackTiles black tiles</info>");
+        return $this->countBlackTiles();
     }
 
     /**
@@ -176,15 +179,5 @@ class PuzzleResolver extends AbstractPuzzleResolver
         if ($y < $this->minY) {
             $this->minY = $y;
         }
-    }
-
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-
-        $this->part2($input, $output);
     }
 }
