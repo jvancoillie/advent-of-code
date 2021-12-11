@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day08;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,30 +11,29 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int $testPart1Expected = 26;
+    protected static int $testPart2Expected = 61229;
+
+    protected static int $part1Expected = 274;
+    protected static int $part2Expected = 1012089;
+
     private $count = 0;
     private $sum = 0;
 
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $data = explode("\n", $input->getData());
+        $data = explode("\n", $this->getInput()->getData());
         $this->guess($data);
-
-        $this->part1($output);
-        $this->part2($output);
     }
 
-    public function part1(OutputInterface $output)
+    public function part1()
     {
-        $ans = $this->count;
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->count;
     }
 
-    public function part2(OutputInterface $output)
+    public function part2()
     {
-        $ans = $this->sum;
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->sum;
     }
 
     public function guess($data)

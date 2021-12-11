@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day09;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,6 +11,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int $testPart1Expected = 15;
+    protected static int $testPart2Expected = 1134;
+
+    protected static int $part1Expected = 448;
+    protected static int $part2Expected = 1417248;
+
     private array $grid = [];
     private array $directions = [
         [0, 1],
@@ -24,28 +28,21 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $basinLengths = [];
     private array $lowPoints = [];
 
-    public function main(PuzzleInput $input, OutputInterface $output, $options = []): void
+    public function main(): void
     {
-        $this->createGrid(explode("\n", $input->getData()));
+        $this->createGrid(explode("\n", $this->getInput()->getData()));
 
         $this->browse();
-
-        $this->part1($output);
-        $this->part2($output);
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1(): int
     {
-        $ans = array_sum($this->lowPoints) + count($this->lowPoints);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return (int) array_sum($this->lowPoints) + count($this->lowPoints);
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2(): int
     {
-        $ans = array_product(array_slice($this->basinLengths, 0, 3));
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return (int) array_product(array_slice($this->basinLengths, 0, 3));
     }
 
     private function createGrid($data): void

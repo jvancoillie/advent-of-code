@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Puzzle\Year2021\Day11;
+namespace App\Tests\Puzzle\Year2021\Day09;
 
 use App\Tests\Puzzle\PuzzleResolverTest\PuzzleResolverTestModel;
 use App\Tests\Puzzle\PuzzleResolverTest\PuzzleResolverTestTrait;

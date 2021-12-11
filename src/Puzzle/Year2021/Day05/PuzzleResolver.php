@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2021\Day05;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,39 +12,35 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int $testPart1Expected = 5;
+    protected static int $testPart2Expected = 12;
+
+    protected static int $part1Expected = 7438;
+    protected static int $part2Expected = 21406;
+
     /**
      * @var Segment[]
      */
     private array $segments;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->parseInput($input);
-
-        $this->part1($output);
-        $this->part2($output);
+        $this->parseInput($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1(): int
     {
-        $ans = $this->countOverlapping(false);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->countOverlapping(false);
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2(): int
     {
-        $ans = $this->countOverlapping(true);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->countOverlapping(true);
     }
 
     private function parseInput(PuzzleInput $input): void
     {
-        foreach (explode("\n", $input->getData()) as $entry) {
+        foreach (explode("\n", $this->getInput()->getData()) as $entry) {
             if (preg_match('/(?<x1>\d+),(?<y1>\d+) -> (?<x2>\d+),(?<y2>\d+)/', $entry, $matches)) {
                 $this->segments[] = new Segment($matches['x1'], $matches['y1'], $matches['x2'], $matches['y2']);
             }

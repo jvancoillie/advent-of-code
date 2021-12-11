@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day03;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,37 +11,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int $testPart1Expected = 198;
+    protected static int $testPart2Expected = 230;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int $part1Expected = 741950;
+    protected static int $part2Expected = 903810;
+
+    public function part1()
     {
-        $data = $this->explodeData(explode("\n", $input->getData()));
+        $data = $this->explodeData(explode("\n", $this->getInput()->getData()));
 
         $gama = $this->rateGama($data);
         $epsilon = $this->reverseBits($gama);
 
-        $ans = bindec($gama) * bindec($epsilon);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return bindec($gama) * bindec($epsilon);
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $data = $this->explodeData(explode("\n", $input->getData()));
+        $data = $this->explodeData(explode("\n", $this->getInput()->getData()));
 
         $oxygen = $this->lifeRating($data);
         $co2 = $this->lifeRating($data, true);
 
-        $ans = bindec($oxygen) * bindec($co2);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return bindec($oxygen) * bindec($co2);
     }
 
     private function rateGama(array $data): string

@@ -17,7 +17,7 @@ class PuzzleResolverTest extends TestCase
             ->addPartMethod('part2')
         ;
 
-         yield PuzzleResolverTestModel::create(false)
+        yield PuzzleResolverTestModel::create(false)
             ->addPartMethod('part1')
             ->addPartMethod('part2')
          ;

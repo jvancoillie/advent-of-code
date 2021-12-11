@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day06;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,28 +11,24 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int $testPart1Expected = 5934;
+    protected static int $testPart2Expected = 26984457539;
+
+    protected static int $part1Expected = 353079;
+    protected static int $part2Expected = 1605400130036;
+
+    public function part1()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $data = explode(',', $this->getInput()->getData());
+
+        return $this->grow($data, 80);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part2()
     {
-        $data = explode(',', $input->getData());
+        $data = explode(',', $this->getInput()->getData());
 
-        $ans = $this->grow($data, 80);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
-    }
-
-    public function part2(PuzzleInput $input, OutputInterface $output)
-    {
-        $data = explode(',', $input->getData());
-
-        $ans = $this->grow($data, 256);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->grow($data, 256);
     }
 
     public function grow($data, $days): float|int

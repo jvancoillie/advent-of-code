@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day07;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,24 +11,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int $testPart1Expected = 37;
+    protected static int $testPart2Expected = 168;
+
+    protected static int $part1Expected = 337833;
+    protected static int $part2Expected = 96678050;
+
+    public function part1()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        return $this->cheapestFuelToAlign(explode(',', $this->getInput()->getData()));
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output)
+    public function part2()
     {
-        $ans = $this->cheapestFuelToAlign(explode(',', $input->getData()));
-
-        $output->writeln("<info>Part 2 : $ans</info>");
-    }
-
-    public function part2(PuzzleInput $input, OutputInterface $output)
-    {
-        $ans = $this->cheapestFuelToAlign(explode(',', $input->getData()), true);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->cheapestFuelToAlign(explode(',', $this->getInput()->getData()), true);
     }
 
     public function cheapestFuelToAlign($data, $expensive = false): float|int

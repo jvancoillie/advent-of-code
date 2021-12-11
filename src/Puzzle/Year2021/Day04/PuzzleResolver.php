@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2021\Day04;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,33 +12,29 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int $testPart1Expected = 4512;
+    protected static int $testPart2Expected = 1924;
+
+    protected static int $part1Expected = 38594;
+    protected static int $part2Expected = 21184;
+
     private Bingo $bingo;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->createBingo($input);
+        $this->createBingo($this->getInput());
 
         $this->bingo->play();
-
-        $this->part1($output);
-        $this->part2($output);
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1(): int
     {
-        $ans = $this->getScore($this->bingo->getFirstWinner());
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->getScore($this->bingo->getFirstWinner());
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2(): int
     {
-        $ans = $this->getScore($this->bingo->getLastWinner());
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->getScore($this->bingo->getLastWinner());
     }
 
     private function getScore(array $list)
@@ -51,7 +46,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function createBingo(PuzzleInput $input): void
     {
-        $data = array_filter(explode("\n", $input->getData()));
+        $data = array_filter(explode("\n", $this->getInput()->getData()));
 
         $numbers = array_map('intval', explode(',', array_shift($data)));
 

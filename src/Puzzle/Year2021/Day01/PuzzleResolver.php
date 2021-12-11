@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2021\Day01;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,27 +11,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int $testPart1Expected = 7;
+    protected static int $testPart2Expected = 5;
+
+    protected static int $part1Expected = 1696;
+    protected static int $part2Expected = 1737;
+
+    public function part1()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        return $this->countIncrease(explode("\n", $this->getInput()->getData()), 1);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->countIncrease(explode("\n", $input->getData()), 1);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
-    }
-
-    public function part2(PuzzleInput $input, OutputInterface $output): void
-    {
-        $ans = $this->countIncrease(explode("\n", $input->getData()), 3);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->countIncrease(explode("\n", $this->getInput()->getData()), 3);
     }
 
     /**
