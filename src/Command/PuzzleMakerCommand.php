@@ -51,37 +51,38 @@ class PuzzleMakerCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $year = $input->getOption('year');
-        $day = sprintf("%02d",$input->getOption('day'));
+        $day = sprintf('%02d', $input->getOption('day'));
 
         $link = sprintf('https://adventofcode.com/%d/day/%d', $year, $day);
 
         $folderPath = sprintf('src/Puzzle/Year%d/Day%s', $year, $day);
+        $folderTestPath = sprintf('tests/Puzzle/Year%d/Day%s', $year, $day);
         $namespace = sprintf("App\Puzzle\Year%d\Day%s", $year, $day);
+        $namespaceTest = sprintf("App\Tests\Puzzle\Year%d\Day%s", $year, $day);
 
         $inputFilePath = sprintf('%s/input/input.txt', $folderPath);
         $testFilePath = sprintf('%s/input/test.txt', $folderPath);
         $resolverFilePath = sprintf('%s/PuzzleResolver.php', $folderPath);
+        $resolverTestFilePath = sprintf('%s/PuzzleResolverTest.php', $folderTestPath);
 
         $noData = $input->getOption('no-data');
-        if ($this->filesystem->exists($resolverFilePath)) {
-            $output->writeln('<comment> Enable to create Puzzle Resolver Class, already exist ! </comment>');
 
-            return Command::FAILURE;
+        // create Puzzle Resolver class if dont exist
+        if (!$this->filesystem->exists($resolverFilePath)) {
+            $output->writeln('<info>Create Puzzle Resolver Class</info>');
+            $this->filesystem->dumpFile(
+                $resolverFilePath,
+                $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', [
+                    'namespace' => $namespace,
+                    'puzzleLink' => $link,
+                ])
+            );
+
+            $output->writeln('<info>Create Puzzle data input files</info>');
+
+            $this->filesystem->dumpFile($inputFilePath, '');
+            $this->filesystem->dumpFile($testFilePath, '');
         }
-
-        $output->writeln('<info>Create Puzzle Resolver Class</info>');
-        $this->filesystem->dumpFile(
-            $resolverFilePath,
-            $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', [
-                'namespace' => $namespace,
-                'puzzleLink' => $link,
-            ])
-        );
-
-        $output->writeln('<info>Create Puzzle data input files</info>');
-
-        $this->filesystem->dumpFile($inputFilePath, '');
-        $this->filesystem->dumpFile($testFilePath, '');
 
         if (!$noData) {
             $output->writeln(sprintf('<info>--- Retrieve data for DAY:  %1$s-%2$s --- <info>', $year, $day));
@@ -114,6 +115,17 @@ class PuzzleMakerCommand extends Command
                     return Command::FAILURE;
                 }
             }
+        }
+
+        // create Puzzle Resolver Test class if dont exist
+        if (!$this->filesystem->exists($resolverTestFilePath)) {
+            $output->writeln('<info>Create Puzzle Resolver Test Class</info>');
+            $this->filesystem->dumpFile(
+                $resolverTestFilePath,
+                $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolverTest.tpl.php', [
+                    'namespace' => $namespaceTest,
+                ])
+            );
         }
 
         return Command::SUCCESS;

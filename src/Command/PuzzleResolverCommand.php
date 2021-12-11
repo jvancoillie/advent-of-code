@@ -21,20 +21,8 @@ class PuzzleResolverCommand extends Command
         $currentDay = (new \DateTime())->format('d');
         $this
             ->setDescription('Outputs the solutions of a Puzzles for a given event')
-            ->addOption(
-                'year',
-                'y',
-                InputOption::VALUE_REQUIRED,
-                'the year of the event',
-                $currentYear
-            )
-            ->addOption(
-                'day',
-                'd',
-                InputOption::VALUE_REQUIRED,
-                'the day of the event',
-                $currentDay
-            )
+            ->addOption('year', 'y', InputOption::VALUE_REQUIRED, 'the year of the event', $currentYear)
+            ->addOption('day', 'd', InputOption::VALUE_REQUIRED, 'the day of the event', $currentDay)
             ->addOption('test', null, InputOption::VALUE_NONE, 'If set, run with test input')
             ;
     }
@@ -51,9 +39,18 @@ class PuzzleResolverCommand extends Command
         $inputFileName = $isTest ? 'test.txt' : 'input.txt';
         $inputFilePath = sprintf('src/Puzzle/Year%d/Day%s/input/%s', $year, $day, $inputFileName);
 
+        $data = file_get_contents($inputFilePath);
+
         try {
-            $callable = [$this->instantiateClass(sprintf('\\App\\Puzzle\\Year%d\\Day%s\\PuzzleResolver', $year, $day)), 'main'];
-        } catch (\Error) {
+            $args = [new PuzzleInput($data), $output, $options];
+
+            $resolverInstance = $this->instantiateClass(sprintf('\\App\\Puzzle\\Year%d\\Day%s\\PuzzleResolver', $year, $day), $args);
+
+            $callable = [$resolverInstance, 'main'];
+            $callablePart1 = [$resolverInstance, 'part1'];
+            $callablePart2 = [$resolverInstance, 'part2'];
+        } catch (\Error $e) {
+            dump($e);
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
 
             return Command::FAILURE;
@@ -61,14 +58,31 @@ class PuzzleResolverCommand extends Command
 
         $output->writeln(sprintf('<info><href=%1$s>%1$s</><info>', $link));
         $output->writeln(sprintf('<info>=========  DAY:  %1$s-%2$s, MODE: %3$s ========= <info>', $year, $day, $isTest ? 'Test' : 'Prod'));
+
         if (!\is_callable($callable)) {
-            throw new \InvalidArgumentException(sprintf('the main methode of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
+            throw new \InvalidArgumentException(sprintf('the main method of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
         }
 
-        $data = file_get_contents($inputFilePath);
+        if (!\is_callable($callablePart1)) {
+            throw new \InvalidArgumentException(sprintf('the part1 method of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
+        }
+
+        if (!\is_callable($callablePart2)) {
+            throw new \InvalidArgumentException(sprintf('the part2 method of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
+        }
 
         $startTime = microtime(true);
+
         $callable(new PuzzleInput($data), $output, $options);
+
+        $resultPart1 = $callablePart1(new PuzzleInput($data), $output);
+        $resultPart2 = $callablePart2(new PuzzleInput($data), $output);
+
+        $output->writeln("<info>Part 1 : $resultPart1</info>");
+        $output->writeln("<info>Part 2 : $resultPart2</info>");
+
+        //dump($resultPart1, $resultPart2);
+
         $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
 
         return Command::SUCCESS;
@@ -79,8 +93,8 @@ class PuzzleResolverCommand extends Command
      *
      * @return object
      */
-    protected function instantiateClass(string $class)
+    protected function instantiateClass(string $class, array $args)
     {
-        return new $class();
+        return new $class(...$args);
     }
 }
