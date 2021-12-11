@@ -49,6 +49,8 @@ class PuzzleResolverCommand extends Command
             $callable = [$resolverInstance, 'main'];
             $callablePart1 = [$resolverInstance, 'part1'];
             $callablePart2 = [$resolverInstance, 'part2'];
+            $callablePart1Expected = [$resolverInstance, 'getTestPart1Expected'];
+            $callablePart2Expected = [$resolverInstance, 'getTestPart2Expected'];
         } catch (\Error $e) {
             dump($e);
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
@@ -77,11 +79,15 @@ class PuzzleResolverCommand extends Command
 
         $resultPart1 = $callablePart1(new PuzzleInput($data), $output);
         $resultPart2 = $callablePart2(new PuzzleInput($data), $output);
+        $correctPart1 = $correctPart2 = '';
 
-        $output->writeln("<info>Part 1 : $resultPart1</info>");
-        $output->writeln("<info>Part 2 : $resultPart2</info>");
+        if($isTest){
+            $correctPart1 = ($resultPart1 === $callablePart1Expected()) ? '✔':'✘';
+            $correctPart2 = ($resultPart2 === $callablePart2Expected()) ? '✔':'✘';
+        }
 
-        //dump($resultPart1, $resultPart2);
+        $output->writeln(sprintf("<info>Part 1 : %s %s</info>", $correctPart1, $resultPart1));
+        $output->writeln(sprintf("<info>Part 1 : %s %s</info>", $correctPart2, $resultPart2));
 
         $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
 
