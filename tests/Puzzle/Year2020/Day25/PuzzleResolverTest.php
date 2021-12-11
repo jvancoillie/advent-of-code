@@ -14,12 +14,10 @@ class PuzzleResolverTest extends TestCase
     {
         yield PuzzleResolverTestModel::create(true)
             ->addPartMethod('part1')
-            ->addPartMethod('part2')
         ;
 
         yield PuzzleResolverTestModel::create(false)
             ->addPartMethod('part1')
-            ->addPartMethod('part2')
          ;
     }
 }
