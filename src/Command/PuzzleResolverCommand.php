@@ -81,13 +81,13 @@ class PuzzleResolverCommand extends Command
         $resultPart2 = $callablePart2(new PuzzleInput($data), $output);
         $correctPart1 = $correctPart2 = '';
 
-        if($isTest){
-            $correctPart1 = ($resultPart1 === $callablePart1Expected()) ? '✔':'✘';
-            $correctPart2 = ($resultPart2 === $callablePart2Expected()) ? '✔':'✘';
+        if ($isTest) {
+            $correctPart1 = ($resultPart1 === $callablePart1Expected()) ? '✔' : '✘';
+            $correctPart2 = ($resultPart2 === $callablePart2Expected()) ? '✔' : '✘';
         }
 
-        $output->writeln(sprintf("<info>Part 1 : %s %s</info>", $correctPart1, $resultPart1));
-        $output->writeln(sprintf("<info>Part 1 : %s %s</info>", $correctPart2, $resultPart2));
+        $output->writeln(sprintf('<info>Part 1 : %s %s</info>', $correctPart1, $resultPart1));
+        $output->writeln(sprintf('<info>Part 1 : %s %s</info>', $correctPart2, $resultPart2));
 
         $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
 
