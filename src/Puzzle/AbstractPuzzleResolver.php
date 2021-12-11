@@ -25,22 +25,22 @@ abstract class AbstractPuzzleResolver
 
     public static function getTestPart1Expected(): int
     {
-        return self::$testPart1Expected;
+        return static::$testPart1Expected;
     }
 
     public static function getTestPart2Expected(): int
     {
-        return self::$testPart2Expected;
+        return static::$testPart2Expected;
     }
 
     public static function getPart1Expected(): int
     {
-        return self::$part1Expected;
+        return static::$part1Expected;
     }
 
     public static function getPart2Expected(): int
     {
-        return self::$part2Expected;
+        return static::$part2Expected;
     }
 
     public function getInput(): PuzzleInput
