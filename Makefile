@@ -72,6 +72,11 @@ app-build: vendor/autoload.php
 
 .PHONY: app-build install
 
+##—— Tests ————————————————————————————————————————————————————————————————————————————————————————————————
+tests: vendor/autoload.php ## Run phpunit
+	$(PHP) vendor/bin/phpunit
+
+.PHONY: tests
 ##—— Quality assurance ————————————————————————————————————————————————————————————————————————————————————————————————
 
 format: vendor/autoload.php  ## Format code with php-cs-fixer
@@ -88,6 +93,7 @@ rector: ## Run rector
 
 rector-dry: ## Run rector in dry mode
 	$(PHP)  vendor/bin/rector process src --dry-run
+
 .PHONY: psalm phpstan format
 
 qa-all:
