@@ -8,7 +8,6 @@ class Leaderboard
     private string $event;
     private string $ownerId;
     private array $dayBoard = [];
-    private int $memberCount = 0;
 
     public function __construct($data)
     {
@@ -23,7 +22,7 @@ class Leaderboard
         $memberCount = count($this->members);
         $days = [];
 
-        foreach (range(1, 10) as $day) {
+        foreach (range(1, 25) as $day) {
             $isDayResolvedByMember = false;
             $dayParts = [
                 1 => [],
@@ -82,7 +81,6 @@ class Leaderboard
             uasort($this->dayBoard[$day], function ($a, $b) {
                 return $b['day_score'] <=> $a['day_score'];
             });
-//            dump($this->dayBoard);
         }
     }
 
@@ -98,8 +96,12 @@ class Leaderboard
 
     private function elapsed($timestamp, $day): string
     {
-        $startDate = new \DateTimeImmutable(sprintf('%s-12-%s midnight', $this->event, $day));
-        $doneAt = new \DateTimeImmutable('@'.$timestamp);
+        try {
+            $startDate = new \DateTimeImmutable(sprintf('%s-12-%s midnight', $this->event, $day));
+            $doneAt = new \DateTimeImmutable('@'.$timestamp);
+        } catch (\Exception) {
+            return ' error ';
+        }
 
         $diff = $startDate->diff($doneAt);
 
