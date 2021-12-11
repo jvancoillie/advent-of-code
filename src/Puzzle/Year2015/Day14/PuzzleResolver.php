@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day14;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,24 +12,25 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 1120;
+    protected static int|string $testPart2Expected = 689;
+
+    protected static int|string $part1Expected = 2640;
+    protected static int|string $part2Expected = 1102;
+
     private $reindeers = [];
     private $time = 1000;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        if ('prod' === $options['env']) {
+        if ('prod' === $this->getOptions()['env']) {
             $this->time = 2503;
         }
 
-        $this->createReindeers($input);
-        $this->part1($output);
-        $this->part2($output);
+        $this->createReindeers($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
         $ans = 0;
         foreach ($this->reindeers as $reindeer) {
@@ -40,10 +40,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return (int) $ans;
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
         $points = [];
         for ($i = 1; $i <= $this->time; ++$i) {
@@ -69,7 +69,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         $ans = max($points);
-        $output->writeln("<info>Part 2 : $ans</info>");
+
+        return $ans;
     }
 
     public function createReindeers(PuzzleInput $input): void

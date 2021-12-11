@@ -5,7 +5,6 @@ namespace App\Puzzle\Year2015\Day13;
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use App\Utils\PathFinding\TSP;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,10 +12,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @see https://adventofcode.com/2015/day/13
  *
  * execute with increase memory limit :
- *  php -d  memory_limit=2048M bin/console puzzle:resolve --year=2015 --day=13
+ *  php -d  memory_limit=768M bin/console puzzle:resolve --year=2015 --day=13
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 330;
+    protected static int|string $testPart2Expected = 286;
+
+    protected static int|string $part1Expected = 733;
+    protected static int|string $part2Expected = 725;
+
     /**
      * @var TSP
      */
@@ -25,14 +30,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->createTSP($input);
-        $this->part1($output);
-        $this->part2($output);
+        $this->createTSP($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
         $ans = $this->tsp->getLongestDistance();
         $path = $this->tsp->getLongestPath();
@@ -43,10 +46,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $ans += $graph[$first][$last];
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
         $graph = $this->tsp->getGraph();
 
@@ -63,7 +66,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $ans += $graph[$first][$last];
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $ans;
     }
 
     /**

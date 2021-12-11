@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2015\Day12;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,35 +11,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int|string $testPart1Expected = 15;
+    protected static int|string $testPart2Expected = 15;
+
+    protected static int|string $part1Expected = 119433;
+    protected static int|string $part2Expected = 68466;
+
+    public function part1()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $decoded = json_decode($this->getInput()->getData());
+
+        return $this->sumNumbers($decoded);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $decoded = json_decode($input->getData());
-        $ans = $this->sumNumbers($decoded);
+        $decoded = json_decode($this->getInput()->getData());
 
-        $output->writeln("<info>Part 1 : $ans</info>");
-    }
-
-    public function part2(PuzzleInput $input, OutputInterface $output): void
-    {
-        $decoded = json_decode($input->getData());
-        $ans = $this->sumNumbers($decoded, 'red');
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->sumNumbers($decoded, 'red');
     }
 
     /**
      * @psalm-param 'red'|null $excluded
      */
-    public function sumNumbers(array $array, string|null $excluded = null)
+    public function sumNumbers($array, string|null $excluded = null)
     {
         $sum = 0;
         foreach ($array as $item) {

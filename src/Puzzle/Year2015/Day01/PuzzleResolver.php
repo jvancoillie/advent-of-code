@@ -3,24 +3,19 @@
 namespace App\Puzzle\Year2015\Day01;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = -1;
+    protected static int|string $testPart2Expected = 5;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 74;
+    protected static int|string $part2Expected = 1795;
+
+    public function part1()
     {
         $floor = 0;
-        foreach (str_split($input->getData()) as $data) {
+        foreach (str_split($this->getInput()->getData()) as $data) {
             if ('(' === $data) {
                 ++$floor;
             } elseif (')' === $data) {
@@ -28,13 +23,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $floor</info>");
+        return $floor;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $floor = $response = 0;
-        foreach (str_split($input->getData()) as $key => $data) {
+        foreach (str_split($this->getInput()->getData()) as $key => $data) {
             if ('(' === $data) {
                 ++$floor;
             } elseif (')' === $data) {
@@ -47,6 +42,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 2 : $response</info>");
+        return $response;
     }
 }

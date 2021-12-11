@@ -1,0 +1,2 @@
+Sue 1: goldfish: 9, cars: 0, samoyeds: 9
+Sue 2: perfumes: 5, trees: 8, goldfish: 8

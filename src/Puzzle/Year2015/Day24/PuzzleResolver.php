@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2015\Day24;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -15,18 +13,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 88;
+    protected static int|string $testPart2Expected = 33;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 10723906903;
+    protected static int|string $part2Expected = 74850409;
+
+    public function part1()
     {
-        $packages = explode("\n", $input->getData());
+        $packages = explode("\n", $this->getInput()->getData());
         $list = $this->createGroups(array_sum($packages) / 3, $packages);
         $min = INF;
         foreach ($list as $item) {
@@ -36,12 +31,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $min</info>");
+        return $min;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $packages = explode("\n", $input->getData());
+        $packages = explode("\n", $this->getInput()->getData());
         $list = $this->createGroups(array_sum($packages) / 4, $packages);
         $min = INF;
         foreach ($list as $item) {
@@ -51,7 +46,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $min</info>");
+        return $min;
     }
 
     private function createGroups(int|float $weight, array $packages = [], $group = [], $checked = []): array

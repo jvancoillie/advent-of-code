@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day22;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,6 +12,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 226;
+    protected static int|string $testPart2Expected = 339;
+
+    protected static int|string $part1Expected = 1269;
+    protected static int|string $part2Expected = 1309;
+
     private $boss = [
         'Hit' => 0,
         'Damage' => 0,
@@ -39,34 +44,24 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Recharge' => ['Cost' => 229, 'Active' => 5, 'Damage' => 0, 'Heal' => 0, 'Armor' => 7, 'Mana' => 101],
     ];
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        dump($options);
-        if ('test' === $options['env']) {
+        if ('test' === $this->getOptions()['env']) {
             $this->player['Hit'] = 10;
             $this->player['mana'] = 250;
         }
 
-        $this->setBossStats($input);
-
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $this->setBossStats($this->getInput());
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->play();
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->play();
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->play(true);
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->play(true);
     }
 
     private function setBossStats(PuzzleInput $input): void

@@ -4,39 +4,41 @@ namespace App\Puzzle\Year2015\Day07;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 123;
+    protected static int|string $testPart2Expected = 123;
+
+    protected static int|string $part1Expected = 956;
+    protected static int|string $part2Expected = 40149;
+
     private $circuit = [];
     private $part1Answer;
+    private $wire;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $this->wire = 'test' === $this->getOptions()['env'] ? 'x' : 'a';
+        $this->createCircuit($this->getInput());
+
+        $this->part1Answer = $this->resolveCircuitEntry($this->wire);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
-        $this->createCircuit($input);
-        $this->part1Answer = $this->resolveCircuitEntry('a');
-        $output->writeln("<info>Part 1 : $this->part1Answer</info>");
+        return $this->part1Answer;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $this->createCircuit($input);
+        $this->createCircuit($this->getInput());
         $this->circuit['b'] = $this->part1Answer;
-        $ans = $this->resolveCircuitEntry('a');
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->resolveCircuitEntry($this->wire);
     }
 
     /**
@@ -124,6 +126,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         foreach (explode("\n", $input->getData()) as $line) {
             [$in, $out] = $this->parseLine($line);
+
             if (1 === count($in)) {
                 $this->circuit[$out] = $in[0];
             } else {

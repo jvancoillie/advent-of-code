@@ -3,47 +3,38 @@
 namespace App\Puzzle\Year2015\Day06;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
 use App\Utils\Grid;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 998996;
+    protected static int|string $testPart2Expected = 1001996;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 569999;
+    protected static int|string $part2Expected = 17836115;
+
+    public function part1()
     {
         $lights = Grid::create(1000, 1000, 0);
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $action = $this->parseLine($line);
             $this->applyLightInstruction($lights, $action['action'], $action['fromX'], $action['fromY'], $action['toX'], $action['toY']);
         }
 
-        $ans = $this->countLightsLit($lights);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->countLightsLit($lights);
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $lights = Grid::create(1000, 1000, 0);
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $action = $this->parseLine($line);
             $this->applyLightBrightnessInstruction($lights, $action['action'], $action['fromX'], $action['fromY'], $action['toX'], $action['toY']);
         }
 
-        $ans = $this->countLightsLit($lights);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->countLightsLit($lights);
     }
 
     /**

@@ -3,19 +3,14 @@
 namespace App\Puzzle\Year2015\Day02;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 101;
+    protected static int|string $testPart2Expected = 48;
+
+    protected static int|string $part1Expected = 1588178;
+    protected static int|string $part2Expected = 3783758;
 
     /**
      * 2*l*w + 2*w*h + 2*h*l.
@@ -23,10 +18,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
      * w = 1
      * h = 2.
      */
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
         $squareFeet = 0;
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $entry = array_map('intval', explode('x', $line));
             $surfaces['lw'] = $entry[0] * $entry[1];
             $surfaces['wh'] = $entry[1] * $entry[2];
@@ -38,13 +33,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $squareFeet += min($surfaces);
         }
 
-        $output->writeln("<info>Part 1 : $squareFeet</info>");
+        return $squareFeet;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $squareFeet = 0;
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $entry = array_map('intval', explode('x', $line));
             sort($entry);
             $min1 = $entry[0];
@@ -53,6 +48,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $squareFeet += $entry[0] * $entry[1] * $entry[2];
         }
 
-        $output->writeln("<info>Part 1 : $squareFeet</info>");
+        return $squareFeet;
     }
 }

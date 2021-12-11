@@ -5,7 +5,6 @@ namespace App\Puzzle\Year2015\Day18;
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use App\Utils\Grid;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -14,6 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 4;
+    protected static int|string $testPart2Expected = 17;
+
+    protected static int|string $part1Expected = 768;
+    protected static int|string $part2Expected = 781;
+
     private $grid = [];
     private $steps = 100;
     private $directions = [
@@ -30,36 +35,31 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $width;
     private $cornersLocked = false;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        if ('test' === $options['env']) {
+        if ('test' === $this->getOptions()['env']) {
             $this->steps = 5;
         }
-
-        $this->createGrid($input);
-        $this->part1($input, $output);
-
-        $this->grid = [];
-        $this->createGrid($input);
-        $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
+        $this->createGrid($this->getInput());
+
         for ($i = 0; $i < $this->steps; ++$i) {
             $this->toggleLights();
         }
 
         $ans = $this->countLightOn();
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
+        $this->grid = [];
+        $this->createGrid($this->getInput());
+
         //turn on corners;
         $this->turnOnCorners();
 
@@ -67,9 +67,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $this->toggleLights();
         }
 
-        $ans = $this->countLightOn();
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->countLightOn();
     }
 
     public function createGrid(PuzzleInput $input): void

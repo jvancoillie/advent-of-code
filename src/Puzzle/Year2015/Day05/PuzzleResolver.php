@@ -3,48 +3,43 @@
 namespace App\Puzzle\Year2015\Day05;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 2;
+    protected static int|string $testPart2Expected = 0;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 258;
+    protected static int|string $part2Expected = 53;
+
+    public function part1()
     {
         $patternVowels = '/(?:[aeiou][^aeiou]*){3}/';
         $patternTwice = '/(\w)\1/';
         $patternTReserved = '/(ab|cd|pq|xy)/';
         $nice = 0;
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             if (preg_match($patternVowels, $line) && preg_match($patternTwice, $line) && !preg_match($patternTReserved, $line)) {
                 ++$nice;
             }
         }
 
-        $output->writeln("<info>Part 1 : $nice</info>");
+        return $nice;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $patternPair = '/(..).*?\1/';
         $patternRepeat = '/(.).\1/';
         $nice = 0;
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             if (preg_match($patternPair, $line) && preg_match($patternRepeat, $line)) {
                 ++$nice;
             }
         }
 
-        $output->writeln("<info>Part 2 : $nice</info>");
+        return $nice;
     }
 }

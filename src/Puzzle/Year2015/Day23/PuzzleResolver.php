@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day23;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,30 +12,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 0;
+    protected static int|string $testPart2Expected = 0;
+
+    protected static int|string $part1Expected = 170;
+    protected static int|string $part2Expected = 247;
+
     private $instructions = [];
 
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->createInstructions($input);
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $this->createInstructions($this->getInput());
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->execute(['a' => 0, 'b' => 0]);
-
-        $output->writeln('<info>Part 1 : '.$ans['b'].'</info>');
+        return $this->execute(['a' => 0, 'b' => 0])['b'];
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->execute(['a' => 1, 'b' => 0]);
-
-        $output->writeln('<info>Part 2 : '.$ans['b'].'</info>');
+        return $this->execute(['a' => 1, 'b' => 0])['b'];
     }
 
     private function createInstructions(PuzzleInput $input): void

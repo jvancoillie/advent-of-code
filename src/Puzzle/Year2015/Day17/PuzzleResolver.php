@@ -5,7 +5,6 @@ namespace App\Puzzle\Year2015\Day17;
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use App\Utils\Generator;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -14,23 +13,27 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 4;
+    protected static int|string $testPart2Expected = 2;
+
+    protected static int|string $part1Expected = 4372;
+    protected static int|string $part2Expected = 4;
+
     private $liters = 150;
     private $containers = [];
 
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        if ('test' === $options['env']) {
+        if ('test' === $this->getOptions()['env']) {
             $this->liters = 25;
         }
-        $this->createContainers($input);
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $this->createContainers($this->getInput());
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
         $ans = 0;
         foreach (Generator::combinations($this->containers) as $comb) {
@@ -38,10 +41,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 ++$ans;
             }
         }
-        $output->writeln("<info>Part 1 : $ans</info>");
+
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $ans = INF;
         foreach (Generator::combinations($this->containers) as $comb) {
@@ -49,7 +53,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $ans = count($comb);
             }
         }
-        $output->writeln("<info>Part 2 : $ans</info>");
+
+        return $ans;
     }
 
     private function createContainers(PuzzleInput $input): void

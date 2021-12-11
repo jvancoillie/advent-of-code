@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2015\Day10;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,37 +11,32 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 82350;
+    protected static int|string $testPart2Expected = 1166642;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 252594;
+    protected static int|string $part2Expected = 3579328;
+
+    public function part1()
     {
-        $ans = $input->getData();
+        $ans = $this->getInput()->getData();
 
         for ($i = 1; $i <= 40; ++$i) {
             $ans = $this->lookAndSay($ans);
         }
-        $ans = strlen($ans);
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return strlen($ans);
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $ans = $input->getData();
+        $ans = $this->getInput()->getData();
 
         for ($i = 1; $i <= 50; ++$i) {
             $ans = $this->lookAndSay($ans);
         }
-        $ans = strlen($ans);
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return strlen($ans);
     }
 
     public function lookAndSay($str): string|null

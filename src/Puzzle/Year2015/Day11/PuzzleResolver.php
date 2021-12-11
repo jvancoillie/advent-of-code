@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2015\Day11;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,32 +11,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int|string $testPart1Expected = 'abcdffaa';
+    protected static int|string $testPart2Expected = 'abcdffbb';
+
+    protected static int|string $part1Expected = 'hxbxxyzz';
+    protected static int|string $part2Expected = 'hxcaabcc';
+
+    public function part1()
     {
-        $password = $input->getData();
-
-        $password = $this->part1($password, $output);
-
-        $this->part2($password, $output);
+        return $this->nextPassword($this->getInput()->getData());
     }
 
-    public function part1(string $password, OutputInterface $output): string
+    public function part2()
     {
-        $password = $this->nextPassword($password);
-
-        $output->writeln("<info>Part 1 : $password</info>");
-
-        return $password;
-    }
-
-    public function part2(string $password, OutputInterface $output): void
-    {
-        $password = $this->nextPassword($password);
-
-        $output->writeln("<info>Part 2 : $password</info>");
+        return $this->nextPassword($this->part1());
     }
 
     public function nextPassword(string $password): string

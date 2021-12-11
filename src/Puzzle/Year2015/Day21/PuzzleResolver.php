@@ -5,7 +5,6 @@ namespace App\Puzzle\Year2015\Day21;
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use App\Utils\Generator;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -14,6 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 65;
+    protected static int|string $testPart2Expected = 188;
+
+    protected static int|string $part1Expected = 78;
+    protected static int|string $part2Expected = 148;
+
     private $shop = [
         'Weapons' => [
             'Dagger' => ['Cost' => 8,   'Damage' => 4, 'Armor' => 0],
@@ -53,36 +58,41 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Equipped' => [],
     ];
 
+    private $part1;
+    private $part2;
+
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        dump($options);
-        if ('test' === $options['env']) {
+        if ('test' === $this->getOptions()['env']) {
             $this->player['Hit'] = 8;
         }
-        $this->setBossStats($input);
-        $this->bothParts($output);
-    }
-
-    public function bothParts(OutputInterface $output): void
-    {
-        $part1 = INF;
-        $part2 = 0;
+        $this->setBossStats($this->getInput());
+        $this->part1 = INF;
+        $this->part2 = 0;
         foreach ($this->nextBuy() as $player) {
             if ($this->fight($player)) {
-                if ($player['Cost'] < $part1) {
-                    $part1 = $player['Cost'];
+                if ($player['Cost'] < $this->part1) {
+                    $this->part1 = $player['Cost'];
                 }
             } else {
-                if ($player['Cost'] > $part2) {
-                    $part2 = $player['Cost'];
+                if ($player['Cost'] > $this->part2) {
+                    $this->part2 = $player['Cost'];
                 }
             }
         }
-        $output->writeln("<info>Part 1 : $part1</info>");
-        $output->writeln("<info>Part 2 : $part2</info>");
+    }
+
+    public function part1()
+    {
+        return $this->part1;
+    }
+
+    public function part2()
+    {
+        return $this->part2;
     }
 
     private function setBossStats(PuzzleInput $input): void

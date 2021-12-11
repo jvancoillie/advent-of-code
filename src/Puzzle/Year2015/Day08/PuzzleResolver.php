@@ -3,24 +3,19 @@
 namespace App\Puzzle\Year2015\Day08;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 12;
+    protected static int|string $testPart2Expected = 19;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 1333;
+    protected static int|string $part2Expected = 2046;
+
+    public function part1()
     {
         $ans = 0;
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $ans += 2;
             preg_match_all('/(\\\.)/', $line, $m);
             foreach ($m[0] as $r) {
@@ -28,16 +23,16 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $ans = 0;
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $ans += strlen(addslashes($line)) + 2 - strlen($line);
         }
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $ans;
     }
 }

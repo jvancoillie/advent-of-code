@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day19;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,33 +12,29 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 7;
+    protected static int|string $testPart2Expected = 6;
+
+    protected static int|string $part1Expected = 509;
+    protected static int|string $part2Expected = 195;
+
     private $replacements = [];
     private $part2Replacements = [];
     private $input;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->init($input);
-
-        $this->part1($output);
-        $this->part2($output);
+        $this->init($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->replace(str_split($this->input));
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->replace(str_split($this->input));
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->randomSearch();
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->randomSearch();
     }
 
     public function init(PuzzleInput $input): void

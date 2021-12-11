@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2015\Day20;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -18,18 +16,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 8;
+    protected static int|string $testPart2Expected = 8;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 776160;
+    protected static int|string $part2Expected = 786240;
+
+    public function part1()
     {
-        $input = (int) $input->getData() / 10;
+        $input = (int) $this->getInput()->getData() / 10;
         $houses = [];
         $houseNumber = $input;
 
@@ -44,12 +39,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 1 : $houseNumber</info>");
+        return $houseNumber;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $input = (int) $input->getData() / 10;
+        $input = (int) $this->getInput()->getData() / 10;
         $houses = [];
         $houseNumber = $input;
 
@@ -70,6 +65,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 2 : $houseNumber</info>");
+        return $houseNumber;
     }
 }

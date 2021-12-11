@@ -3,41 +3,38 @@
 namespace App\Puzzle\Year2015\Day04;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 609043;
+    protected static int|string $testPart2Expected = 6742839;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 254575;
+    protected static int|string $part2Expected = 1038736;
+
+    public function part1()
     {
         $i = 0;
         $md5 = '';
-        $string = $input->getData();
+        $string = $this->getInput()->getData();
         while (!str_starts_with($md5, '00000')) {
             ++$i;
             $md5 = md5($string.$i);
         }
-        $output->writeln("<info>Part 1 : $i</info>");
+
+        return $i;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $i = 0;
         $md5 = '';
-        $string = $input->getData();
+        $string = $this->getInput()->getData();
         while (!str_starts_with($md5, '000000')) {
             ++$i;
             $md5 = md5($string.$i);
         }
-        $output->writeln("<info>Part 2 : $i</info>");
+
+        return $i;
     }
 }

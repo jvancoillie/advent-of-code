@@ -3,25 +3,20 @@
 namespace App\Puzzle\Year2015\Day03;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 2;
+    protected static int|string $testPart2Expected = 11;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 2592;
+    protected static int|string $part2Expected = 2360;
+
+    public function part1()
     {
         $x = $y = 0;
         $houses = [[0]];
-        foreach (str_split($input->getData()) as $d) {
+        foreach (str_split($this->getInput()->getData()) as $d) {
             switch ($d) {
                 case '<':
                     --$x;
@@ -42,19 +37,18 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $houses[$x][$y] = 0;
             }
         }
-        $count = $this->countHouses($houses);
 
-        $output->writeln("<info>Part 1 : $count</info>");
+        return $this->countHouses($houses);
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $coords = [
             'santa' => ['x' => 0, 'y' => 0],
             'robo' => ['x' => 0, 'y' => 0],
         ];
         $houses = [[0]];
-        foreach (str_split($input->getData()) as $key => $d) {
+        foreach (str_split($this->getInput()->getData()) as $key => $d) {
             $turn = (0 === $key % 2) ? 'santa' : 'robo';
             switch ($d) {
                 case '<':
@@ -76,9 +70,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $houses[$coords[$turn]['x']][$coords[$turn]['y']] = 0;
             }
         }
-        $count = $this->countHouses($houses);
 
-        $output->writeln("<info>Part 2 : $count</info>");
+        return $this->countHouses($houses);
     }
 
     public function countHouses(array $houses): int

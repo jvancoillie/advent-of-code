@@ -3,38 +3,34 @@
 namespace App\Puzzle\Year2015\Day09;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
 use App\Utils\PathFinding\TSP;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 605;
+    protected static int|string $testPart2Expected = 982;
+
+    protected static int|string $part1Expected = 117;
+    protected static int|string $part2Expected = 909;
+
     private $tsp;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
         $tsp = new TSP();
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             [$from, $to, $dist] = $this->parseLine($line);
             $tsp->add($from, $to, $dist);
         }
         $this->tsp = $tsp;
-
-        $this->part1($output);
-        $this->part2($output);
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->tsp->getShortestDistance();
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->tsp->getShortestDistance();
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
         $maxDistance = 0;
 
@@ -44,14 +40,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 2 : $maxDistance</info>");
+        return $maxDistance;
     }
 
-    /**
-     * @return (int|string)[]
-     *
-     * @psalm-return array{0: string, 1: string, 2: int}
-     */
     public function parseLine(string $line): array
     {
         $pattern = '/(?<from>.*)\sto\s(?<to>.*)\s=\s(?<dist>\d+)/';

@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day15;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,30 +12,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 62842880;
+    protected static int|string $testPart2Expected = 57600000;
+
+    protected static int|string $part1Expected = 222870;
+    protected static int|string $part2Expected = 117936;
+
     private $ingredients = [];
 
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->createIngredients($input);
-        $this->part1($output);
-        $this->part2($output);
+        $this->createIngredients($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->highestScoringCookie();
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->highestScoringCookie();
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->highestScoringCookie(true);
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->highestScoringCookie(true);
     }
 
     private function createIngredients(PuzzleInput $input): void
