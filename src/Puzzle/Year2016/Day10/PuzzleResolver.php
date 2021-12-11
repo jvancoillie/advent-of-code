@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2016\Day10;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,36 +12,32 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 0;
+    protected static int|string $testPart2Expected = 30;
+
+    protected static int|string $part1Expected = 147;
+    protected static int|string $part2Expected = 55637;
+
     private array $bots = [];
     private array $actions = [];
     private array $outputs = [];
-    private int $botComparingId;
+    private int $botComparingId = 0;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->parseInput($input);
+        $this->parseInput($this->getInput());
 
         $this->playActions();
-
-        $this->part1($output);
-        $this->part2($output);
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
-        $ans = $this->botComparingId;
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->botComparingId;
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->outputs['0'] * $this->outputs['1'] * $this->outputs['2'];
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->outputs['0'] * $this->outputs['1'] * $this->outputs['2'];
     }
 
     public function parseInput(PuzzleInput $input): void

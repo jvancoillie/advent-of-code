@@ -6,11 +6,11 @@ use App\Puzzle\AbstractPuzzleResolver;
 
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    protected static int $testPart1Expected = 10;
-    protected static int $testPart2Expected = 2208;
+    protected static int|string $testPart1Expected = 10;
+    protected static int|string $testPart2Expected = 2208;
 
-    protected static int $part1Expected = 317;
-    protected static int $part2Expected = 3804;
+    protected static int|string $part1Expected = 317;
+    protected static int|string $part2Expected = 3804;
 
     public const BLACK = '#';
     public const WHITE = 'O';

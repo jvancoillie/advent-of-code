@@ -3,9 +3,7 @@
 namespace App\Puzzle\Year2016\Day13;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
 use App\Utils\PathFinding\Dijkstra;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -14,23 +12,23 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 11;
+    protected static int|string $testPart2Expected = 0;
+
+    protected static int|string $part1Expected = 82;
+    protected static int|string $part2Expected = 0;
+
     private array $reach;
     private int $favoriteNumber;
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->reach = ('test' === $options['env']) ? [7, 4] : [31, 39];
+        $this->reach = ('test' === $this->getOptions()['env']) ? [7, 4] : [31, 39];
 
-        $this->favoriteNumber = $input->getData();
-
-        $this->part1($output);
-        $this->part2($output);
+        $this->favoriteNumber = $this->getInput()->getData();
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
         $maze = new Maze($this->favoriteNumber);
 
@@ -41,14 +39,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $path = $dijkstra->findPath($start, $goal);
 
-        $ans = count($path) - 1;
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return count($path) - 1;
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
-        $ans = 0;
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return 0;
     }
 }

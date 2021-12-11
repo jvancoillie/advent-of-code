@@ -11,11 +11,11 @@ use App\Puzzle\AbstractPuzzleResolver;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    protected static int $testPart1Expected = 7;
-    protected static int $testPart2Expected = 5;
+    protected static int|string $testPart1Expected = 7;
+    protected static int|string $testPart2Expected = 5;
 
-    protected static int $part1Expected = 1696;
-    protected static int $part2Expected = 1737;
+    protected static int|string $part1Expected = 1696;
+    protected static int|string $part2Expected = 1737;
 
     public function part1()
     {

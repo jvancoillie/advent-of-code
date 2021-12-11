@@ -1,18 +1,16 @@
-<?php echo "<?php\n"; ?>
+<?php
 
-namespace <?php echo $namespace; ?>;
+namespace App\Puzzle\Year2016\Day11;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
-* Class PuzzleResolver
-* @see <?php echo $puzzleLink; ?><?php echo "\n"; ?>
-*/
+ * Class PuzzleResolver.
+ *
+ * @see https://adventofcode.com/2016/day/11
+ */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-
     protected static int|string $testPart1Expected = 0;
     protected static int|string $testPart2Expected = 0;
 

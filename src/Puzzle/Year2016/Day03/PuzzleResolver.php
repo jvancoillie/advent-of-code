@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2016\Day03;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,32 +11,27 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 3;
+    protected static int|string $testPart2Expected = 6;
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 862;
+    protected static int|string $part2Expected = 1577;
+
+    public function part1()
     {
         $triangles = [];
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $triangles[] = array_map('intval', preg_split("/[\s]+/", trim($line)));
         }
 
-        $ans = $this->countValidTriangles($triangles);
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $this->countValidTriangles($triangles);
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $cols = [[], [], []];
         $triangles = [];
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             [$col1, $col2, $col3] = array_map('intval', preg_split("/[\s]+/", trim($line)));
             $cols[0][] = $col1;
             $cols[1][] = $col2;
@@ -50,9 +43,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $cols = [[], [], []];
             }
         }
-        $ans = $this->countValidTriangles($triangles);
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $this->countValidTriangles($triangles);
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2016\Day12;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,34 +12,34 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 42;
+    protected static int|string $testPart2Expected = 42;
+
+    protected static int|string $part1Expected = 318003;
+    protected static int|string $part2Expected = 9227657;
+
     private array $instructions = [];
 
     /**
      * @return void
      */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->parseInput($input);
-        $this->part1($output);
-        $this->part2($output);
+        $this->parseInput($this->getInput());
     }
 
-    public function part1(OutputInterface $output): void
+    public function part1()
     {
         $register = $this->playInstructions([]);
 
-        $ans = $register['a'];
-
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $register['a'];
     }
 
-    public function part2(OutputInterface $output): void
+    public function part2()
     {
         $register = $this->playInstructions(['c' => 1]);
 
-        $ans = $register['a'];
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $register['a'];
     }
 
     private function parseInput(PuzzleInput $input): void

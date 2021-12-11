@@ -12,11 +12,11 @@ use App\Puzzle\PuzzleInput;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    protected static int $testPart1Expected = 5;
-    protected static int $testPart2Expected = 12;
+    protected static int|string $testPart1Expected = 5;
+    protected static int|string $testPart2Expected = 12;
 
-    protected static int $part1Expected = 7438;
-    protected static int $part2Expected = 21406;
+    protected static int|string $part1Expected = 7438;
+    protected static int|string $part2Expected = 21406;
 
     /**
      * @var Segment[]

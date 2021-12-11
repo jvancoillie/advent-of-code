@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2016\Day04;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,34 +11,31 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = 1514;
+    protected static int|string $testPart2Expected = 'Not found';
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 245102;
+    protected static int|string $part2Expected = 324;
+
+    public function part1()
     {
         $ans = 0;
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $room = $this->parseLine($line);
             if ($this->check($room)) {
                 $ans += $room['id'];
             }
         }
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $ans = 'Not found';
 
-        foreach (explode("\n", $input->getData()) as $line) {
+        foreach (explode("\n", $this->getInput()->getData()) as $line) {
             $room = $this->parseLine($line);
             $realName = $this->decrypt($room);
             if (str_contains($realName, 'northpole object storage')) {
@@ -48,7 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $ans;
     }
 
     public function check(array $room): bool

@@ -6,7 +6,6 @@ use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use App\Utils\Grid;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -15,42 +14,44 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
+    protected static int|string $testPart1Expected = 6;
+    protected static int|string $testPart2Expected = 0;
+
+    protected static int|string $part1Expected = 106;
+    protected static int|string $part2Expected = 0;
+
     private $instructions = [];
     private $grid = [];
 
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    public function main()
     {
-        $this->createInstructions($input);
+        $this->createInstructions($this->getInput());
 
-        if ('test' === $options['env']) {
+        if ('test' === $this->getOptions()['env']) {
             $this->grid = Grid::create(7, 3, '.');
         } else {
             $this->grid = Grid::create(50, 6, ' ');
         }
-
-        $this->part1($input, $output);
-        $this->part2($input, $output);
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part1()
     {
         $this->applyInstructions();
         $ans = Grid::count($this->grid, '#');
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $output->writeln('<info>Part 2 : Display screen below </info>');
+        $this->getOutput()->writeln('<info>Part 2 : Display screen below </info>');
 
-        $table = new Table($output);
+        $table = new Table($this->getOutput());
         $table->setStyle('compact');
         $table->setRows($this->grid);
         $table->render();
+
+        return 0;
     }
 
     private function createInstructions(PuzzleInput $input): void

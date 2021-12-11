@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2016\Day05;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,20 +11,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
-    {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
-    }
+    protected static int|string $testPart1Expected = '18f47a30';
+    protected static int|string $testPart2Expected = '05ace8e3';
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    protected static int|string $part1Expected = 'd4cd2ee1';
+    protected static int|string $part2Expected = 'f2c730e5';
+
+    public function part1()
     {
         $i = 0;
         $salt = 0;
-        $string = $input->getData();
+        $string = $this->getInput()->getData();
         $password = '';
         while ($i < 8) {
             ++$salt;
@@ -39,14 +34,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         $ans = $password;
 
-        $output->writeln("<info>Part 1 : $ans</info>");
+        return $ans;
     }
 
-    public function part2(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
         $i = 0;
         $salt = 0;
-        $string = $input->getData();
+        $string = $this->getInput()->getData();
         $password = [];
         while ($i < 8) {
             ++$salt;
@@ -63,6 +58,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         ksort($password);
         $ans = implode('', $password);
 
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $ans;
     }
 }

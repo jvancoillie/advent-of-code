@@ -10,11 +10,11 @@ abstract class AbstractPuzzleResolver
     private OutputInterface $output;
     private array $options;
 
-    protected static int $testPart1Expected = 0;
-    protected static int $testPart2Expected = 0;
+    protected static int|string $testPart1Expected = 0;
+    protected static int|string $testPart2Expected = 0;
 
-    protected static int $part1Expected = 0;
-    protected static int $part2Expected = 0;
+    protected static int|string $part1Expected = 0;
+    protected static int|string $part2Expected = 0;
 
     public function __construct(PuzzleInput $input, OutputInterface $output, array $options)
     {
@@ -23,22 +23,22 @@ abstract class AbstractPuzzleResolver
         $this->options = $options;
     }
 
-    public static function getTestPart1Expected(): int
+    public static function getTestPart1Expected(): int|string
     {
         return static::$testPart1Expected;
     }
 
-    public static function getTestPart2Expected(): int
+    public static function getTestPart2Expected(): int|string
     {
         return static::$testPart2Expected;
     }
 
-    public static function getPart1Expected(): int
+    public static function getPart1Expected(): int|string
     {
         return static::$part1Expected;
     }
 
-    public static function getPart2Expected(): int
+    public static function getPart2Expected(): int|string
     {
         return static::$part2Expected;
     }

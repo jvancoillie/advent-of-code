@@ -3,8 +3,6 @@
 namespace App\Puzzle\Year2016\Day09;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class PuzzleResolver.
@@ -13,27 +11,24 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    /**
-     * @return void
-     */
-    public function main(PuzzleInput $input, OutputInterface $output, $options = [])
+    protected static int|string $testPart1Expected = 57;
+    protected static int|string $testPart2Expected = 56;
+
+    protected static int|string $part1Expected = 102239;
+    protected static int|string $part2Expected = 10780403063;
+
+    public function part1()
     {
-        $this->part1($input, $output);
-        $this->part2($input, $output);
+        $ans = $this->decompress($this->getInput()->getData(), false);
+
+        return $ans;
     }
 
-    public function part1(PuzzleInput $input, OutputInterface $output): void
+    public function part2()
     {
-        $ans = $this->decompress($input->getData(), false);
+        $ans = $this->decompress($this->getInput()->getData());
 
-        $output->writeln("<info>Part 1 : $ans</info>");
-    }
-
-    public function part2(PuzzleInput $input, OutputInterface $output): void
-    {
-        $ans = $this->decompress($input->getData());
-
-        $output->writeln("<info>Part 2 : $ans</info>");
+        return $ans;
     }
 
     public function decompress(string $sequence, bool $recurse = true): float|int
