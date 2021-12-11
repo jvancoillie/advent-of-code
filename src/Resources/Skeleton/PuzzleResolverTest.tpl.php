@@ -22,5 +22,4 @@ class PuzzleResolverTest extends TestCase
             ->addPartMethod('part2')
          ;
     }
-
 }
