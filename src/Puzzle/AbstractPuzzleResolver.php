@@ -55,7 +55,7 @@ abstract class AbstractPuzzleResolver
         return $this->options;
     }
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         // void method, can be used before part1 & part2 is called
     }

@@ -20,7 +20,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private $ingredients = [];
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->createIngredients($this->getInput());
     }

@@ -33,7 +33,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private $aunts = [];
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->createAunts($this->getInput());
     }

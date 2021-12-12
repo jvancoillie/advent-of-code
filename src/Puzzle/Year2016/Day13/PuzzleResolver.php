@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $reach;
     private int $favoriteNumber;
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->reach = ('test' === $this->getOptions()['env']) ? [7, 4] : [31, 39];
 

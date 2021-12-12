@@ -20,7 +20,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $count = 0;
     private $sum = 0;
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $data = explode("\n", $this->getInput()->getData());
         $this->guess($data);

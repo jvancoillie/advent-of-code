@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $liters = 150;
     private $containers = [];
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         if ('test' === $this->getOptions()['env']) {
             $this->liters = 25;

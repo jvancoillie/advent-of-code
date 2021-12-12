@@ -19,7 +19,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private Bingo $bingo;
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->createBingo();
 

@@ -20,7 +20,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $part1Answer;
     private $wire;
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->wire = 'test' === $this->getOptions()['env'] ? 'x' : 'a';
         $this->createCircuit($this->getInput());

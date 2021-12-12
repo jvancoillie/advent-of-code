@@ -28,7 +28,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $maxY = 0;
     private $floor = [];
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         foreach (explode("\n", $this->getInput()->getData()) as $data) {
             $moves = $this->parseLine($data);

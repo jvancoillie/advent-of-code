@@ -19,7 +19,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private array $graph = [];
 
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->graph = $this->createGraph();
     }
