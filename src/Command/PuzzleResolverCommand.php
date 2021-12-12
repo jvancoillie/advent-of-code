@@ -50,16 +50,19 @@ class PuzzleResolverCommand extends Command
 
             $callablePart1 = [$resolverInstance, 'part1'];
             $callablePart2 = [$resolverInstance, 'part2'];
-            $callablePart1Expected = [$resolverInstance, 'getTestPart1Expected'];
-            $callablePart2Expected = [$resolverInstance, 'getTestPart2Expected'];
+            $callablePart1Expected = [$resolverInstance, $isTest ? 'getTestPart1Expected' : 'getPart1Expected'];
+            $callablePart2Expected = [$resolverInstance, $isTest ? 'getTestPart2Expected' : 'getPart2Expected'];
         } catch (\Error) {
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
 
             return Command::FAILURE;
         }
 
-        $output->writeln(sprintf('<info><href=%1$s>%1$s</><info>', $link));
-        $output->writeln(sprintf('<info>=========  DAY:  %1$s-%2$s, MODE: %3$s ========= <info>', $year, $day, $isTest ? 'Test' : 'Prod'));
+        $output->writeln(sprintf('<href=%1$s>%1$s</>', $link));
+        $output->writeln([
+            sprintf('<info>==========</info> <comment>DAY %2$s %1$s, MODE %3$s</comment> <info>==========</info> ', $year, $day, $isTest ? 'Test' : 'Prod'),
+            ' ',
+        ]);
 
         if (!\is_callable($callablePart1)) {
             throw new \InvalidArgumentException(sprintf('the part1 method of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
@@ -71,29 +74,24 @@ class PuzzleResolverCommand extends Command
 
         $startTime = microtime(true);
 
-        $resultPart1 = $callablePart1(new PuzzleInput($data), $output);
-        $resultPart2 = $callablePart2(new PuzzleInput($data), $output);
-        $correctPart1 = $correctPart2 = '';
+        $this->outputPartResult($output, 1, $callablePart1(), $callablePart1Expected());
 
-        if ($isTest) {
-            $correctPart1 = ($resultPart1 === $callablePart1Expected()) ? '✔' : '✘';
-            $correctPart2 = ($resultPart2 === $callablePart2Expected()) ? '✔' : '✘';
-        }
+        $this->outputPartResult($output, 2, $callablePart2(), $callablePart2Expected());
 
-        $output->writeln(sprintf('<info>Part 1 : %s %s</info>', $correctPart1, $resultPart1));
-        $output->writeln(sprintf('<info>Part 2 : %s %s</info>', $correctPart2, $resultPart2));
-
-        $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
+        $output->writeln([
+             ' ',
+             sprintf('<info>==========</info> <comment>Execution time: %01.4f</comment> <info>==========</info> ', microtime(true) - $startTime),
+         ]);
 
         return Command::SUCCESS;
     }
 
-    /**
-     * Returns an instantiated class.
-     *
-     * @return object
-     */
-    protected function instantiateClass(string $class, array $args)
+    protected function outputPartResult(OutputInterface $output, int $part, string|int $result, string|int $expected)
+    {
+        $output->writeln(sprintf('  <options=bold,underscore,conceal>Part %d</> <options=blink>:</> <fg=%s>%s</>', $part, ($result === $expected) ? 'green' : 'red', $result));
+    }
+
+    protected function instantiateClass(string $class, array $args): object
     {
         return new $class(...$args);
     }
