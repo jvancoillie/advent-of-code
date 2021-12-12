@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,7 +36,8 @@ class PuzzleResolverCommand extends Command
         $link = sprintf('https://adventofcode.com/%d/day/%d', $year, $day);
 
         $isTest = $input->getOption('test');
-        $options = ['env' => $isTest ? 'test' : 'prod'];
+        $options = ['mode' => $isTest ? AbstractPuzzleResolver::TEST_MODE : AbstractPuzzleResolver::PROD_MODE];
+
         $inputFileName = $isTest ? 'test.txt' : 'input.txt';
         $inputFilePath = sprintf('src/Puzzle/Year%d/Day%s/input/%s', $year, $day, $inputFileName);
 
@@ -50,7 +52,7 @@ class PuzzleResolverCommand extends Command
             $callablePart2 = [$resolverInstance, 'part2'];
             $callablePart1Expected = [$resolverInstance, 'getTestPart1Expected'];
             $callablePart2Expected = [$resolverInstance, 'getTestPart2Expected'];
-        } catch (\Error $e) {
+        } catch (\Error) {
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
 
             return Command::FAILURE;

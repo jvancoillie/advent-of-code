@@ -20,7 +20,7 @@ trait PuzzleResolverTestTrait
     {
         preg_match('/Year(?P<year>\d+)(.*)Day(?P<day>\d+)/', static::class, $matches);
 
-        $options = ['env' => $withTestData ? 'test' : 'prod'];
+        $options = ['mode' => $withTestData ? AbstractPuzzleResolver::TEST_MODE : AbstractPuzzleResolver::PROD_MODE];
         $output = new ConsoleOutput();
         $data = $this->getTestInputData($matches['year'], $matches['day'], $withTestData);
 

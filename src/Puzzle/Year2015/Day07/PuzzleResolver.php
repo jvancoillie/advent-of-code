@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     protected function initialize(): void
     {
-        $this->wire = 'test' === $this->getOptions()['env'] ? 'x' : 'a';
+        $this->wire = $this->isTestMode() ? 'x' : 'a';
         $this->createCircuit($this->getInput());
 
         $this->part1Answer = $this->resolveCircuitEntry($this->wire);

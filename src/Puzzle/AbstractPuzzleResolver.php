@@ -6,6 +6,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractPuzzleResolver
 {
+    public const TEST_MODE = 'TEST';
+    public const PROD_MODE = 'PROD';
+
     private array $options;
 
     protected static int|string $testPart1Expected = 0;
@@ -50,7 +53,12 @@ abstract class AbstractPuzzleResolver
         return $this->output;
     }
 
-    public function getOptions(): array
+    protected function isTestMode(): bool
+    {
+        return self::TEST_MODE === $this->options['mode'];
+    }
+
+    protected function getOptions(): array
     {
         return $this->options;
     }

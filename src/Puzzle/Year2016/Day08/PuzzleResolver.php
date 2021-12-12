@@ -27,7 +27,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $this->createInstructions($this->getInput());
 
-        if ('test' === $this->getOptions()['env']) {
+        if ($this->isTestMode()) {
             $this->grid = Grid::create(7, 3, '.');
         } else {
             $this->grid = Grid::create(50, 6, ' ');

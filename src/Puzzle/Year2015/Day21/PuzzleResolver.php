@@ -63,7 +63,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     protected function initialize(): void
     {
-        if ('test' === $this->getOptions()['env']) {
+        if ($this->isTestMode()) {
             $this->player['Hit'] = 8;
         }
         $this->setBossStats($this->getInput());

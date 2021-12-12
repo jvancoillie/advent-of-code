@@ -23,7 +23,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     protected function initialize(): void
     {
-        $this->reach = ('test' === $this->getOptions()['env']) ? [7, 4] : [31, 39];
+        $this->reach = ($this->isTestMode()) ? [7, 4] : [31, 39];
 
         $this->favoriteNumber = $this->getInput()->getData();
     }

@@ -19,12 +19,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part2Expected = 1102;
 
     private $reindeers = [];
-    private $time = 1000;
+    private $time = 2503;
 
     protected function initialize(): void
     {
-        if ('prod' === $this->getOptions()['env']) {
-            $this->time = 2503;
+        if ($this->isTestMode()) {
+            $this->time = 1000;
         }
 
         $this->createReindeers($this->getInput());

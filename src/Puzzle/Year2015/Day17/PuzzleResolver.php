@@ -24,7 +24,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     protected function initialize(): void
     {
-        if ('test' === $this->getOptions()['env']) {
+        if ($this->isTestMode()) {
             $this->liters = 25;
         }
         $this->createContainers($this->getInput());
