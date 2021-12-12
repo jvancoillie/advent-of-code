@@ -114,11 +114,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
         foreach ($this->grid as $y => $line) {
             $col[$y] = $line[$x];
         }
-//        dump($col);
+
         for ($i = 0; $i < $by; ++$i) {
             array_unshift($col, array_pop($col));
         }
-//        dump($col);
+
         foreach ($this->grid as $y => $line) {
             $this->grid[$y][$x] = $col[$y];
         }

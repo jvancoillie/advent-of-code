@@ -116,7 +116,6 @@ class Leaderboard
 
     public function walk(callable $callable, $day)
     {
-        dump($this->dayBoard[$day]);
         array_walk($this->dayBoard[$day], $callable);
     }
 }

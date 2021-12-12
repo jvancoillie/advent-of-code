@@ -4,7 +4,6 @@ namespace App\Puzzle\Year2015\Day18;
 
 use App\Puzzle\AbstractPuzzleResolver;
 use App\Puzzle\PuzzleInput;
-use App\Utils\Grid;
 
 /**
  * Class PuzzleResolver.
@@ -80,7 +79,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function togglelights(): void
     {
-        //Grid::dump($this->grid);
         $grid = [];
 
         for ($y = 0; $y <= $this->height; ++$y) {
