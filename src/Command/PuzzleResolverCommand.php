@@ -58,7 +58,7 @@ class PuzzleResolverCommand extends Command
             return Command::FAILURE;
         }
 
-        $output->writeln(sprintf('<href=%1$s>%1$s</>', $link));
+        $output->writeln(sprintf('    <href=%1$s>%1$s</>', $link));
         $output->writeln([
             sprintf('<info>==========</info> <comment>DAY %2$s %1$s, MODE %3$s</comment> <info>==========</info> ', $year, $day, $isTest ? 'Test' : 'Prod'),
             ' ',
