@@ -12,4 +12,9 @@ class PuzzleInput
     {
         return $this->data;
     }
+
+    public function getArrayData(): array
+    {
+        return explode("\n", $this->data);
+    }
 }
