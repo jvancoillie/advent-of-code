@@ -28,7 +28,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $basinLengths = [];
     private array $lowPoints = [];
 
-    public function main(): void
+    public function initialize(): void
     {
         $this->createGrid(explode("\n", $this->getInput()->getData()));
 

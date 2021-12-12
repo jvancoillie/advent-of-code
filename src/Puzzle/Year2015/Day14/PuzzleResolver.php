@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $reindeers = [];
     private $time = 1000;
 
-    public function main()
+    public function initialize(): void
     {
         if ('prod' === $this->getOptions()['env']) {
             $this->time = 2503;

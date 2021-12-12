@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     private array $segments;
 
-    public function main()
+    public function initialize(): void
     {
         $this->parseInput();
     }

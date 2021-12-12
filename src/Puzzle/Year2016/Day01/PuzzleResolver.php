@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $currentDirection = 'N';
     private $directions = ['N', 'E', 'S', 'W'];
 
-    public function main()
+    public function initialize(): void
     {
         $this->createInstructions();
     }

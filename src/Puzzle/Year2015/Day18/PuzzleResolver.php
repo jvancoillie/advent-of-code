@@ -34,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $width;
     private $cornersLocked = false;
 
-    public function main()
+    public function initialize(): void
     {
         if ('test' === $this->getOptions()['env']) {
             $this->steps = 5;

@@ -27,10 +27,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     private $tsp;
 
-    /**
-     * @return void
-     */
-    public function main()
+    public function initialize(): void
     {
         $this->createTSP($this->getInput());
     }

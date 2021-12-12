@@ -44,7 +44,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Recharge' => ['Cost' => 229, 'Active' => 5, 'Damage' => 0, 'Heal' => 0, 'Armor' => 7, 'Mana' => 101],
     ];
 
-    public function main()
+    public function initialize(): void
     {
         if ('test' === $this->getOptions()['env']) {
             $this->player['Hit'] = 10;

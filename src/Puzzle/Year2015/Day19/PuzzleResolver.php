@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $part2Replacements = [];
     private $input;
 
-    public function main()
+    public function initialize(): void
     {
         $this->init($this->getInput());
     }

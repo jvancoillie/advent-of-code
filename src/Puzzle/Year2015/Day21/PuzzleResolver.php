@@ -61,10 +61,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $part1;
     private $part2;
 
-    /**
-     * @return void
-     */
-    public function main()
+    public function initialize(): void
     {
         if ('test' === $this->getOptions()['env']) {
             $this->player['Hit'] = 8;

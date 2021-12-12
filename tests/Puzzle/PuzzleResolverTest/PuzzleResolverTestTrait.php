@@ -37,9 +37,6 @@ trait PuzzleResolverTestTrait
     {
         $puzzleResolver = $this->getPuzzleResolverInstance($withTestData);
 
-        // Always call main method
-        [$puzzleResolver, 'main']();
-
         $callablePartResult = [$puzzleResolver, $partMethod];
 
         if (!\is_callable($callablePartResult)) {

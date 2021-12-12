@@ -23,7 +23,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private $instructions = [];
     private $grid = [];
 
-    public function main()
+    public function initialize(): void
     {
         $this->createInstructions($this->getInput());
 

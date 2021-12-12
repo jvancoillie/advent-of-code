@@ -20,10 +20,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private $instructions = [];
 
-    /**
-     * @return void
-     */
-    public function main()
+    public function initialize(): void
     {
         $this->createInstructions($this->getInput());
     }

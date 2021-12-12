@@ -15,7 +15,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private $tsp;
 
-    public function main()
+    public function initialize(): void
     {
         $tsp = new TSP();
         foreach (explode("\n", $this->getInput()->getData()) as $line) {

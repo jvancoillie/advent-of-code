@@ -17,6 +17,7 @@ abstract class AbstractPuzzleResolver
     public function __construct(private PuzzleInput $input, private OutputInterface $output, array $options = [])
     {
         $this->options = $options;
+        $this->initialize();
     }
 
     public static function getTestPart1Expected(): int|string
@@ -54,7 +55,7 @@ abstract class AbstractPuzzleResolver
         return $this->options;
     }
 
-    public function main()
+    public function initialize(): void
     {
         // void method, can be used before part1 & part2 is called
     }
