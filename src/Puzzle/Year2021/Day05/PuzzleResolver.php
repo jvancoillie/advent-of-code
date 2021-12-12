@@ -3,7 +3,6 @@
 namespace App\Puzzle\Year2021\Day05;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Puzzle\PuzzleInput;
 
 /**
  * Class PuzzleResolver.
