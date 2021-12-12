@@ -37,6 +37,7 @@ class Leaderboard
                 }
                 foreach ($current as $part => $ts) {
                     $partData['ts'] = $ts;
+                    $partData['elapsed'] = '-';
                     if (INF !== $ts) {
                         $partData['elapsed'] = $this->elapsed($ts, $day);
                     }
@@ -115,6 +116,7 @@ class Leaderboard
 
     public function walk(callable $callable, $day)
     {
+        dump($this->dayBoard[$day]);
         array_walk($this->dayBoard[$day], $callable);
     }
 }
