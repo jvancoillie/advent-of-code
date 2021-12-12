@@ -3,6 +3,7 @@
 namespace App\Puzzle;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractPuzzleResolver
 {
@@ -19,7 +20,12 @@ abstract class AbstractPuzzleResolver
 
     public function __construct(private PuzzleInput $input, private OutputInterface $output, array $options = [])
     {
-        $this->options = $options;
+        $resolver = new OptionsResolver();
+        $resolver->setDefault('mode', self::PROD_MODE);
+        $resolver->setAllowedValues('mode', [self::PROD_MODE, self::TEST_MODE]);
+
+        $this->options = $resolver->resolve($options);
+
         $this->initialize();
     }
 
