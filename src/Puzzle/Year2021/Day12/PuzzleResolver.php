@@ -82,7 +82,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $paths = [];
 
         $queue = new \SplQueue();
-        $queue->enqueue([[$start], ['start' => 1]]);
+        $queue->enqueue([[$start], [$start => 1]]);
 
         while (!$queue->isEmpty()) {
             [$path, $visited] = $queue->dequeue();
