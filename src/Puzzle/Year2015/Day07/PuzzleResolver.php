@@ -16,9 +16,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 956;
     protected static int|string $part2Expected = 40149;
 
-    private $circuit = [];
+    private array $circuit = [];
     private $part1Answer;
-    private $wire;
+    private ?string $wire = null;
 
     protected function initialize(): void
     {

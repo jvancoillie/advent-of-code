@@ -13,15 +13,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PuzzleMakerCommand extends Command
 {
-    /**
-     * @var HttpClientInterface
-     */
-    private $client;
+    private HttpClientInterface $client;
 
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
+    private Filesystem $filesystem;
 
     protected static $defaultName = 'puzzle:make';
 

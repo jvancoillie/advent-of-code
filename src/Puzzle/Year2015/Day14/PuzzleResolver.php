@@ -18,8 +18,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 2640;
     protected static int|string $part2Expected = 1102;
 
-    private $reindeers = [];
-    private $time = 2503;
+    private array $reindeers = [];
+    private int $time = 2503;
 
     protected function initialize(): void
     {

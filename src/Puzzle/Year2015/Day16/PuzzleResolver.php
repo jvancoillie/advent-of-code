@@ -18,7 +18,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 40;
     protected static int|string $part2Expected = 241;
 
-    private $tickerTape = [
+    private array $tickerTape = [
         'children' => 3,
         'cats' => 7,
         'samoyeds' => 2,
@@ -31,7 +31,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'perfumes' => 1,
     ];
 
-    private $aunts = [];
+    private array $aunts = [];
 
     protected function initialize(): void
     {

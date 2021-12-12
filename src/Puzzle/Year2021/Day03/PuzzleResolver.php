@@ -42,9 +42,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         // transpose
         $rate = array_map(null, ...$data);
 
-        return implode('', array_map(function ($entry) {
-            return (array_sum($entry) >= count($entry) / 2) ? '1' : '0';
-        }, $rate));
+        return implode('', array_map(fn($entry) => (array_sum($entry) >= count($entry) / 2) ? '1' : '0', $rate));
     }
 
     private function reverseBits(string $binaryString): string
@@ -82,8 +80,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function explodeData(array $data): array
     {
-        return array_map(function ($e) {
-            return str_split($e);
-        }, $data);
+        return array_map(fn($e) => str_split($e), $data);
     }
 }

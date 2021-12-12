@@ -18,13 +18,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 1269;
     protected static int|string $part2Expected = 1309;
 
-    private $boss = [
+    private array $boss = [
         'Hit' => 0,
         'Damage' => 0,
         'Armor' => 0,
     ];
 
-    private $player = [
+    private array $player = [
         'Hit' => 50,
         'Damage' => 0,
         'Armor' => 0,
@@ -36,7 +36,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'Recharge' => 0,
     ];
 
-    private $spells = [
+    private array $spells = [
         'Missile' => ['Cost' => 53,  'Active' => 0, 'Damage' => 4, 'Heal' => 0, 'Armor' => 7, 'Mana' => 0],
         'Drain' => ['Cost' => 73,  'Active' => 0, 'Damage' => 2, 'Heal' => 2, 'Armor' => 7, 'Mana' => 0],
         'Shield' => ['Cost' => 113, 'Active' => 6, 'Damage' => 0, 'Heal' => 0, 'Armor' => 7, 'Mana' => 0],

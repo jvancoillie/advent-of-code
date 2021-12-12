@@ -14,7 +14,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public const BLACK = '#';
     public const WHITE = 'O';
-    private $directions = [
+    private array $directions = [
         'w' => [-1, 0],
         'e' => [1,  0],
         'ne' => [0,  1],
@@ -22,11 +22,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
         'se' => [1, -1],
         'sw' => [0, -1],
     ];
-    private $minX = 0;
-    private $minY = 0;
-    private $maxX = 0;
-    private $maxY = 0;
-    private $floor = [];
+    private int $minX = 0;
+    private int $minY = 0;
+    private int $maxX = 0;
+    private int $maxY = 0;
+    private array $floor = [];
 
     protected function initialize(): void
     {

@@ -61,6 +61,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         // count overlapping vents in grid, x,y > 1
-        return array_reduce($grid, function ($carry, $item) { return $carry + count(array_filter($item, function ($e) {return $e > 1; })); });
+        return array_reduce($grid, fn($carry, $item) => $carry + count(array_filter($item, fn($e) => $e > 1)));
     }
 }

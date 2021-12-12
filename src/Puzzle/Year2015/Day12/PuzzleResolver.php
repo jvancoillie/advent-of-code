@@ -19,14 +19,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        $decoded = json_decode($this->getInput()->getData());
+        $decoded = json_decode($this->getInput()->getData(), null, 512, JSON_THROW_ON_ERROR);
 
         return $this->sumNumbers($decoded);
     }
 
     public function part2()
     {
-        $decoded = json_decode($this->getInput()->getData());
+        $decoded = json_decode($this->getInput()->getData(), null, 512, JSON_THROW_ON_ERROR);
 
         return $this->sumNumbers($decoded, 'red');
     }

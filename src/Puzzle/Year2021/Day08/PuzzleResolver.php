@@ -17,8 +17,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 274;
     protected static int|string $part2Expected = 1012089;
 
-    private $count = 0;
-    private $sum = 0;
+    private int $count = 0;
+    private int $sum = 0;
 
     protected function initialize(): void
     {

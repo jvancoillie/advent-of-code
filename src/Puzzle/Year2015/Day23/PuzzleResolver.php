@@ -18,7 +18,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 170;
     protected static int|string $part2Expected = 247;
 
-    private $instructions = [];
+    private array $instructions = [];
 
     protected function initialize(): void
     {
@@ -44,7 +44,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $jmp = (int) $register;
                 $register = null;
             } else {
-                $jmp = isset($exploded[1]) ? $exploded[1] : 0;
+                $jmp = $exploded[1] ?? 0;
             }
             $this->instructions[] = ['action' => $action, 'register' => $register, 'jmp' => (int) $jmp];
         }

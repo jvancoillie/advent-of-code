@@ -33,7 +33,7 @@ class Dijkstra
 
             foreach ($this->graph->getNeighbors($u) as $v) {
                 $alt = $distance[$u] + $this->graph->getDistance($u, $v);
-                $best = isset($distance[$v]) ? $distance[$v] : INF;
+                $best = $distance[$v] ?? INF;
 
                 if ($alt < $best) {
                     $distance[$v] = $alt;

@@ -19,7 +19,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 78;
     protected static int|string $part2Expected = 148;
 
-    private $shop = [
+    private array $shop = [
         'Weapons' => [
             'Dagger' => ['Cost' => 8,   'Damage' => 4, 'Armor' => 0],
             'Shortsword' => ['Cost' => 10,  'Damage' => 5, 'Armor' => 0],
@@ -44,13 +44,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
         ],
     ];
 
-    private $boss = [
+    private array $boss = [
         'Hit' => 0,
         'Damage' => 0,
         'Armor' => 0,
     ];
 
-    private $player = [
+    private array $player = [
         'Hit' => 100,
         'Damage' => 0,
         'Armor' => 0,

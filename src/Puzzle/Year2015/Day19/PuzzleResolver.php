@@ -18,9 +18,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 509;
     protected static int|string $part2Expected = 195;
 
-    private $replacements = [];
-    private $part2Replacements = [];
-    private $input;
+    private array $replacements = [];
+    private array $part2Replacements = [];
+    private ?string $input = null;
 
     protected function initialize(): void
     {
@@ -98,7 +98,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         while ('e' !== $input) {
             $found = false;
             foreach ($this->part2Replacements as [$search, $replacement]) {
-                if ((false !== $pos = strrpos($input, $search))) {
+                if ((false !== $pos = strrpos($input, (string) $search))) {
                     $length = strlen($search);
                     $input = substr_replace($input, $replacement, $pos, $length);
                     ++$ans;

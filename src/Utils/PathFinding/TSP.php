@@ -11,21 +11,21 @@ class TSP
 {
     private $shortestPath = [];
 
-    private $shortestPaths = [];
+    private array $shortestPaths = [];
 
     private $shortestDistance;
 
     private $longestPath = [];
 
-    private $longestPaths = [];
+    private array $longestPaths = [];
 
     private $longestDistance;
 
-    private $routes = [];
+    private array $routes = [];
 
     private $graph;
 
-    private $computed = false;
+    private bool $computed = false;
 
     public function __construct(array $graph = [])
     {

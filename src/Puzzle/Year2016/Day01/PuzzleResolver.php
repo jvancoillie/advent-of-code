@@ -17,9 +17,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 300;
     protected static int|string $part2Expected = 159;
 
-    private $instructions = [];
+    private array $instructions = [];
     private $currentDirection = 'N';
-    private $directions = ['N', 'E', 'S', 'W'];
+    private array $directions = ['N', 'E', 'S', 'W'];
 
     protected function initialize(): void
     {

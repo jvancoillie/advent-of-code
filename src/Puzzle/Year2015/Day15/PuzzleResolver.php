@@ -18,7 +18,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 222870;
     protected static int|string $part2Expected = 117936;
 
-    private $ingredients = [];
+    private array $ingredients = [];
 
     protected function initialize(): void
     {

@@ -18,9 +18,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 768;
     protected static int|string $part2Expected = 781;
 
-    private $grid = [];
-    private $steps = 100;
-    private $directions = [
+    private array $grid = [];
+    private int $steps = 100;
+    private array $directions = [
         [-1, -1],
         [-1, 0],
         [-1, 1],
@@ -30,9 +30,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
         [0, -1],
         [0, 1],
     ];
-    private $height;
-    private $width;
-    private $cornersLocked = false;
+    private ?int $height = null;
+    private ?int $width = null;
+    private bool $cornersLocked = false;
 
     protected function initialize(): void
     {

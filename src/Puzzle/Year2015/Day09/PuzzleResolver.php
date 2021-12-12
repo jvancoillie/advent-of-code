@@ -13,7 +13,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 117;
     protected static int|string $part2Expected = 909;
 
-    private $tsp;
+    private ?TSP $tsp = null;
 
     protected function initialize(): void
     {

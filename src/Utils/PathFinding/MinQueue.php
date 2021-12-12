@@ -4,15 +4,9 @@ namespace App\Utils\PathFinding;
 
 class MinQueue implements \Countable
 {
-    /**
-     * @var \SplPriorityQueue
-     */
-    private $queue;
+    private object $queue;
 
-    /**
-     * @var \SplObjectStorage
-     */
-    private $register;
+    private \SplObjectStorage $register;
 
     /**
      * MinQueue constructor.

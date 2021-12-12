@@ -84,7 +84,7 @@ class PrivateLeaderboardCommand extends Command
                             'headers' => ['Cookie' => 'session='.$sessionId],
                         ]);
 
-                    return json_decode($response->getContent(), true);
+                    return json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
                 } catch (\Exception $e) {
                     $item->expiresAfter(0);
 
@@ -115,9 +115,7 @@ class PrivateLeaderboardCommand extends Command
         $table->setHeaders([
             [new TableCell(sprintf(" %s - %s private leaderboard's", $leaderboard->getEvent(), $leaderboard->getOwnerName()), ['colspan' => 3])],
             [sprintf('Day %02d', $day),
-                ...array_map(function ($i) {
-                    return 'part '.$i % 2 + 1;
-                }, range(0, 1)), ],
+                ...array_map(fn($i) => 'part '.$i % 2 + 1, range(0, 1)), ],
             ]);
 
         $leaderboard->walk(function ($entry) use ($table) {
