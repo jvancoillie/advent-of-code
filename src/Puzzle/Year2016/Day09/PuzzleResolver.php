@@ -19,16 +19,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        $ans = $this->decompress($this->getInput()->getData(), false);
-
-        return $ans;
+        return $this->decompress($this->getInput()->getData(), false);
     }
 
     public function part2()
     {
-        $ans = $this->decompress($this->getInput()->getData());
-
-        return $ans;
+        return $this->decompress($this->getInput()->getData());
     }
 
     public function decompress(string $sequence, bool $recurse = true): float|int

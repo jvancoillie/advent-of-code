@@ -20,9 +20,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $doorSubjectNumber = (int) $data[1];
 
         $doorLoopSize = $this->findLoopSize($doorSubjectNumber);
-        $cardKey = $this->transformNumber($cardSubjectNumber, $doorLoopSize);
 
-        return $cardKey;
+        return $this->transformNumber($cardSubjectNumber, $doorLoopSize);
     }
 
     public function part2()

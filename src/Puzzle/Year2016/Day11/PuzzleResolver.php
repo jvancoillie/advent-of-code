@@ -19,19 +19,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        $ans = 0;
-
-        $data = explode("\n", $this->getInput()->getData());
-
-        return $ans;
+        return 0;
     }
 
     public function part2()
     {
-        $ans = 0;
-
-        $data = explode("\n", $this->getInput()->getData());
-
-        return $ans;
+        return 0;
     }
 }

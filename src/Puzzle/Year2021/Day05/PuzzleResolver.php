@@ -25,7 +25,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main()
     {
-        $this->parseInput($this->getInput());
+        $this->parseInput();
     }
 
     public function part1(): int
@@ -38,7 +38,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $this->countOverlapping(true);
     }
 
-    private function parseInput(PuzzleInput $input): void
+    private function parseInput(): void
     {
         foreach (explode("\n", $this->getInput()->getData()) as $entry) {
             if (preg_match('/(?<x1>\d+),(?<y1>\d+) -> (?<x2>\d+),(?<y2>\d+)/', $entry, $matches)) {

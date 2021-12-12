@@ -50,9 +50,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $this->toggleLights();
         }
 
-        $ans = $this->countLightOn();
-
-        return $ans;
+        return $this->countLightOn();
     }
 
     public function part2()

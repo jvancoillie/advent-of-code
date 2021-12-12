@@ -22,7 +22,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main()
     {
-        $this->createBingo($this->getInput());
+        $this->createBingo();
 
         $this->bingo->play();
     }
@@ -44,16 +44,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         });
     }
 
-    private function createBingo(PuzzleInput $input): void
+    private function createBingo(): void
     {
         $data = array_filter(explode("\n", $this->getInput()->getData()));
-
         $numbers = array_map('intval', explode(',', array_shift($data)));
-
         $this->bingo = new Bingo($numbers);
-
         $dataGrids = array_chunk($data, 5);
-
         foreach ($dataGrids as $dataGrid) {
             $grid = [];
             foreach ($dataGrid as $entry) {

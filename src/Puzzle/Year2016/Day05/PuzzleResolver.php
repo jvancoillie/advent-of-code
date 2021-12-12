@@ -32,9 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $ans = $password;
-
-        return $ans;
+        return $password;
     }
 
     public function part2()
@@ -56,8 +54,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         ksort($password);
-        $ans = implode('', $password);
 
-        return $ans;
+        return implode('', $password);
     }
 }

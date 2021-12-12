@@ -37,9 +37,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1()
     {
         $this->applyInstructions();
-        $ans = Grid::count($this->grid, '#');
 
-        return $ans;
+        return Grid::count($this->grid, '#');
     }
 
     public function part2()

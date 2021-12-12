@@ -68,9 +68,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $ans = max($points);
-
-        return $ans;
+        return max($points);
     }
 
     public function createReindeers(PuzzleInput $input): void

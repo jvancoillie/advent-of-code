@@ -44,9 +44,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $first = array_shift($path);
         $last = array_pop($path);
 
-        $ans += $graph[$first][$last];
-
-        return $ans;
+        return $ans + $graph[$first][$last];
     }
 
     public function part2()
@@ -64,9 +62,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $first = array_shift($path);
         $last = array_pop($path);
 
-        $ans += $graph[$first][$last];
-
-        return $ans;
+        return $ans + $graph[$first][$last];
     }
 
     /**

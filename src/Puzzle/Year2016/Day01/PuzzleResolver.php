@@ -24,7 +24,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function main()
     {
-        $this->createInstructions($this->getInput());
+        $this->createInstructions();
     }
 
     public function part1()
@@ -41,7 +41,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $this->manhattan(0, 0, $x, $y);
     }
 
-    private function createInstructions(PuzzleInput $input): void
+    private function createInstructions(): void
     {
         foreach (explode(', ', $this->getInput()->getData()) as $line) {
             $this->instructions[] = ['turn' => substr($line, 0, 1), 'dist' => (int) substr($line, 1)];

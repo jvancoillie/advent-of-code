@@ -6,8 +6,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractPuzzleResolver
 {
-    private PuzzleInput $input;
-    private OutputInterface $output;
     private array $options;
 
     protected static int|string $testPart1Expected = 0;
@@ -16,10 +14,8 @@ abstract class AbstractPuzzleResolver
     protected static int|string $part1Expected = 0;
     protected static int|string $part2Expected = 0;
 
-    public function __construct(PuzzleInput $input, OutputInterface $output, array $options)
+    public function __construct(private PuzzleInput $input, private OutputInterface $output, array $options = [])
     {
-        $this->input = $input;
-        $this->output = $output;
         $this->options = $options;
     }
 
