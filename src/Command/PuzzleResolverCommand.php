@@ -81,7 +81,7 @@ class PuzzleResolverCommand extends Command
         }
 
         $output->writeln(sprintf('<info>Part 1 : %s %s</info>', $correctPart1, $resultPart1));
-        $output->writeln(sprintf('<info>Part 1 : %s %s</info>', $correctPart2, $resultPart2));
+        $output->writeln(sprintf('<info>Part 2 : %s %s</info>', $correctPart2, $resultPart2));
 
         $output->writeln('<comment>Execution time: '.(microtime(true) - $startTime).'</comment>');
 
