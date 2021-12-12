@@ -54,9 +54,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return [$in, $out];
     }
 
-    /**
-     * @psalm-param 'a' $letter
-     */
     public function resolveCircuitEntry(string $letter)
     {
         if (is_numeric($this->circuit[$letter])) {

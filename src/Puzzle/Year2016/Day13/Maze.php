@@ -18,7 +18,7 @@ class Maze implements GraphInterface
 
     public function toString(callable $renderer = null, string $rowDelimiter = "\n"): string
     {
-        $renderer = $renderer ?: fn(Tile $tile) => $tile->getValue();
+        $renderer = $renderer ?: fn (Tile $tile) => $tile->getValue();
         ksort($this->tiles);
         $result = [];
 

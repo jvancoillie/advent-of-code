@@ -105,7 +105,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                     $split[$i] === $split[$i + 2]
                 ) {
                     $bab = $split[$i + 1].$split[$i].$split[$i + 1];
-                    if (array_filter($ip['in'], fn($v) => str_contains($v, $bab))) {
+                    if (array_filter($ip['in'], fn ($v) => str_contains($v, $bab))) {
                         return true;
                     }
                 }

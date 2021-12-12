@@ -33,7 +33,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $fuels = [];
 
         for ($i = 0; $i < $max; ++$i) {
-            $fuels[] = array_reduce($data, fn($carry, $pos) => $carry + $this->spend(abs($pos - $i), $expensive));
+            $fuels[] = array_reduce($data, fn ($carry, $pos) => $carry + $this->spend(abs($pos - $i), $expensive));
         }
 
         return min($fuels);

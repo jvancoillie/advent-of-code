@@ -18,16 +18,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::SKIP, [
         AddLiteralSeparatorToNumberRector::class,
-        CountOnNullRector::class
+        CountOnNullRector::class,
     ]);
 
     $parameters->set(Option::AUTOLOAD_PATHS, [
-        __DIR__ . '/vendor/autoload.php',
+        __DIR__.'/vendor/autoload.php',
     ]);
 
     $parameters->set(Option::PATHS, [
         __DIR__.'/src',
-        __DIR__ . '/tests',
+        __DIR__.'/tests',
     ]);
 
     // Define what rule sets will be applied

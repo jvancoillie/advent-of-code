@@ -46,7 +46,7 @@ class Leaderboard
             }
             if ($isDayResolvedByMember) {
                 for ($part = 1; $part <= 2; ++$part) {
-                    usort($dayParts[$part], fn($a, $b) => $a['ts'] <=> $b['ts']);
+                    usort($dayParts[$part], fn ($a, $b) => $a['ts'] <=> $b['ts']);
                     $penalty = 0;
                     foreach ($dayParts[$part] as $key => $entry) {
                         $score = 0;
@@ -64,16 +64,16 @@ class Leaderboard
         foreach ($days as $day => $parts) {
             foreach ($this->members as $id => $member) {
                 $mapped = array_map(function ($data) use ($id) {
-                    $filtered = array_filter($data, fn($entry) => $entry['member_id'] === $id);
+                    $filtered = array_filter($data, fn ($entry) => $entry['member_id'] === $id);
 
                     return array_shift($filtered);
                 }, $parts);
 
-                $dayScore = array_reduce($mapped, fn($carry, $item) => $carry + $item['part_score']);
+                $dayScore = array_reduce($mapped, fn ($carry, $item) => $carry + $item['part_score']);
 
                 $this->dayBoard[$day][$id] = ['day_score' => $dayScore, 'parts' => $mapped, 'member_name' => $this->members[$id]['name']];
             }
-            uasort($this->dayBoard[$day], fn($a, $b) => $b['day_score'] <=> $a['day_score']);
+            uasort($this->dayBoard[$day], fn ($a, $b) => $b['day_score'] <=> $a['day_score']);
         }
     }
 

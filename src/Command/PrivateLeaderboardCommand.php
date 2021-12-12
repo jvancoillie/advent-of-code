@@ -115,7 +115,7 @@ class PrivateLeaderboardCommand extends Command
         $table->setHeaders([
             [new TableCell(sprintf(" %s - %s private leaderboard's", $leaderboard->getEvent(), $leaderboard->getOwnerName()), ['colspan' => 3])],
             [sprintf('Day %02d', $day),
-                ...array_map(fn($i) => 'part '.$i % 2 + 1, range(0, 1)), ],
+                ...array_map(fn ($i) => 'part '.$i % 2 + 1, range(0, 1)), ],
             ]);
 
         $leaderboard->walk(function ($entry) use ($table) {

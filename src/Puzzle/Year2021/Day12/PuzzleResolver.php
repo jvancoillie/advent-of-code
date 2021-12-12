@@ -44,7 +44,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(): int
     {
         $paths = $this->breadthFirstSearch($this->graph, 'start', 'end', function ($node, $visited): array {
-            if (isset($visited[$node]) && (in_array($node, ['start', 'end']) || !empty(array_filter($visited, fn($n) => $n > 1)))) {
+            if (isset($visited[$node]) && (in_array($node, ['start', 'end']) || !empty(array_filter($visited, fn ($n) => $n > 1)))) {
                 return [true, $visited];
             }
 
