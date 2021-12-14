@@ -53,7 +53,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        return (int) $ans;
+        return $ans;
     }
 
     protected function processing(array $data): array
