@@ -11,7 +11,7 @@
         <ignoreFiles>
             <directory name="vendor" />
             <directory name="src/Resources" />
-            <directory name="src/Utils" />
+            <directory name="src/Puzzle/Year2016/Day13" />
         </ignoreFiles>
     </projectFiles>
 </psalm>
