@@ -29,7 +29,7 @@ class Grid
     public static function dump($array): void
     {
         foreach ($array as $lines) {
-            echo implode('', $lines)."\n";
+            echo implode('|', $lines)."\n";
         }
         echo "\n";
     }
