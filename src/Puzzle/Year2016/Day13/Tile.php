@@ -2,8 +2,6 @@
 
 namespace App\Puzzle\Year2016\Day13;
 
-use App\Utils\NodeInterface;
-
 class Tile implements NodeInterface
 {
     public function __construct(private int $x, private int $y, private $value)

@@ -3,7 +3,6 @@
 namespace App\Puzzle\Year2016\Day13;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Utils\PathFinding\Dijkstra;
 
 /**
  * Class PuzzleResolver.

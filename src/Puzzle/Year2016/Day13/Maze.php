@@ -2,9 +2,6 @@
 
 namespace App\Puzzle\Year2016\Day13;
 
-use App\Utils\GraphInterface;
-use App\Utils\NodeInterface;
-
 class Maze implements GraphInterface
 {
     /**
