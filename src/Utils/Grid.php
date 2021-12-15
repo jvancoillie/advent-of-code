@@ -4,6 +4,9 @@ namespace App\Utils;
 
 class Grid
 {
+    public static array $crossDirections = [[0, 1], [0, -1], [-1, 0], [1, 0]];
+    public static array $fullDirections = [[0, 1], [0, -1], [1, 0], [1, -1], [1, 1], [-1, 0], [-1, -1], [-1, 1]];
+
     /**
      * @psalm-param 7|50|1000 $x
      * @psalm-param 3|6|1000 $y
