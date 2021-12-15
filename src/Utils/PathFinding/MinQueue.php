@@ -6,7 +6,7 @@ class MinQueue implements \Countable
 {
     private object $queue;
 
-    private \SplObjectStorage $register;
+    private array $register = [];
 
     /**
      * MinQueue constructor.
@@ -21,23 +21,19 @@ class MinQueue implements \Countable
             }
         };
 
-        $this->register = new \SplObjectStorage();
+        $this->register = []; //new \SplObjectStorage();
     }
 
-    /**
-     * @param object $value
-     * @param mixed  $priority
-     */
     public function insert($value, $priority)
     {
         $this->queue->insert($value, $priority);
-        $this->register->attach($value);
+        $this->register[$value] = $value;
     }
 
     public function extract()
     {
         $value = $this->queue->extract();
-        $this->register->detach($value);
+        unset($this->register[$value]);
 
         return $value;
     }
@@ -47,13 +43,13 @@ class MinQueue implements \Countable
      */
     public function contains($value)
     {
-        return $this->register->contains($value);
+        return isset($this->register[$value]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->queue);
     }

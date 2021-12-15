@@ -2,37 +2,32 @@
 
 namespace App\Utils\PathFinding;
 
-use App\Utils\GraphInterface;
-use App\Utils\NodeInterface;
-
 class Dijkstra
 {
-    public function __construct(private GraphInterface $graph)
+    public function __construct(private array $graph)
     {
     }
 
-    /**
-     * see: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Using_a_priority_queue.
-     */
-    public function findPath(NodeInterface $src, NodeInterface $dst): array
+    public function findPath($src, $dst, $detailedResult = false): array
     {
-        // setup
         $queue = new MinQueue();
-        $distance = new \SplObjectStorage();
-        $path = new \SplObjectStorage();
+        $distance = [];
+        $path = [];
 
-        // init
         $queue->insert($src, 0);
         $distance[$src] = 0;
 
         while (count($queue) > 0) {
             $u = $queue->extract();
+
             if ($u === $dst) {
-                return $this->buildPath($dst, $path);
+                $path = $this->buildPath($dst, $path);
+
+                return $detailedResult ? $this->buildDetailedPath($path) : $path;
             }
 
-            foreach ($this->graph->getNeighbors($u) as $v) {
-                $alt = $distance[$u] + $this->graph->getDistance($u, $v);
+            foreach ($this->graph[$u] as $v => $dist) {
+                $alt = $distance[$u] + $dist;
                 $best = $distance[$v] ?? INF;
 
                 if ($alt < $best) {
@@ -49,10 +44,7 @@ class Dijkstra
         throw new \LogicException('No path found.');
     }
 
-    /**
-     * @param object $dst
-     */
-    private function buildPath($dst, \SplObjectStorage $path): array
+    private function buildPath($dst, array $path): array
     {
         $result = [$dst];
 
@@ -63,5 +55,30 @@ class Dijkstra
         }
 
         return array_reverse($result);
+    }
+
+    private function buildDetailedPath(array $path): array
+    {
+        $pathWeight = 0;
+        $previousNode = array_shift($path);
+        $detailedResult = [[
+            'node' => $previousNode,
+            'weight' => 0,
+            'path_weight' => 0,
+        ]];
+
+        while (!empty($path)) {
+            $currentNode = array_shift($path);
+            $weight = $this->graph[$previousNode][$currentNode];
+            $pathWeight += $weight;
+            $detailedResult[] = [
+                'node' => $currentNode,
+                'weight' => $weight,
+                'path_weight' => $pathWeight,
+            ];
+            $previousNode = $currentNode;
+        }
+
+        return $detailedResult;
     }
 }
