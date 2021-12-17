@@ -52,8 +52,9 @@ class PuzzleResolverCommand extends Command
             $callablePart2 = [$resolverInstance, 'part2'];
             $callablePart1Expected = [$resolverInstance, $isTest ? 'getTestPart1Expected' : 'getPart1Expected'];
             $callablePart2Expected = [$resolverInstance, $isTest ? 'getTestPart2Expected' : 'getPart2Expected'];
-        } catch (\Error) {
+        } catch (\Error $e) {
             $output->writeln(sprintf('<error>No class found for day %d of year %d</error>', $day, $year));
+            $output->writeln($e);
 
             return Command::FAILURE;
         }
