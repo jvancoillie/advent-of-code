@@ -142,9 +142,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $results[] = $child['result'];
             $sumVersion += $child['version'];
         }
-        if (empty($results)) {
-            $results[] = $packet['result'] ?? 0;
-        }
 
         $result = match ($packet['type_id']) {
             0 => array_sum($results),
@@ -154,8 +151,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             5 => $results[0] > $results[1] ? 1 : 0,
             6 => $results[0] < $results[1] ? 1 : 0,
             7 => $results[0] === $results[1] ? 1 : 0,
-            default => $results[0],
+            default => null,
         };
+
+        if (null === $result) {
+            $result = $packet['result'] ?? 0;
+        }
 
         $packet['result'] = $result;
         $packet['children'] = $children;
