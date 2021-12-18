@@ -22,7 +22,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $data = explode("\n", $this->getInput()->getData());
         $snailfish = array_shift($data);
-//        $this->getOutput()->writeln("= $snailfish");
         while (!empty($data)) {
             $add = array_shift($data);
 
