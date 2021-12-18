@@ -22,9 +22,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $data = explode("\n", $this->getInput()->getData());
         $snailfish = array_shift($data);
-
+//        $this->getOutput()->writeln("= $snailfish");
         while (!empty($data)) {
             $add = array_shift($data);
+
             $snailfish = $this->add($snailfish, $add);
             $snailfish = $this->reduce($snailfish);
         }
@@ -126,7 +127,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function reduceSplit(array $pairs): array
     {
         // explode ....
-
         $pairs[0] = is_array($pairs[0]) ? $this->reduceSplit($pairs[0]) : $pairs[0];
         if (empty($this->action)) {
             // split ....
@@ -181,21 +181,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return $array;
     }
 
-    private function explodeSnailfish(string $snailfish)
+    private function explodeSnailfish(string $snailfish): array
     {
-        if ('[' === $snailfish[0]) {
-            $parts = $this->splitSnailfish($snailfish);
-            foreach ($parts as $part => $snailfish) {
-                $parts[$part] = $this->explodeSnailfish($snailfish);
-            }
-        } else {
-            return (int) $snailfish;
-        }
-
-        return $parts;
+        return json_decode($snailfish);
     }
 
-    private function implodeSnailfish(array $pairs)
+    private function implodeSnailfish(array $pairs): string
     {
         $part1 = $pairs[0];
         if (is_array($pairs[0])) {
@@ -207,49 +198,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         return sprintf('[%s,%s]', $part1, $part2);
-    }
-
-    private function splitSnailfish($snailfish)
-    {
-        $pairs = substr($snailfish, 1, -1);
-        $couple = 0;
-        $parts = [];
-        $part = 0;
-        $current = '';
-        for ($i = 0; $i < strlen($pairs); ++$i) {
-            if ('[' === $pairs[$i]) {
-                ++$couple;
-            } elseif (']' === $pairs[$i]) {
-                --$couple;
-            }
-            $current .= $pairs[$i];
-            if (0 === $couple) {
-                if (0 === $part) {
-                    ++$i;
-                    while (',' !== $pairs[$i]) {
-                        $current .= $pairs[$i];
-                        ++$i;
-                    }
-                }
-
-                if (1 === $part) {
-                    ++$i;
-                    while ($i < strlen($pairs)) {
-                        $current .= $pairs[$i];
-                        ++$i;
-                    }
-                }
-                $parts[$part] = $current;
-
-                ++$part;
-                $current = '';
-                if (2 === $part) {
-                    break;
-                }
-            }
-        }
-
-        return $parts;
     }
 
     private function add($a, $b): string
@@ -274,7 +222,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $this->action = null;
         $exploded = $this->explodeSnailfish($snailfish);
-
         // reduce exploded
         $exploded = $this->reduceExplode($exploded);
 
