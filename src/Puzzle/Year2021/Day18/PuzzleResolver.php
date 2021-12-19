@@ -43,13 +43,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 if ($snailfish1 === $snailfish2) {
                     continue;
                 }
-                    $snailfish = $this->add($snailfish1, $snailfish2);
-                    $snailfish = $this->reduce($snailfish);
+                $snailfish = $this->add($snailfish1, $snailfish2);
+                $snailfish = $this->reduce($snailfish);
 
-                    $exploded = $this->explodeSnailfish($snailfish);
-                    $magnitude = $this->magnitude($exploded);
-                    $max = max($magnitude, $max);
-
+                $exploded = $this->explodeSnailfish($snailfish);
+                $magnitude = $this->magnitude($exploded);
+                $max = max($magnitude, $max);
             }
         }
 
