@@ -42,7 +42,7 @@ class PuzzleResolverCommand extends Command
         $inputFilePath = sprintf('src/Puzzle/Year%d/Day%s/input/%s', $year, $day, $inputFileName);
 
         $data = file_get_contents($inputFilePath);
-
+        $startTime = microtime(true);
         try {
             $args = [new PuzzleInput($data), $output, $options];
 
@@ -72,8 +72,6 @@ class PuzzleResolverCommand extends Command
         if (!\is_callable($callablePart2)) {
             throw new \InvalidArgumentException(sprintf('the part2 method of class \\App\\Puzzle\\Year%d\\Day%s is not callable', $year, $day));
         }
-
-        $startTime = microtime(true);
 
         $this->outputPartResult($output, 1, $callablePart1(), $callablePart1Expected());
 
