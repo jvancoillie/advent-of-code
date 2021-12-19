@@ -40,14 +40,16 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $data = explode("\n", $this->getInput()->getData());
         foreach ($data as $snailfish1) {
             foreach ($data as $snailfish2) {
-                if ($snailfish1 !== $snailfish2) {
+                if ($snailfish1 === $snailfish2) {
+                    continue;
+                }
                     $snailfish = $this->add($snailfish1, $snailfish2);
                     $snailfish = $this->reduce($snailfish);
 
                     $exploded = $this->explodeSnailfish($snailfish);
                     $magnitude = $this->magnitude($exploded);
                     $max = max($magnitude, $max);
-                }
+
             }
         }
 
@@ -187,16 +189,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function implodeSnailfish(array $pairs): string
     {
-        $part1 = $pairs[0];
-        if (is_array($pairs[0])) {
-            $part1 = $this->implodeSnailfish($pairs[0]);
-        }
-        $part2 = $pairs[1];
-        if (is_array($pairs[1])) {
-            $part2 = $this->implodeSnailfish($pairs[1]);
-        }
-
-        return sprintf('[%s,%s]', $part1, $part2);
+        return json_encode($pairs);
     }
 
     private function add($a, $b): string
