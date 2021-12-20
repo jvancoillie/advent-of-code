@@ -43,7 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
         foreach ($this->getInput()->getArrayData() as $line) {
             [$range, $letter, $password] = explode(' ', $line);
-            [$min, $max] = explode('-', $range);
+            [$min, $max] = array_map('intval', explode('-', $range));
 
             $char = substr($letter, 0, -1);
 
