@@ -5,7 +5,7 @@ namespace App\Utils;
 class Grid
 {
     public static array $crossDirections = [[0, 1], [0, -1], [-1, 0], [1, 0]];
-    public static array $fullDirections = [[0, 1], [0, -1], [1, 0], [1, -1], [1, 1], [-1, 0], [-1, -1], [-1, 1]];
+    public static array $fullDirections = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 0], [0, 1], [1, -1], [1, 0], [1, 1]];
 
     /**
      * @psalm-param 7|50|1000 $x
@@ -45,9 +45,10 @@ class Grid
     public static function count($grid, string $needle): int
     {
         $count = 0;
-        for ($y = 0; $y < count($grid); ++$y) {
-            for ($x = 0; $x < count($grid[$y]); ++$x) {
-                if ($grid[$y][$x] === $needle) {
+
+        foreach ($grid as $lines) {
+            foreach ($lines as $cell) {
+                if ($cell === $needle) {
                     ++$count;
                 }
             }
