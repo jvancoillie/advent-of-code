@@ -43,17 +43,12 @@ class Submarine
         return $this->cost;
     }
 
-    public function countMoves()
-    {
-        return count($this->moves);
-    }
-
     /**
      *  hallway [ . .  X  .  X  .  X .  X  .   .  ]
      *                0 1    3     5    7     9 10
      *                      2     4    6     8.
      */
-    public function getNextMoves()
+    public function getNextMoves(): array
     {
         $moves = [];
 
@@ -95,6 +90,7 @@ class Submarine
             for ($right = $roomId; $right < count($this->hallway); ++$right) {
                 if ($this->isFillablePosition($right)) {
                     if ($this->canFill($right, $amphi)) {
+//                        return [['from' => $roomId, 'to' => $right]];
                         return [['from' => $roomId, 'to' => $right]];
                     }
                     continue;
@@ -110,6 +106,7 @@ class Submarine
             for ($left = $roomId; $left >= 0; --$left) {
                 if ($this->isFillablePosition($left)) {
                     if ($this->canFill($left, $amphi)) {
+                        //return [];
                         return [['from' => $roomId, 'to' => $left]];
                     }
                     continue;
@@ -126,19 +123,14 @@ class Submarine
         return $moves;
     }
 
-    private function canFill($position, $amphi): bool
+    public function canFill($position, $amphi): bool
     {
-        return $this->isFillablePosition($position) &&
-                (
-                    $this->order[$position] === $amphi &&
-                    count($this->rooms[$position]) < $this->roomLength &&
-                    (!isset($this->rooms[$position][0]) || $this->rooms[$position][0] === $amphi)
-                );
+        return $this->isFillablePosition($position) && $this->order[$position] === $amphi && !$this->isMovableAmphi($position);
     }
 
     private function isFillablePosition($position): bool
     {
-        return in_array($position, ['2', '4', '6', '8']);
+        return in_array($position, [2, 4, 6, 8]);
     }
 
     public function isMovableAmphi($roomId): bool
@@ -164,7 +156,7 @@ class Submarine
     {
         $distance = abs($move['from'] - $move['to']);
         if (in_array($move['from'], ['2', '4', '6', '8'])) {
-            $distance += (2 - count($this->rooms[$move['from']]));
+            $distance += ($this->roomLength - count($this->rooms[$move['from']]));
             $amphi = array_shift($this->rooms[$move['from']]);
         } else {
             $amphi = $this->hallway[$move['from']];
@@ -172,7 +164,7 @@ class Submarine
         }
 
         if (in_array($move['to'], ['2', '4', '6', '8'])) {
-            $distance += (3 - count($this->rooms[$move['to']]));
+            $distance += ($this->roomLength + 1 - count($this->rooms[$move['to']]));
             array_unshift($this->rooms[$move['to']], $amphi);
         } else {
             $this->hallway[$move['to']] = $amphi;
@@ -184,7 +176,7 @@ class Submarine
     public function isEnd(): bool
     {
         foreach ($this->rooms as $roomId => $room) {
-            if (2 !== count($room)) {
+            if ($this->roomLength !== count($room)) {
                 return false;
             }
 
@@ -194,28 +186,6 @@ class Submarine
         }
 
         return true;
-    }
-
-    public function display()
-    {
-        dump('======= Game loop     : '.count($this->moves).' =========');
-        dump('cost    : '.$this->cost);
-        dump('last m : '.end($this->moves));
-        dump('#############');
-        dump('#'.join($this->hallway).'#');
-        dump('###'.join('#', $this->getRoomRow(0)).'##');
-        dump('###'.join('#', $this->getRoomRow(1)).'##');
-        dump('====================================');
-    }
-
-    public function getRoomRow($pos): array
-    {
-        $roomRow = [];
-        foreach ($this->rooms as $room) {
-            $roomRow[] = (2 == count($room)) ? ($room[$pos]) : $room[$pos - count($room)] ?? '.';
-        }
-
-        return $roomRow;
     }
 
     public function getStateHash()

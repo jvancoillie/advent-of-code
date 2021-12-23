@@ -69,13 +69,13 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $queue = new \SplQueue();
         $queue->enqueue($submarine);
-        $bestCost = INF;
+        $bestCost = PHP_INT_MAX;
 
         $memo = [];
 
         while (!$queue->isEmpty()) {
             /** @var Submarine $current */
-            $current = $queue->dequeue();
+            $current = $queue->pop();
             $currentStateHash = $current->getStateHash();
 
             if (isset($memo[$currentStateHash])) {
