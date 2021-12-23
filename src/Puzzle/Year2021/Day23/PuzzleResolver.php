@@ -34,9 +34,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 8 => ['D', 'B'],
             ];
         }
-        $hallway = [];
 
-        $submarine = new Submarine($rooms, $hallway);
+        $submarine = new Submarine($rooms);
 
         return $this->search($submarine);
     }
@@ -58,9 +57,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 8 => ['D', 'A', 'C', 'B'],
             ];
         }
-        $hallway = [];
 
-        $submarine = new Submarine($rooms, $hallway);
+        $submarine = new Submarine($rooms);
 
         return $this->search($submarine);
     }

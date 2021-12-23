@@ -6,7 +6,7 @@ class Submarine
 {
     private array $rooms;
 
-    private array $hallway = [];
+    private array $hallway;
 
     private int $cost = 0;
 
@@ -26,16 +26,12 @@ class Submarine
 
     private int $roomLength;
 
-    public function __construct(array $rooms, array $hallway = [])
+    public function __construct(array $rooms)
     {
         $this->rooms = $rooms;
         $this->roomLength = count(reset($rooms));
 
-        if (empty($hallway)) {
-            $this->hallway = array_fill(0, 11, '.');
-        } else {
-            $this->hallway = $hallway;
-        }
+        $this->hallway = array_fill(0, 11, '.');
     }
 
     public function getCost(): int
