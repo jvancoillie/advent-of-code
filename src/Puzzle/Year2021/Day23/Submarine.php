@@ -4,8 +4,6 @@ namespace App\Puzzle\Year2021\Day23;
 
 class Submarine
 {
-    private array $rooms;
-
     private array $hallway;
 
     private int $cost = 0;
@@ -26,9 +24,8 @@ class Submarine
 
     private int $roomLength;
 
-    public function __construct(array $rooms)
+    public function __construct(private array $rooms)
     {
-        $this->rooms = $rooms;
         $this->roomLength = count(reset($rooms));
 
         $this->hallway = array_fill(0, 11, '.');
@@ -186,6 +183,6 @@ class Submarine
 
     public function getStateHash()
     {
-        return json_encode(['room' => $this->rooms, 'hallway' => $this->hallway]);
+        return json_encode(['room' => $this->rooms, 'hallway' => $this->hallway], JSON_THROW_ON_ERROR);
     }
 }

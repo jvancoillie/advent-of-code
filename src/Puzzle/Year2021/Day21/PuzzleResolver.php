@@ -63,7 +63,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return [0, 1];
         }
 
-        if (isset($this->memo[$key = json_encode([$player, $opponent])])) {
+        if (isset($this->memo[$key = json_encode([$player, $opponent], JSON_THROW_ON_ERROR)])) {
             return $this->memo[$key];
         }
 
@@ -88,7 +88,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $this->memo[json_encode([$player, $opponent])] = $universes;
+        $this->memo[json_encode([$player, $opponent], JSON_THROW_ON_ERROR)] = $universes;
 
         return $universes;
     }

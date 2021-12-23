@@ -30,9 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part1(): int
     {
         $data = explode("\n\n", $this->getInput()->getData());
-        $passports = array_map(function ($entry) {
-            return str_replace("\n", ' ', $entry);
-        }, $data);
+        $passports = array_map(fn($entry) => str_replace("\n", ' ', $entry), $data);
 
         $valid = 0;
         foreach ($passports as $p) {
@@ -55,9 +53,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2(): int
     {
         $data = explode("\n\n", $this->getInput()->getData());
-        $passports = array_map(function ($entry) {
-            return str_replace("\n", ' ', $entry);
-        }, $data);
+        $passports = array_map(fn($entry) => str_replace("\n", ' ', $entry), $data);
 
         $valid = 0;
         foreach ($passports as $p) {

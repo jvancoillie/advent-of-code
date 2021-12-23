@@ -183,12 +183,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     private function explodeSnailfish(string $snailfish): array
     {
-        return json_decode($snailfish);
+        return json_decode($snailfish, null, 512, JSON_THROW_ON_ERROR);
     }
 
     private function implodeSnailfish(array $pairs): string
     {
-        return json_encode($pairs);
+        return json_encode($pairs, JSON_THROW_ON_ERROR);
     }
 
     private function add($a, $b): string

@@ -33,7 +33,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        return count(array_filter($cubes, function ($state) {return $state; }));
+        return count(array_filter($cubes, fn($state) => $state));
     }
 
     public function part2(): int
@@ -62,7 +62,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $cubes[] = $entry;
             }
 
-            $cubes = array_merge($cubes, $newCubes);
+            $cubes = [...$cubes, ...$newCubes];
         }
 
         $on = 0;

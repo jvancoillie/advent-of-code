@@ -2,19 +2,17 @@
 
 namespace App\Puzzle\Year2021\Day19;
 
-class Scanner
+class Scanner implements \Stringable
 {
     private array $points = [];
-    private int $id;
     private Point $position;
     private int $pointDirection;
     private bool $locked = false;
     private array $vector = [0, 0, 0];
     private array $memory = [];
 
-    public function __construct(int $id)
+    public function __construct(private int $id)
     {
-        $this->id = $id;
         $this->position = new Point(0, 0, 0);
         $this->pointDirection = -1;
 
@@ -181,7 +179,7 @@ class Scanner
         return false;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('id : %d, locked: %d, position: %d', $this->id, $this->locked, $this->position);
     }

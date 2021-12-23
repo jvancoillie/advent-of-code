@@ -2,20 +2,14 @@
 
 namespace App\Puzzle\Year2021\Day19;
 
-class Point
+class Point implements \Stringable
 {
-    private int $x;
-    private int $y;
-    private int $z;
     private array $rotations = [];
 
     public const AXES = ['x', 'y', 'z'];
 
-    public function __construct(int $x, int $y, int $z)
+    public function __construct(private int $x, private int $y, private int $z)
     {
-        $this->x = $x;
-        $this->y = $y;
-        $this->z = $z;
     }
 
     public function getX(): int
@@ -33,7 +27,7 @@ class Point
         return $this->z;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%d, %d, %d', $this->x, $this->y, $this->z);
     }
