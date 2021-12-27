@@ -29,10 +29,10 @@ class Grid
         return $grid;
     }
 
-    public static function dump($array): void
+    public static function dump($array, $separator = '|'): void
     {
         foreach ($array as $lines) {
-            echo implode('|', $lines)."\n";
+            echo implode($separator, $lines)."\n";
         }
         echo "\n";
     }

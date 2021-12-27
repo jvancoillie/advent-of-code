@@ -125,8 +125,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $minY = min(array_keys($grid)) - 2;
         $maxY = max(array_keys($grid)) + 2;
-        $minX = min(array_map(fn($line) => min(array_keys($line)), $grid)) - 2;
-        $maxX = max(array_map(fn($line) => max(array_keys($line)), $grid)) + 2;
+        $minX = min(array_map(fn ($line) => min(array_keys($line)), $grid)) - 2;
+        $maxX = max(array_map(fn ($line) => max(array_keys($line)), $grid)) + 2;
 
 //        dump($grid);
 //        dump("$minY => $maxY, $minX => $maxX");
