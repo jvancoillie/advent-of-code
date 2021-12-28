@@ -10,11 +10,11 @@ class PuzzleInput
 
     public function getData()
     {
-        return $this->data;
+        return trim($this->data);
     }
 
     public function getArrayData(): array
     {
-        return explode("\n", $this->data);
+        return array_map('trim', explode("\n", $this->getData()));
     }
 }
