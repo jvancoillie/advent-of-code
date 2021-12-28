@@ -47,9 +47,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2()
     {
-        $ans = 0;
-
-        return $ans;
+        return 0;
     }
 
     public function moveEast(array $grid)
