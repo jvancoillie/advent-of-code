@@ -20,8 +20,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        $ans = 0;
-
         $data = explode("\n", $this->getInput()->getData());
         $grid = array_map('str_split', $data);
 
@@ -50,8 +48,6 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function part2()
     {
         $ans = 0;
-
-        $data = explode("\n", $this->getInput()->getData());
 
         return $ans;
     }
