@@ -46,7 +46,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return 0;
         }
 
-        return $this->solve(fn($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => max($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
+        return $this->solve(fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => max($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
     }
 
     public function part2()
@@ -55,7 +55,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return 0;
         }
 
-        return $this->solve(fn($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => min($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
+        return $this->solve(fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => min($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
     }
 
     public function solve(callable $callable)
