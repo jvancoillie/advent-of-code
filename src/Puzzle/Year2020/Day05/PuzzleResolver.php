@@ -52,14 +52,14 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->places = $places;
     }
 
-    public function part1()
+    public function part1(): int
     {
         return max($this->places);
     }
 
-    public function part2()
+    public function part2(): int
     {
-        $previous = $myPlace = null;
+        $previous = $myPlace = 0;
 
         foreach ($this->places as $key => $value) {
             if (0 === $key) {
