@@ -21,9 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function initialize(): void
     {
-        $this->instructions = array_map(function ($line) {
-            return explode(' ', $line);
-        }, $this->getInput()->getArrayData());
+        $this->instructions = array_map(fn($line) => explode(' ', $line), $this->getInput()->getArrayData());
     }
 
     public function part1(): int
