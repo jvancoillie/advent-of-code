@@ -20,6 +20,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
     private array $foods;
     private array $composition;
 
+    private int $count = 0;
+
     protected function initialize(): void
     {
         foreach ($this->getInput()->getArrayData() as $line) {
@@ -27,10 +29,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $this->foods[] = [explode(' ', $matches['ingredients']), explode(', ', $matches['allergens'])];
             }
         }
-    }
 
-    public function part1(): int
-    {
         $allergensList = [];
         $ingredientsList = [];
         $ingredientCount = [];
@@ -65,20 +64,23 @@ class PuzzleResolver extends AbstractPuzzleResolver
             }
         }
 
-        $count = 0;
+        $this->count = 0;
 
         // for each ingredient which contains all the allergens excluded, we sum the number of times it appears in the composition
         // otherwise we create a table of possible allergen composition of the ingredient
         foreach ($excluded as $ingredient => $exclude) {
             $diff = array_diff($allergensList, $exclude);
             if (0 === count($diff)) {
-                $count += $ingredientCount[$ingredient];
+                $this->count += $ingredientCount[$ingredient];
             } else {
                 $this->composition[$ingredient] = $diff;
             }
         }
+    }
 
-        return $count;
+    public function part1(): int
+    {
+        return $this->count;
     }
 
     public function part2(): string
