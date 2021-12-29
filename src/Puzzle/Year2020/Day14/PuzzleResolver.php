@@ -32,7 +32,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
     }
 
-    public function part1(): int
+    public function part1(): float|int
     {
         $mask = null;
         $memory = [];
@@ -49,7 +49,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return array_sum($memory);
     }
 
-    public function part2(): int
+    public function part2(): float|int
     {
         $mask = null;
         $memory = [];
@@ -70,7 +70,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return array_sum($memory);
     }
 
-    private function applyMaskValue($value, $mask): int
+    private function applyMaskValue($value, $mask): float|int
     {
         $str = str_pad(decbin($value), 36, '0', STR_PAD_LEFT);
 
