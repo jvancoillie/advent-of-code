@@ -24,19 +24,21 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function initialize(): void
     {
-        $instructions = [];
+        if (!$this->isTestMode()) {
+            $instructions = [];
 
-        foreach ($this->getInput()->getArrayData() as $line) {
-            $instructions[] = explode(' ', $line);
-        }
+            foreach ($this->getInput()->getArrayData() as $line) {
+                $instructions[] = explode(' ', $line);
+            }
 
-        $this->parameters = [];
+            $this->parameters = [];
 
-        for ($index = 0; $index < 18 * 14; $index += 18) {
-            $p1 = (int) $instructions[$index + 4][2];
-            $p2 = (int) $instructions[$index + 5][2];
-            $p3 = (int) $instructions[$index + 15][2];
-            $this->parameters[] = [$p1, $p2, $p3];
+            for ($index = 0; $index < 18 * 14; $index += 18) {
+                $p1 = (int) $instructions[$index + 4][2];
+                $p2 = (int) $instructions[$index + 5][2];
+                $p3 = (int) $instructions[$index + 15][2];
+                $this->parameters[] = [$p1, $p2, $p3];
+            }
         }
     }
 
@@ -46,7 +48,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return 0;
         }
 
-        return $this->solve(fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => max($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
+        return $this->solve(
+            fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => max(
+                $newMinMaxZ[$newZ],
+                $minMaxZ[$z] * 10 + $inputDigit
+            )
+        );
     }
 
     public function part2()
@@ -55,7 +62,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             return 0;
         }
 
-        return $this->solve(fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => min($newMinMaxZ[$newZ], $minMaxZ[$z] * 10 + $inputDigit));
+        return $this->solve(
+            fn ($newMinMaxZ, $newZ, $minMaxZ, $z, $inputDigit) => min(
+                $newMinMaxZ[$newZ],
+                $minMaxZ[$z] * 10 + $inputDigit
+            )
+        );
     }
 
     public function solve(callable $callable)
