@@ -3,7 +3,6 @@
 namespace App\Puzzle\Year2021\Day25;
 
 use App\Puzzle\AbstractPuzzleResolver;
-use App\Utils\Grid;
 
 /**
  * Class PuzzleResolver.
@@ -12,10 +11,10 @@ use App\Utils\Grid;
  */
 class PuzzleResolver extends AbstractPuzzleResolver
 {
-    protected static int|string $testPart1Expected = 0;
+    protected static int|string $testPart1Expected = 58;
     protected static int|string $testPart2Expected = 0;
 
-    protected static int|string $part1Expected = 0;
+    protected static int|string $part1Expected = 528;
     protected static int|string $part2Expected = 0;
 
     public function part1()
@@ -26,21 +25,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $move = true;
         $step = 0;
 
-        dump('Initial state:');
-        Grid::dump($grid);
-
         while ($move) {
             ++$step;
             [$grid, $moveEast] = $this->moveEast($grid);
             [$grid, $moveSouth] = $this->moveSouth($grid);
-            dump("After $step step : ".(int) $move);
-            Grid::dump($grid);
             $move = $moveEast || $moveSouth;
         }
-
-//            if($step > 5){
-//                break;
-//            }
 
         return $step;
     }
@@ -50,7 +40,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return 0;
     }
 
-    public function moveEast(array $grid)
+    public function moveEast(array $grid): array
     {
         $move = false;
         $done = [];
@@ -80,7 +70,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         return [$grid, $move];
     }
 
-    public function moveSouth(array $grid)
+    public function moveSouth(array $grid): array
     {
         $move = false;
         $done = [];
