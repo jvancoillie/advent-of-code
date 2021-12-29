@@ -14,6 +14,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $testPart1Expected = 20899048083289;
     protected static int|string $testPart2Expected = 273;
 
+
     protected static int|string $part1Expected = 27798062994017;
     protected static int|string $part2Expected = 2366;
 
@@ -41,6 +42,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2(): int
     {
+        $this->puzzle->resolve();
         return $this->puzzle->findSeaMonster();
     }
 }
