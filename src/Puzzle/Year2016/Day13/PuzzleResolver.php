@@ -15,7 +15,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $testPart2Expected = 0;
 
     protected static int|string $part1Expected = 82;
-    protected static int|string $part2Expected = 0;
+    protected static int|string $part2Expected = 138;
 
     private array $reach;
     private int $favoriteNumber;
@@ -43,6 +43,29 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2()
     {
-        return 0;
+        $maze = new Maze($this->favoriteNumber);
+        $start = $maze->createPoint(1, 1);
+        $count = 0;
+        $queue = new \SplQueue();
+        $queue->enqueue([$start, 0]);
+        $visited = [$start->hash()];
+
+        while (count($queue) > 0) {
+            [$node, $distance] = $queue->dequeue();
+            if ($distance > 50) {
+                continue;
+            }
+
+            ++$count;
+
+            foreach ($maze->getNeighbors($node) as $neighbor) {
+                if (!in_array($neighbor->hash(), $visited)) {
+                    $visited[] = $neighbor->hash();
+                    $queue->enqueue([$neighbor, $distance + 1]);
+                }
+            }
+        }
+
+        return $count;
     }
 }

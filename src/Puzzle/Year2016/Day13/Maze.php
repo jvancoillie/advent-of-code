@@ -65,11 +65,14 @@ class Maze implements GraphInterface
         foreach ($directions as [$dx, $dy]) {
             $y = $node->getY() + $dy;
             $x = $node->getX() + $dx;
+            if ($y < 0 || $x < 0) {
+                continue;
+            }
             if (!isset($this->tiles[$y][$x])) {
                 $this->createPoint($x, $y);
             }
 
-            if (!in_array($this->tiles[$y][$x]->getValue(), ['#'], true)) {
+            if ('#' !== $this->tiles[$y][$x]->getValue()) {
                 $neighbors[] = $this->tiles[$y][$x];
             }
         }

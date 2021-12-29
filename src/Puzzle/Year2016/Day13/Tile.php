@@ -18,8 +18,13 @@ class Tile implements NodeInterface
         return $this->y;
     }
 
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function hash(): string
+    {
+        return $this->y.'-'.$this->x;
     }
 }
