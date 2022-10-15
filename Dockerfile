@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.0
+ARG PHP_VERSION=8.1
 
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
