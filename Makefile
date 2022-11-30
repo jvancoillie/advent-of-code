@@ -11,7 +11,7 @@ ifneq (,$(wildcard .env.local))
 endif
 
 ifeq ($(IS_DOCKER), 1)
-	DC = docker-compose --env-file ./${ENV_FILE}
+	DC = docker compose --env-file ./${ENV_FILE}
 	DE = $(DC) exec advent
 
 	CONSOLE     = $(DE) bin/console

@@ -1,7 +1,10 @@
-ARG PHP_VERSION=8.1
+# syntax=docker/dockerfile:1.4
 
 # "php" stage
-FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
+FROM php:8.1-fpm-alpine AS symfony_php
+
+# php extensions installer: https://github.com/mlocati/docker-php-extension-installer
+COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -17,52 +20,25 @@ RUN apk add --no-cache \
         make \
     ;
 
-ARG APCU_VERSION=5.1.19
 RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-	    $PHPIZE_DEPS \
-	    icu-dev \
-	    libzip-dev \
-	    zlib-dev \
-	; \
-	\
-	docker-php-ext-configure zip; \
-	docker-php-ext-install -j$(nproc) \
-	    gmp \
-	    intl \
-	    zip \
-	; \
-	pecl install \
-	    apcu-${APCU_VERSION} \
-	; \
-	pecl clear-cache; \
-	docker-php-ext-enable \
-	    apcu \
-	    opcache \
-	; \
-	\
-	runDeps="$( \
-	    scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
-	        | tr ',' '\n' \
-	        | sort -u \
-	        | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache --virtual .phpexts-rundeps $runDeps; \
-	\
-	apk del .build-deps
+    install-php-extensions \
+    	intl \
+    	zip \
+    	apcu \
+		opcache \
+    ;
 
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer/composer:2-bin --link /composer /usr/bin/composer
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+WORKDIR /srv/app
 
-ENV PATH="${PATH}:/root/.composer/vendor/bin"
-
-RUN mkdir -p /var/www/advent
-WORKDIR /var/www/advent
-COPY . /var/www/advent
+COPY --link . .
 
 
 CMD ["php-fpm"]
