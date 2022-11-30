@@ -34,3 +34,9 @@ Options:
 `up`    docker-compose up -d  
 `exec`  docker-compose exec advent bash  
  
+
+## Make commands
+`make resolve` Resolve current day  
+`make resolve-test` Resolve current day with test input  
+`make puzzle` Create structure and data for current day  
+`make leaderboard` Create structure and data for current day  
