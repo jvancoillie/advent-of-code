@@ -151,7 +151,7 @@ class Scanner implements \Stringable
                     // keep this distance reference
                     $subPoint = $currentPointA->sub($pointA);
 
-                    //Checks that at least 12 beacons are overlapping
+                    // Checks that at least 12 beacons are overlapping
                     $overlapping = 0;
                     foreach ($points as $pointB) {
                         $compareTo = $pointB->add($subPoint);

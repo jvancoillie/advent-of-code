@@ -10,7 +10,7 @@ class PuzzleResolverTestModel
     {
     }
 
-    public static function create(bool $withTestInput, ): self
+    public static function create(bool $withTestInput): self
     {
         return new self($withTestInput);
     }

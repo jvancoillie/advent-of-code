@@ -118,7 +118,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         if ($key < 0) {
             $key = count($this->directions) - 1;
         }
-        $key %= (count($this->directions));
+        $key %= count($this->directions);
 
         $this->currentDirection = $this->directions[$key];
     }

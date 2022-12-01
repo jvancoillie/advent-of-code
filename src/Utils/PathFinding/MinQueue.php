@@ -21,7 +21,7 @@ class MinQueue implements \Countable
             }
         };
 
-        $this->register = []; //new \SplObjectStorage();
+        $this->register = []; // new \SplObjectStorage();
     }
 
     public function insert($value, $priority)

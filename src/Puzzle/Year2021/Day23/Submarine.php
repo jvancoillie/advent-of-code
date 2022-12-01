@@ -99,7 +99,7 @@ class Submarine
             for ($left = $roomId; $left >= 0; --$left) {
                 if ($this->isFillablePosition($left)) {
                     if ($this->canFill($left, $amphi)) {
-                        //return [];
+                        // return [];
                         return [['from' => $roomId, 'to' => $left]];
                     }
                     continue;

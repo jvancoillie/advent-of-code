@@ -25,7 +25,7 @@ class PuzzleResolverCommand extends Command
             ->addOption('year', 'y', InputOption::VALUE_REQUIRED, 'the year of the event', $currentYear)
             ->addOption('day', 'd', InputOption::VALUE_REQUIRED, 'the day of the event', $currentDay)
             ->addOption('test', null, InputOption::VALUE_NONE, 'If set, run with test input')
-            ;
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

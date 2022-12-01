@@ -57,7 +57,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $this->grid = [];
         $this->createGrid($this->getInput());
 
-        //turn on corners;
+        // turn on corners;
         $this->turnOnCorners();
 
         for ($i = 0; $i < $this->steps; ++$i) {

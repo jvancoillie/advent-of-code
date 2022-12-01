@@ -197,7 +197,7 @@ class Puzzle
             --$x;
         }
 
-        if (0 === $x % ($this->width) && Border::RIGHT === $direction) {
+        if (0 === $x % $this->width && Border::RIGHT === $direction) {
             --$x;
             $direction = Border::BOTTOM;
             ++$y;

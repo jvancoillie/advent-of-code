@@ -98,7 +98,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         while ('e' !== $input) {
             $found = false;
             foreach ($this->part2Replacements as [$search, $replacement]) {
-                if ((false !== $pos = strrpos($input, (string) $search))) {
+                if (false !== $pos = strrpos($input, (string) $search)) {
                     $length = strlen($search);
                     $input = substr_replace($input, $replacement, $pos, $length);
                     ++$ans;

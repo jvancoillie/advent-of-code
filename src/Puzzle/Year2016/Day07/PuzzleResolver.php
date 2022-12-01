@@ -96,7 +96,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     public function isSSl(array $ip): bool
     {
-        //extract all ABA from outside brackets and check if in brackets
+        // extract all ABA from outside brackets and check if in brackets
         foreach ($ip['out'] as $string) {
             $split = str_split($string);
             for ($i = 0; $i < count($split) - 2; ++$i) {

@@ -52,7 +52,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $excluded = [];
 
         foreach ($this->foods as [$ingredients, $allergens]) {
-            //for each ingredient on the list if it is not in the composition, the allergens can be considered to be excluded
+            // for each ingredient on the list if it is not in the composition, the allergens can be considered to be excluded
             foreach ($ingredientsList as $ingredient) {
                 if (!in_array($ingredient, $ingredients)) {
                     if (isset($excluded[$ingredient])) {

@@ -150,7 +150,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
                             $player = $this->addItemToPlayer($player, $ringName, $ringStats);
                         }
 
-                        //retrun without armor first
+                        // retrun without armor first
                         yield $player;
 
                         $player = $this->addItemToPlayer($player, $armorName, $armorStats);

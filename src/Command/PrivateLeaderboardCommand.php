@@ -41,7 +41,7 @@ class PrivateLeaderboardCommand extends Command
             ->addOption('day', 'd', InputOption::VALUE_REQUIRED, 'the day of the event', $currentDay)
             ->addOption('all', null, InputOption::VALUE_NONE, 'display all days')
             ->addOption('no-cache', null, InputOption::VALUE_NONE, 'without cache')
-            ;
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -93,8 +93,8 @@ class PrivateLeaderboardCommand extends Command
             });
         } catch (\Error) {
             $output->writeln(
-                    sprintf('<error>Error when retrieve private leaderboard data for id %d and year %d</error>', $boardId, $year)
-                );
+                sprintf('<error>Error when retrieve private leaderboard data for id %d and year %d</error>', $boardId, $year)
+            );
 
             return Command::FAILURE;
         }
