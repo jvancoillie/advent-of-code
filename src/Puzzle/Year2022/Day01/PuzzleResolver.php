@@ -19,18 +19,16 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        $carry = $this->getCarry();
+        $carry = array_slice($this->getCarry(), 0, 1);
 
-        return max($carry);
+        return array_sum($carry);
     }
 
     public function part2()
     {
-        $carry = $this->getCarry();
+        $carry = array_slice($this->getCarry(), 0, 3);
 
-        rsort($carry);
-
-        return $carry[0] + $carry[1] + $carry[2];
+        return array_sum($carry);
     }
 
     /**
@@ -38,19 +36,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
      */
     protected function getCarry(): array
     {
-        $elf = 0;
-        $carry = [$elf => 0];
-        $data = explode("\n", $this->getInput()->getData());
+        $data = array_map(fn ($entry) => array_sum(explode("\n", $entry)), explode("\n\n", $this->getInput()->getData()));
 
-        foreach ($data as $cal) {
-            if ('' === $cal) {
-                ++$elf;
-                $carry[$elf] = 0;
-            }
+        rsort($data);
 
-            $carry[$elf] += (int) $cal;
-        }
-
-        return $carry;
+        return $data;
     }
 }
