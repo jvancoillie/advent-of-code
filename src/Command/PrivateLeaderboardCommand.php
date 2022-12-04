@@ -33,7 +33,7 @@ class PrivateLeaderboardCommand extends Command
     protected function configure()
     {
         $currentYear = (new \DateTime())->format('Y');
-        $currentDay = (new \DateTime())->format('d');
+        $currentDay = (int) (new \DateTime())->format('d');
 
         $this
             ->setDescription('Display private leaderboard')
