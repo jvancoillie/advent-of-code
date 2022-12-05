@@ -19,28 +19,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1()
     {
-        // need to fix trimed line in input class :(
-        $entry = [
-            1 => ['J', 'H', 'P', 'M', 'S', 'F', 'N', 'V'],
-            2 => ['S', 'R', 'L', 'M', 'J', 'D', 'Q'],
-            3 => ['N', 'Q', 'D', 'H', 'C', 'S', 'W', 'B'],
-            4 => ['R', 'S', 'C', 'L'],
-            5 => ['M', 'V', 'T', 'P', 'F', 'B'],
-            6 => ['T', 'R', 'Q', 'N', 'C'],
-            7 => ['G', 'V', 'R'],
-            8 => ['C', 'Z', 'S', 'P', 'D', 'L', 'R'],
-            9 => ['D', 'S', 'J', 'V', 'G', 'P', 'B', 'F'],
-        ];
+        [$entry, $moves] = $this->getParsedData();
 
-//        $entry = [
-//            1 => ['Z', 'N'],
-//            2 => ['M', 'C', 'D'],
-//            3 => ['P']
-//        ];
-
-        $data = explode("\n\n", $this->getInput()->getData());
-
-        foreach (explode("\n", $data[1]) as $u => $l) {
+        foreach ($moves as $l) {
             preg_match('/move (.*) from (.*) to (.*)/', $l, $m);
             $move = array_slice($entry[(int) $m[2]], -$m[1]);
             $entry[(int) $m[2]] = array_slice($entry[(int) $m[2]], 0, count($entry[(int) $m[2]]) - $m[1]);
@@ -52,27 +33,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part2()
     {
-        $entry = [
-            1 => ['J', 'H', 'P', 'M', 'S', 'F', 'N', 'V'],
-            2 => ['S', 'R', 'L', 'M', 'J', 'D', 'Q'],
-            3 => ['N', 'Q', 'D', 'H', 'C', 'S', 'W', 'B'],
-            4 => ['R', 'S', 'C', 'L'],
-            5 => ['M', 'V', 'T', 'P', 'F', 'B'],
-            6 => ['T', 'R', 'Q', 'N', 'C'],
-            7 => ['G', 'V', 'R'],
-            8 => ['C', 'Z', 'S', 'P', 'D', 'L', 'R'],
-            9 => ['D', 'S', 'J', 'V', 'G', 'P', 'B', 'F'],
-        ];
+        [$entry, $moves] = $this->getParsedData();
 
-//        $entry = [
-//            1 => ['Z', 'N'],
-//            2 => ['M', 'C', 'D'],
-//            3 => ['P']
-//        ];
-
-        $data = explode("\n\n", $this->getInput()->getData());
-
-        foreach (explode("\n", $data[1]) as $u => $l) {
+        foreach ($moves as $l) {
             preg_match('/move (.*) from (.*) to (.*)/', $l, $m);
             $move = array_slice($entry[(int) $m[2]], -$m[1]);
             $entry[(int) $m[2]] = array_slice($entry[(int) $m[2]], 0, count($entry[(int) $m[2]]) - $m[1]);
@@ -80,5 +43,26 @@ class PuzzleResolver extends AbstractPuzzleResolver
         }
 
         return implode(array_map(fn ($e) => array_pop($e), $entry));
+    }
+
+    private function getParsedData(): array
+    {
+        $data = explode("\n\n", $this->getInput()->getData());
+        $entry = [];
+        foreach (explode("\n", $data[0]) as $line) {
+            $split = array_map('trim', str_split($line, 4));
+            foreach ($split as $i => $value) {
+                if (preg_match('/\[(.*)\]/', $value, $matches)) {
+                    if (!isset($entry[$i + 1])) {
+                        $entry[$i + 1] = [];
+                    }
+                    array_unshift($entry[$i + 1], $matches[1]);
+                }
+            }
+        }
+
+        ksort($entry);
+
+        return [$entry, explode("\n", $data[1])];
     }
 }
