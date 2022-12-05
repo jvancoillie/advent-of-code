@@ -10,7 +10,7 @@ class PuzzleInput
 
     public function getData()
     {
-        return trim($this->data);
+        return $this->data;
     }
 
     public function getArrayData(): array
