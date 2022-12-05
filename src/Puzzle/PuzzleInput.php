@@ -8,13 +8,23 @@ class PuzzleInput
     {
     }
 
-    public function getData()
+    public function getData(bool $trim = true)
     {
+        if ($trim) {
+            return trim($this->data);
+        }
+
         return $this->data;
     }
 
-    public function getArrayData(): array
+    public function getArrayData($trim = true): array
     {
-        return array_map('trim', explode("\n", $this->getData()));
+        $data = explode("\n", $this->getData());
+
+        if ($trim) {
+            return array_map('trim', $data);
+        }
+
+        return $data;
     }
 }
