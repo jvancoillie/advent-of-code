@@ -13,7 +13,6 @@ class Dijkstra
         $queue = new MinQueue();
         $distance = [];
         $path = [];
-
         $queue->insert($src, 0);
         $distance[$src] = 0;
 
@@ -24,6 +23,10 @@ class Dijkstra
                 $path = $this->buildPath($dst, $path);
 
                 return $detailedResult ? $this->buildDetailedPath($path) : $path;
+            }
+
+            if (!isset($this->graph[$u])) {
+                continue;
             }
 
             foreach ($this->graph[$u] as $v => $dist) {
