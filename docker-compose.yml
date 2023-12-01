@@ -1,8 +1,8 @@
-version: '3'
 services:
   advent:
     build:
       context: ./
+      target: php_aoc
     volumes:
       - ./:/srv/app
       - ./docker/conf.d/aoc.ini:/usr/local/etc/php/conf.d/aoc.ini

@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1.4
 
 # "php" stage
-FROM php:8.1-fpm-alpine AS symfony_php
+FROM php:8.2-fpm-alpine AS php_upstream
+FROM mlocati/php-extension-installer:2 AS php_extension_installer_upstream
+FROM composer/composer:2-bin AS composer_upstream
 
-# php extensions installer: https://github.com/mlocati/docker-php-extension-installer
-COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/
+FROM php_upstream AS php_aoc
+
+COPY --from=php_extension_installer_upstream --link /usr/bin/install-php-extensions /usr/local/bin/
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -38,9 +41,6 @@ COPY --from=composer/composer:2-bin --link /composer /usr/bin/composer
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 WORKDIR /srv/app
-
-COPY --link . .
-
 
 CMD ["php-fpm"]
 

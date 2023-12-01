@@ -21,7 +21,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = 0;
 
-        $data = explode("\n", $this->getInput()->getData());
+        $data = $this->getInput()->getArrayData();
 
         return $ans;
     }
@@ -30,7 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     {
         $ans = 0;
 
-        $data = explode("\n", $this->getInput()->getData());
+        $data = $this->getInput()->getArrayData();
 
         return $ans;
     }

@@ -51,20 +51,6 @@ help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9\.@_-]+:.*?##.*$$)|(^##)' $(firstword  $(MAKEFILE_LIST)) | awk 'BEGIN {FS = ":.*?## "}{printf "${COLOR_INFO}%-30s${COLOR_RESET} %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 
-##—— Advent Of Code —————————————————————————————————————————————————————————————————————————————————————————————————————
-resolve: ## Resolve current day
-	$(CONSOLE) puzzle:resolve
-
-resolve-test: ## Resolve current day with test input
-	$(CONSOLE) puzzle:resolve --test
-
-puzzle: ## Create structure and data for current day
-	$(CONSOLE) puzzle:make
-
-leaderboard: ## Create structure and data for current day
-	$(CONSOLE)  puzzle:leaderboard
-
-
 ##—— Install ——————————————————————————————————————————————————————————————————————————————————————————————————————————
 install: app-build ## Install apps based on APP_ENV
 
@@ -137,6 +123,21 @@ rm:				## Remove current container
 	@$(DC) rm -f
 
 .PHONY: build start stop logs restart bash up rm  ps
+
+
+##—— Advent Of Code —————————————————————————————————————————————————————————————————————————————————————————————————————
+resolve: ## Resolve current day
+	$(CONSOLE) puzzle:resolve
+
+resolve-test: ## Resolve current day with test input
+	$(CONSOLE) puzzle:resolve --test
+
+puzzle: ## Create structure and data for current day
+	$(CONSOLE) puzzle:make
+
+leaderboard: ## Create structure and data for current day
+	$(CONSOLE)  puzzle:leaderboard
+
 
 # -----------------------------------
 # Dépendances
