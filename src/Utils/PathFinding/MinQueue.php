@@ -14,7 +14,6 @@ class MinQueue implements \Countable
     public function __construct()
     {
         $this->queue = new class() extends \SplPriorityQueue {
-            /** {@inheritdoc} */
             public function compare($p, $q): int
             {
                 return $q <=> $p;
@@ -38,17 +37,11 @@ class MinQueue implements \Countable
         return $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function contains($value)
     {
         return isset($this->register[$value]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function count(): int
     {
         return count($this->queue);

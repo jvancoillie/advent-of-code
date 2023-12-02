@@ -34,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $decompressedLength += strlen(substr($sequence, 0, $pos));
 
             if (preg_match("/\((\d+)x(\d+)\)(.+)/", $sequence, $matches)) {
-                [ ,$subsequentLength, $repeated, $remaining] = $matches;
+                [,$subsequentLength, $repeated, $remaining] = $matches;
 
                 $stringLength = ($recurse) ? $this->decompress(substr($remaining, 0, (int) $subsequentLength)) : strlen(substr($remaining, 0, (int) $subsequentLength));
                 $decompressedLength += (int) $repeated * $stringLength;

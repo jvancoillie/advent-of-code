@@ -137,9 +137,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
     public function isOutOfRange(array $cube): bool
     {
         return !(
-            $cube[0] >= $this->range[0][0] && $cube[0] <= $this->range[0][1] &&
-            $cube[1] >= $this->range[1][0] && $cube[1] <= $this->range[1][1] &&
-            $cube[2] >= $this->range[2][0] && $cube[2] <= $this->range[2][1])
+            $cube[0] >= $this->range[0][0] && $cube[0] <= $this->range[0][1]
+            && $cube[1] >= $this->range[1][0] && $cube[1] <= $this->range[1][1]
+            && $cube[2] >= $this->range[2][0] && $cube[2] <= $this->range[2][1])
         ;
     }
 }

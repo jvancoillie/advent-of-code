@@ -61,7 +61,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     /**
      * @param (mixed|string[])[] $insctructions
-     * @param (int|string)[][] $pad
+     * @param (int|string)[][]   $pad
      *
      * @psalm-param array<list<string>|mixed> $insctructions
      * @psalm-param array{0: array{0?: 1, 1?: 2, 2: 1|3}, 1: array{0?: 4, 1: 2|5, 2: 3|6, 3?: 4}, 2: array{0: 5|7, 1: 6|8, 2: 7|9, 3?: 8, 4?: 9}, 3?: array{1: 'A', 2: 'B', 3: 'C'}, 4?: array{2: 'D'}} $pad

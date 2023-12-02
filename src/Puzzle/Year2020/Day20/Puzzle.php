@@ -61,7 +61,7 @@ class Puzzle
         for ($y = 0; $y < $this->width; ++$y) {
             for ($x = 0; $x < $this->width; ++$x) {
                 /**
-                 *@var Tile $tile
+                 * @var Tile $tile
                  */
                 [$tile,$position] = $solution[$y][$x];
                 $merge = $tile->getGridWithoutBorderByPosition($position);

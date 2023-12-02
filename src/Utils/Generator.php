@@ -57,16 +57,16 @@ class Generator
      */
     public static function permutations($items): \Generator
     {
-//        if (count($items) === 0) {
-//            yield [];
-//        }
-//
-//        $firstItem = array_shift($items);
-//        foreach (self::permutations($items) as $perms) {
-//            for ($i = 0; $i <= count($perms); $i++) {
-//                yield array_merge(array_slice($perms, 0, $i), [$firstItem], array_slice($perms, $i));
-//            }
-//        }
+        //        if (count($items) === 0) {
+        //            yield [];
+        //        }
+        //
+        //        $firstItem = array_shift($items);
+        //        foreach (self::permutations($items) as $perms) {
+        //            for ($i = 0; $i <= count($perms); $i++) {
+        //                yield array_merge(array_slice($perms, 0, $i), [$firstItem], array_slice($perms, $i));
+        //            }
+        //        }
 
         if (0 === count($items)) {
             yield [];

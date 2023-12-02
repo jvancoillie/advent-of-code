@@ -83,7 +83,7 @@ class Submarine
             for ($right = $roomId; $right < count($this->hallway); ++$right) {
                 if ($this->isFillablePosition($right)) {
                     if ($this->canFill($right, $amphi)) {
-//                        return [['from' => $roomId, 'to' => $right]];
+                        //                        return [['from' => $roomId, 'to' => $right]];
                         return [['from' => $roomId, 'to' => $right]];
                     }
                     continue;

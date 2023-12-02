@@ -34,7 +34,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
     /**
      * @psalm-param 'red'|null $excluded
      */
-    public function sumNumbers($array, string|null $excluded = null)
+    public function sumNumbers($array, string $excluded = null)
     {
         $sum = 0;
         foreach ($array as $item) {

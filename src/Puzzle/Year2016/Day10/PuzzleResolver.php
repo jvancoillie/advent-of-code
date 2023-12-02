@@ -52,7 +52,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
             if (str_starts_with($line, 'bot')) {
                 if (preg_match("/^bot (\d+) gives low to (\w+) (\d+) and high to (\w+) (\d+)/", $line, $matches)) {
-                    [, $fromBotId, $lowEntityType, $lowEntityId,$highEntityType, $highEntityId ] = $matches;
+                    [, $fromBotId, $lowEntityType, $lowEntityId,$highEntityType, $highEntityId] = $matches;
                     $this->actions[] = ['from' => $fromBotId, 'low' => ['type' => $lowEntityType, 'id' => $lowEntityId], 'high' => ['type' => $highEntityType, 'id' => $highEntityId]];
                 }
             }

@@ -86,10 +86,10 @@ class PuzzleResolver extends AbstractPuzzleResolver
                 $grid[$y][$x] = $this->grid[$y][$x];
 
                 // use for part 2 locked corners
-                if ($this->cornersLocked &&
-                    (
-                        (0 === $x && 0 === $y) || (0 === $x && $y === $this->width) ||
-                        ($x === $this->height && 0 === $y) || ($x === $this->height && $y === $this->width)
+                if ($this->cornersLocked
+                    && (
+                        (0 === $x && 0 === $y) || (0 === $x && $y === $this->width)
+                        || ($x === $this->height && 0 === $y) || ($x === $this->height && $y === $this->width)
                     )
                 ) {
                     continue;

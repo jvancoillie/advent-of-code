@@ -77,9 +77,9 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $split = str_split($string);
             for ($i = 0; $i < count($split) - 3; ++$i) {
                 if (
-                    $split[$i] !== $split[$i + 1] &&
-                    $split[$i] === $split[$i + 3] &&
-                    $split[$i + 1] === $split[$i + 2]
+                    $split[$i] !== $split[$i + 1]
+                    && $split[$i] === $split[$i + 3]
+                    && $split[$i + 1] === $split[$i + 2]
                 ) {
                     return true;
                 }
@@ -101,8 +101,8 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $split = str_split($string);
             for ($i = 0; $i < count($split) - 2; ++$i) {
                 if (
-                    $split[$i] !== $split[$i + 1] &&
-                    $split[$i] === $split[$i + 2]
+                    $split[$i] !== $split[$i + 1]
+                    && $split[$i] === $split[$i + 2]
                 ) {
                     $bab = $split[$i + 1].$split[$i].$split[$i + 1];
                     if (array_filter($ip['in'], fn ($v) => str_contains($v, $bab))) {

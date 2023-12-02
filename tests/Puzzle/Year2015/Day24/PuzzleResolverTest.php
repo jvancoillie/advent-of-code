@@ -16,10 +16,10 @@ class PuzzleResolverTest extends TestCase
             ->addPartMethod('part1')
             ->addPartMethod('part2')
         ;
-//         TODO improve this puzzle
-//        yield PuzzleResolverTestModel::create(false)
-//            ->addPartMethod('part1')
-//            ->addPartMethod('part2')
-//         ;
+        //         TODO improve this puzzle
+        //        yield PuzzleResolverTestModel::create(false)
+        //            ->addPartMethod('part1')
+        //            ->addPartMethod('part2')
+        //         ;
     }
 }

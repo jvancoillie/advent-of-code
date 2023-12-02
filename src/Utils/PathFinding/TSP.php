@@ -44,9 +44,9 @@ class TSP
      */
     public function compute(): void
     {
-//        if ($this->isComputed()) {
-//            return;
-//        }
+        //        if ($this->isComputed()) {
+        //            return;
+        //        }
         $keys = array_keys($this->graph);
         $this->routes = $this->permutations($keys);
         foreach ($this->routes as $key => $perms) {
