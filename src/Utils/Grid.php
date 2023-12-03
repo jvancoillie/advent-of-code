@@ -29,9 +29,14 @@ class Grid
         return $grid;
     }
 
-    public static function dump($array, $separator = '|'): void
+    public static function dump($array, $separator = '|', $withLineNumber = true): void
     {
-        foreach ($array as $lines) {
+        $maxLineNumber = strlen(count($array));
+
+        foreach ($array as $n => $lines) {
+            if ($withLineNumber) {
+                echo str_pad($n, $maxLineNumber, 0, STR_PAD_LEFT).' '.$separator;
+            }
             echo implode($separator, $lines)."\n";
         }
         echo "\n";
