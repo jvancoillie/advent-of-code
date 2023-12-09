@@ -19,30 +19,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
     public function part1(): int
     {
-        $ans = 0;
-
-        $data = $this->getInput()->getArrayData();
-
-        foreach ($data as $sequence) {
-            $value = $this->getValue($sequence);
-            $ans += $value;
-        }
-
-        return $ans;
+        return array_reduce($this->getInput()->getArrayData(), fn ($c, $s) => $c + $this->getValue($s));
     }
 
     public function part2(): int
     {
-        $ans = 0;
-
-        $data = $this->getInput()->getArrayData();
-
-        foreach ($data as $sequence) {
-            $value = $this->getValue($sequence, true);
-            $ans += $value;
-        }
-
-        return $ans;
+        return array_reduce($this->getInput()->getArrayData(), fn ($c, $s) => $c + $this->getValue($s, true));
     }
 
     private function getValue(string $sequence, bool $getPrev = false): int
