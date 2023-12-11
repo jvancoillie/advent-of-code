@@ -61,4 +61,12 @@ class Grid
 
         return $count;
     }
+
+    public static function rotate(array $grid)
+    {
+        array_unshift($grid, null);
+        $grid = call_user_func_array('array_map', $grid);
+
+        return array_map('array_reverse', $grid);
+    }
 }
