@@ -18,40 +18,37 @@ class PuzzleResolver extends AbstractPuzzleResolver
     protected static int|string $part1Expected = 9693756;
     protected static int|string $part2Expected = 717878258016;
 
-    protected array $universe = [];
-    protected array $galaxies = [];
-    protected array $empty = ['rows' => [], 'columns' => []];
-
-    protected array $part1 = [];
-    protected array $part2 = [];
+    protected int $part1 = 0;
+    protected int $part2 = 0;
 
     public function initialize(): void
     {
-        $this->universe = array_map(fn ($e) => str_split($e), $this->getInput()->getArrayData());
-        $this->empty['columns'] = range(0, count($this->universe[0]) - 1);
+        $universe = array_map(fn ($e) => str_split($e), $this->getInput()->getArrayData());
+        $galaxies = [];
+        $empty = ['rows' => [], 'columns' => range(0, count($universe[0]) - 1)];
 
-        foreach ($this->universe as $x => $row) {
+        foreach ($universe as $x => $row) {
             $unique = array_unique($row);
 
             if (1 === count($unique) && '.' === $unique[0]) {
-                $this->empty['rows'][] = $x;
+                $empty['rows'][] = $x;
             }
 
             foreach ($row as $y => $cell) {
-                if ('.' !== $cell && isset($this->empty['columns'][$y])) {
-                    unset($this->empty['columns'][$y]);
+                if ('.' !== $cell && isset($empty['columns'][$y])) {
+                    unset($empty['columns'][$y]);
                 }
 
                 if ('#' === $cell) {
-                    $this->galaxies[] = [$x, $y];
+                    $galaxies[] = [$x, $y];
                 }
             }
         }
 
         $pairs = [];
 
-        foreach ($this->galaxies as $i => [$xa, $ya]) {
-            foreach ($this->galaxies as $j => [$xb, $yb]) {
+        foreach ($galaxies as $i => [$xa, $ya]) {
+            foreach ($galaxies as $j => [$xb, $yb]) {
                 if ($i === $j) {
                     continue;
                 }
@@ -62,24 +59,24 @@ class PuzzleResolver extends AbstractPuzzleResolver
 
                 $pairs["$xa|$ya|$xb|$yb"] = 1;
 
-                $emptyRows = count(array_intersect($this->empty['rows'], range(min($xa, $xb), max($xa, $xb))));
-                $emptyColumns = count(array_intersect($this->empty['columns'], range(min($ya, $yb), max($ya, $yb))));
+                $emptyRows = count(array_intersect($empty['rows'], range(min($xa, $xb), max($xa, $xb))));
+                $emptyColumns = count(array_intersect($empty['columns'], range(min($ya, $yb), max($ya, $yb))));
 
                 $distance = Distance::manhattan([$xa, $ya], [$xb, $yb]);
 
-                $this->part1[] = $distance + $emptyRows + $emptyColumns;
-                $this->part2[] = $distance + $emptyRows * 999999 + $emptyColumns * 999999;
+                $this->part1 += $distance + $emptyRows + $emptyColumns;
+                $this->part2 += $distance + $emptyRows * 999999 + $emptyColumns * 999999;
             }
         }
     }
 
     public function part1(): int
     {
-        return array_sum($this->part1);
+        return $this->part1;
     }
 
     public function part2(): int
     {
-        return array_sum($this->part2);
+        return $this->part2;
     }
 }
