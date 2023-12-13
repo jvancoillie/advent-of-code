@@ -43,6 +43,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $this->memoization = [];
             [$knownSprings, $groups] = explode(' ', $row);
             [$knownSprings, $groups] = $this->repeat($knownSprings, $groups);
+            dump("$i => $row");
             $ans += $this->countArrangements($knownSprings, $groups, 0, substr_count($knownSprings, '?'));
         }
 
@@ -52,11 +53,11 @@ class PuzzleResolver extends AbstractPuzzleResolver
     /** TODO improve this memory size :( :( :( */
     public function countArrangements($knownSprings, $groups, $pos = 0, $remaining = 0): int
     {
-        $key = "$pos$knownSprings$remaining";
-
-        if (isset($this->memoization[$key])) {
-            return $this->memoization[$key];
-        }
+        //        $key = "$pos$knownSprings$remaining";
+        //
+        //        if (isset($this->memoization[$key])) {
+        //            return $this->memoization[$key];
+        //        }
 
         if (0 === $remaining) {
             return $this->isValid($knownSprings, $groups, $remaining) ? 1 : 0;
@@ -73,14 +74,12 @@ class PuzzleResolver extends AbstractPuzzleResolver
             $a[$pos] = '#';
             $b[$pos] = '.';
 
-            $sum = $this->countArrangements($a, $groups, $pos + 1, $remaining - 1) + $this->countArrangements($b, $groups, $pos + 1, $remaining - 1);
-        } else {
-            $sum = $this->countArrangements($knownSprings, $groups, $pos + 1, $remaining);
+            return $this->countArrangements($a, $groups, $pos + 1, $remaining - 1) + $this->countArrangements($b, $groups, $pos + 1, $remaining - 1);
         }
 
-        $this->memoization[$key] = $sum;
+        return $this->countArrangements($knownSprings, $groups, $pos + 1, $remaining);
 
-        return $sum;
+        //        return $this->memoization[$key] = $sum;
     }
 
     private function repeat(string $knownSprings, string $groups): array
