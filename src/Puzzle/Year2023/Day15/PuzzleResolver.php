@@ -30,13 +30,7 @@ class PuzzleResolver extends AbstractPuzzleResolver
         $boxes = array_fill(0, 256, []);
 
         foreach ($data as $string) {
-            if (str_contains($string, '-')) {
-                $string .= 'empty';
-                $operation = '-';
-            } else {
-                $operation = '=';
-            }
-
+            $operation = str_contains($string, '-') ? '-' : '=';
             [$label, $number] = explode($operation, $string);
 
             $hash = $this->getHash($label);
