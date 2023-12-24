@@ -12,7 +12,8 @@
         "ext-json": "*",
         "ext-gmp": "*",
         "symfony/cache": "6.4.*",
-        "symfony/options-resolver": "6.4.*"
+        "symfony/options-resolver": "6.4.*",
+      "ext-bcmath": "*"
     },
     "autoload": {
         "psr-4": {
