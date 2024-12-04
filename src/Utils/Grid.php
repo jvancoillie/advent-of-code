@@ -5,7 +5,8 @@ namespace App\Utils;
 class Grid
 {
     public static array $crossDirections = [[0, 1], [0, -1], [-1, 0], [1, 0]];
-    public static array $fullDirections = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 0], [0, 1], [1, -1], [1, 0], [1, 1]];
+    public static array $fullDirections = [[-1, -1], [-1, 0], [-1, 1], [0, -1],  [0, 1], [1, -1], [1, 0], [1, 1]];
+    public static array $diagDirections = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
 
     /**
      * @psalm-param 7|50|1000 $x
