@@ -30,7 +30,7 @@ class Grid
         return $grid;
     }
 
-    public static function dump($array, $separator = '|', $withLineNumber = true): void
+    public static function dump($array, $separator = '', $withLineNumber = true): void
     {
         $maxLineNumber = strlen(count($array));
 
