@@ -66,7 +66,7 @@ class PuzzleMakerCommand extends Command
             $output->writeln('<info>Create Puzzle Resolver Class</info>');
             $this->filesystem->dumpFile(
                 $resolverFilePath,
-                $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolver.tpl.php', [
+                $this->parseTemplate(__DIR__.'/../Resources/Skeleton/PuzzleResolver.tpl.php', [
                     'namespace' => $namespace,
                     'puzzleLink' => $link,
                 ])
@@ -116,7 +116,7 @@ class PuzzleMakerCommand extends Command
             $output->writeln('<info>Create Puzzle Resolver Test Class</info>');
             $this->filesystem->dumpFile(
                 $resolverTestFilePath,
-                $this->parseTemplate(__DIR__.'/../Resources/skeleton/PuzzleResolverTest.tpl.php', [
+                $this->parseTemplate(__DIR__.'/../Resources/Skeleton/PuzzleResolverTest.tpl.php', [
                     'namespace' => $namespaceTest,
                 ])
             );
